@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="Thinking--Introspection--Improving **<br/>勿忘初心，自由自在**">
+
+
+
+<title>我的JS规范三语句和表达式 | INTROSPECTION MOMENT</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Janely&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Janely&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我的JS规范三语句和表达式</h1>
+            
+                <div class="post-meta">
+                    
+                        作者:&nbsp;&nbsp;<a itemprop="author" rel="author" href="/">Janely</a>
+                    
+                        <br>
+                    
+                        <span class="post-time">
+                        时间:&nbsp;&nbsp;<a href="#">August 14, 2019&nbsp;&nbsp;0:00:18</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/JS编程规范/">JS编程规范</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="一、块语句"><a href="#一、块语句" class="headerlink" title="一、块语句"></a>一、块语句</h3><blockquote>
+<p>不论块语句包含多行代码还是单行代码，都应当总是使用花括号。</p>
+</blockquote>
+<ul>
+<li>if</li>
+<li>for</li>
+<li>while</li>
+<li>do…while…</li>
+<li>try…catch…finally</li>
+</ul>
+<h3 id="二、花括号都对齐方式"><a href="#二、花括号都对齐方式" class="headerlink" title="二、花括号都对齐方式"></a>二、花括号都对齐方式</h3><ul>
+<li><p>将左花括号放置在块语句中第一句代码都末尾</p>
+</li>
+<li><p>将左边花括号放置于块语句首行都下一行</p>
+</li>
+</ul>
+<h3 id="三、块语句都间隔"><a href="#三、块语句都间隔" class="headerlink" title="三、块语句都间隔"></a>三、块语句都间隔</h3><blockquote>
+<p>第二种比较常见</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种</span></span><br><span class="line"><span class="keyword">if</span>(condition)&#123;</span><br><span class="line">  doSomething()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种</span></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">  doSomething()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三种</span></span><br><span class="line"><span class="keyword">if</span> ( condition ) &#123;</span><br><span class="line">  doSomething()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、switch语句"><a href="#四、switch语句" class="headerlink" title="四、switch语句"></a>四、switch语句</h3><ul>
+<li>缩进：<ul>
+<li>每条case语句相对于switch关键字都缩进一个层级</li>
+<li>从第二条case语句开始，每条case语句前后各有一个空行</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(condition) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">"first"</span>:</span><br><span class="line">    <span class="comment">// dosomthing</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="string">"second"</span>:</span><br><span class="line">    <span class="comment">// dosomthing</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// dosomthing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>case 语句的“连续执行”</li>
+</ul>
+<blockquote>
+<p>执行完一个case后连续执行下一个case。两种明显的“连续执行”：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(condition) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 明显的一次执行，当一个case语句中没有需要执行的语句，也没有任何其他语句将这两个case语句分割开。</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">"first"</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">"second"</span>:</span><br><span class="line">    <span class="comment">// dosomthing</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="string">"third"</span>:</span><br><span class="line">    <span class="comment">// dosomthing</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* fall through */</span></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// dosomthing，当在注释中明确说明了，故意为之</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>default</li>
+</ul>
+<blockquote>
+<p>switch语句中不应当省略default，如果default不需要执行任何，可以注释说明</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(condition) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">"first"</span>:</span><br><span class="line">    <span class="comment">// dosomething</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="string">"second"</span>:</span><br><span class="line">    <span class="comment">// dosomething</span></span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 没有default</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、ith语句"><a href="#五、ith语句" class="headerlink" title="五、ith语句"></a>五、ith语句</h3><blockquote>
+<p>with语句可以更改包含的上下文解析变量当方式，虽然可以将对象前缀统统省略掉，但是js引擎和压缩工具无法对代码进行优化，因为它们无法猜出代码对正确含义。所以在严格模式下，with语句是被严格禁止对，应避免使用。</p>
+</blockquote>
+<h3 id="六、for循环"><a href="#六、for循环" class="headerlink" title="六、for循环"></a>六、for循环</h3><ul>
+<li><p>传统的for循环，往往用于遍历数组</p>
+</li>
+<li><p>for-in循环，用来遍历对象</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (i !== <span class="number">2</span>) &#123;</span><br><span class="line">    process(values[i])</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、for-in循环"><a href="#七、for-in循环" class="headerlink" title="七、for-in循环"></a>七、for-in循环</h3><blockquote>
+<p>遍历对象属性，不用定义任何控制条件，循环会遍历每个对象的属性，并返回属性名而不是值。</p>
+</blockquote>
+<p> <strong>for-in不仅遍历对象的实例属性，同样还遍历从原型继承来的属性。最好使用hasOwnProperty()方法来为for-in循环过滤实例属性</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> prop;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (prop <span class="keyword">in</span> object) &#123;</span><br><span class="line">  <span class="keyword">if</span> (object.hasOwnProperty(prop)) &#123;</span><br><span class="line">    <span class="comment">// console...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不使用hasOwnProperty的情况：对原型链遍历</li>
+</ul>
+
+        </div>
+
+        <!-- 
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Janely</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://janely.cn/2019/08/14/js/js-rule-statements-expressions/">http://janely.cn/2019/08/14/js/js-rule-statements-expressions/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span></span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span></span>
+                     </p>
+                
+
+            </section>
+         -->
+
+        <section class="post-tags">
+            <div>
+                <span>归档:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Rules/">～ Rules</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/08/14/js/js-rule-variable-function/">我的JS规范四变量、函数和运算符</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/13/js/js-rule-comment/">我的JS规范二注释</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="Thinking--Introspection--Improving **<br/>勿忘初心，自由自在**">
+
+
+
+<title>JsTopic日常整理一 | INTROSPECTION MOMENT</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Janely&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Janely&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JsTopic日常整理一</h1>
+            
+                <div class="post-meta">
+                    
+                        作者:&nbsp;&nbsp;<a itemprop="author" rel="author" href="/">Janely</a>
+                    
+                        <br>
+                    
+                        <span class="post-time">
+                        时间:&nbsp;&nbsp;<a href="#">August 14, 2019&nbsp;&nbsp;0:03:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/JS问题积累/">JS问题积累</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h5 id="1-从字符串-const-str-‘qwbewrbbeqqbbbweebbbbqee’-中能得到结果-“b”-“bb”-“bbb”-“bbbb”-的方法有？"><a href="#1-从字符串-const-str-‘qwbewrbbeqqbbbweebbbbqee’-中能得到结果-“b”-“bb”-“bbb”-“bbbb”-的方法有？" class="headerlink" title="1. 从字符串 const str = ‘qwbewrbbeqqbbbweebbbbqee’;中能得到结果 [“b”, “bb”, “bbb”, “bbbb”] 的方法有？"></a>1. 从字符串 const str = ‘qwbewrbbeqqbbbweebbbbqee’;中能得到结果 [“b”, “bb”, “bbb”, “bbbb”] 的方法有？</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /b+/g，配前面的子表达式一次或多次，有一个或多个b</span></span><br><span class="line">str.match(<span class="regexp">/b+/g</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// /b&#123;1,4&#125;/g，匹配1-4个b </span></span><br><span class="line">str.match(<span class="regexp">/b&#123;1,4&#125;/g</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// /b&#123;1,5&#125;/g，匹配1-5个b</span></span><br><span class="line">str.match(<span class="regexp">/b&#123;1,5&#125;/g</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-JavaScript中-RegExp-对象有哪几个个方法？"><a href="#2-JavaScript中-RegExp-对象有哪几个个方法？" class="headerlink" title="2. JavaScript中 RegExp 对象有哪几个个方法？"></a>2. JavaScript中 RegExp 对象有哪几个个方法？</h5><ul>
+<li><p>test() 方法用来检测一个字符串是否匹配某个正则表达式，如果匹配成功，返回 true ，否则返回 false；</p>
+</li>
+<li><p>exec() 方法用来检索字符串中与正则表达式匹配的值。exec() 方法返回一个数组，其中存放匹配的结果。如果未找到匹配的值，则返回 null；</p>
+</li>
+<li><p>compile() 方法可以在脚本执行过程中编译正则表达式，也可以改变已有表达式。</p>
+</li>
+</ul>
+<h5 id="3-setTimeout的方式-注册事件-：有两个参数，第一个参数是函数，第二参数是时间值。调用setTimeout时，把函数参数，放到事件队列-event-loop-中。等主程序运行完，再调用。"><a href="#3-setTimeout的方式-注册事件-：有两个参数，第一个参数是函数，第二参数是时间值。调用setTimeout时，把函数参数，放到事件队列-event-loop-中。等主程序运行完，再调用。" class="headerlink" title="3. setTimeout的方式(注册事件)：有两个参数，第一个参数是函数，第二参数是时间值。调用setTimeout时，把函数参数，放到事件队列(event loop)中。等主程序运行完，再调用。"></a>3. setTimeout的方式(注册事件)：有两个参数，第一个参数是函数，第二参数是时间值。调用setTimeout时，把函数参数，放到事件队列(event loop)中。等主程序运行完，再调用。</h5><h5 id="4-浏览器窗口宽高"><a href="#4-浏览器窗口宽高" class="headerlink" title="4. 浏览器窗口宽高"></a>4. 浏览器窗口宽高</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//浏览器当前窗口可视区域高度 </span></span><br><span class="line">alert($(<span class="built_in">window</span>).height())</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口文档的高度 </span></span><br><span class="line">alert($(<span class="built_in">document</span>).height())</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口文档body的高度 </span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).height())</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口文档body的总高度 包括border padding margin </span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).outerHeight(<span class="literal">true</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口可视区域宽度 </span></span><br><span class="line">alert($(<span class="built_in">window</span>).width())</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口文档对象宽度 </span></span><br><span class="line">alert($(<span class="built_in">document</span>).width())</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口文档body的高度 </span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).width())</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器当前窗口文档body的总宽度 包括border padding margin </span></span><br><span class="line">alert($(<span class="built_in">document</span>.body).outerWidth(<span class="literal">true</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-闭包的两个最大的用处"><a href="#5-闭包的两个最大的用处" class="headerlink" title="5. 闭包的两个最大的用处"></a>5. 闭包的两个最大的用处</h5><ul>
+<li><p>可以读取到函数内部的变量</p>
+</li>
+<li><p>让这些变量的值始终保持在内存中</p>
+</li>
+</ul>
+<h5 id="6-在JS里如何判断一个对象oStringObject是否为String。"><a href="#6-在JS里如何判断一个对象oStringObject是否为String。" class="headerlink" title="6. 在JS里如何判断一个对象oStringObject是否为String。"></a>6. 在JS里如何判断一个对象oStringObject是否为String。</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oStringObject <span class="keyword">instanceof</span> <span class="built_in">String</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>JS 中值的类型分为原始值类型和对象类型。原始值类型包括 number, string, boolean, null 和 undefined；对象类型即 object。首先原始值类型它就不是对象。</p>
+</li>
+<li><p>另外，要注意 ‘hello’ 和 new String(‘hello’) 的区别，前者是字符串字面值，属于原始类型，而后者是对象。用 typeof 运算符返回的值也是完全不一样的</p>
+</li>
+<li><p>string 和 String是不一样的,当执行 ‘hello’.length 时，发现可以意料之中的返回 5，你们就觉得 ‘hello’ 就是 String 对象，不然它怎么会有 String 对象的属性。其实，这是由于 JS 在执行到这条语句的时候，内部将 ‘hello’ 包装成了一个 String 对象，执行完后，再把这个对象丢弃了，这种语法叫做 “装箱”.</p>
+</li>
+</ul>
+
+        </div>
+
+        <!-- 
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Janely</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://janely.cn/2019/08/14/topic/js-topic-1/">http://janely.cn/2019/08/14/topic/js-topic-1/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span></span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span></span>
+                     </p>
+                
+
+            </section>
+         -->
+
+        <section class="post-tags">
+            <div>
+                <span>归档:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Topic/">～ Topic</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/08/14/algorithm/string/">算法一String</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/14/js/js-rule-variable-function/">我的JS规范四变量、函数和运算符</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

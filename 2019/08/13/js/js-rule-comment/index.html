@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="Thinking--Introspection--Improving **<br/>勿忘初心，自由自在**">
+
+
+
+<title>我的JS规范二注释 | INTROSPECTION MOMENT</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Janely&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Janely&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我的JS规范二注释</h1>
+            
+                <div class="post-meta">
+                    
+                        作者:&nbsp;&nbsp;<a itemprop="author" rel="author" href="/">Janely</a>
+                    
+                        <br>
+                    
+                        <span class="post-time">
+                        时间:&nbsp;&nbsp;<a href="#">August 13, 2019&nbsp;&nbsp;23:58:48</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/JS编程规范/">JS编程规范</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="一、单行注释"><a href="#一、单行注释" class="headerlink" title="一、单行注释"></a>一、单行注释</h3><ul>
+<li>独占一行，用来解释第一行代码。<strong>这行注释之前总是有一个空行，且缩进层级和下一行的代码保持一致</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果存在则执行如下</span></span><br><span class="line">  doSomething()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在代码行的尾部的注释。代码结束到注释之间至少有一个缩进。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = something + anything; <span class="comment">// something为数字类型</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>被注释掉的大段代码。<strong>单行注释不应连续多行注释的形式出现</strong></li>
+</ul>
+<h3 id="二、多行注释"><a href="#二、多行注释" class="headerlink" title="二、多行注释"></a>二、多行注释</h3><blockquote>
+<p>多行注释常出现在将要描述的代码片段之前，注释和代码之间没有空行和间隔。vscode块注释快捷键：Alt + Shift + A</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* </span></span><br><span class="line"><span class="comment">   * 如果存在则执行如下</span></span><br><span class="line"><span class="comment">   * 说明通过了格式验证</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  doSomething()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、使用注释的场景"><a href="#三、使用注释的场景" class="headerlink" title="三、使用注释的场景"></a>三、使用注释的场景</h3><blockquote>
+<p>添加注释的一般原则是：在需要让代码变得更清晰时添加注释</p>
+</blockquote>
+<ul>
+<li>有特殊含义的值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1表示已签到，0表示未签到</span></span><br><span class="line"><span class="keyword">let</span> status = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>难于理解的代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (mode) &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* </span></span><br><span class="line"><span class="comment">   * 当 mode 存在并且</span></span><br><span class="line"><span class="comment">   * 为 1 的时候，值进行一次动画渲染</span></span><br><span class="line"><span class="comment">   * 为 2 的时候，循环渲染</span></span><br><span class="line"><span class="comment">   * 为 3 的时候，不渲染</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  doSomething()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可能被误认为错误的代码，这里是一段书中来自YUI源码的例子：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (element &amp;&amp; (element = element[axis])) &#123; <span class="comment">// 提示：赋值操作</span></span><br><span class="line">  <span class="keyword">if</span> ( (all || element[TAG_NAME]) &amp;&amp;</span><br><span class="line">      (!fn || fn(element)) ) &#123;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>浏览器特性hack</li>
+</ul>
+<blockquote>
+<p>为了让低级浏览器正常工作，常常需要编写一些低效的代码，这种情形是一种特殊的“可能被误认为错误的代码”：</p>
+</blockquote>
+<h3 id="四、文档注释"><a href="#四、文档注释" class="headerlink" title="四、文档注释"></a>四、文档注释</h3><blockquote>
+<p>多行注释以单斜线加双星号开始–&gt;描述信息–&gt;使用@符号来表示一个或多个属性。JSDOC是一个根据 JavaScript 文件中注释信息，生成 JavaScript 应用程序或模块的API文档的工具。你可以使用 JSDoc 标记如：命名空间，类，方法，方法参数等。从而使开发者能够轻易地阅读代码，掌握代码定义的类和其属性和方法，从而降低维护成本，和提高开发效率。</p>
+</blockquote>
+<ul>
+<li><p>@constructor 构造函数声明注释，明确一个函数是某个类的构造函数</p>
+</li>
+<li><p>@param 参数注释，参数标签可表示一个参数的参数名、参数类型和参数描述的注释</p>
+</li>
+<li><p>@return 返回值注释</p>
+</li>
+<li><p>@example 示例注释</p>
+</li>
+<li><p>@overview对当前代码文件的描述。</p>
+</li>
+<li><p>@copyright代码的版权信息。</p>
+</li>
+<li><p>@author []代码的作者信息。</p>
+</li>
+<li><p>@version当前代码的版本。</p>
+</li>
+</ul>
+
+        </div>
+
+        <!-- 
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Janely</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://janely.cn/2019/08/13/js/js-rule-comment/">http://janely.cn/2019/08/13/js/js-rule-comment/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span></span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span></span>
+                     </p>
+                
+
+            </section>
+         -->
+
+        <section class="post-tags">
+            <div>
+                <span>归档:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Rules/">～ Rules</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/08/14/js/js-rule-statements-expressions/">我的JS规范三语句和表达式</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/13/js/js-rule-formate/">我的JS规范一基本格式化</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

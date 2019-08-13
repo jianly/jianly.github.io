@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="Thinking--Introspection--Improving **<br/>勿忘初心，自由自在**">
+
+
+
+<title>我的JS规范四变量、函数和运算符 | INTROSPECTION MOMENT</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Janely&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Janely&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Category</a>
+                
+                    <a class="menu-item" href="/tag">Tag</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我的JS规范四变量、函数和运算符</h1>
+            
+                <div class="post-meta">
+                    
+                        作者:&nbsp;&nbsp;<a itemprop="author" rel="author" href="/">Janely</a>
+                    
+                        <br>
+                    
+                        <span class="post-time">
+                        时间:&nbsp;&nbsp;<a href="#">August 14, 2019&nbsp;&nbsp;0:01:37</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/JS编程规范/">JS编程规范</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="一、变量声明"><a href="#一、变量声明" class="headerlink" title="一、变量声明"></a>一、变量声明</h3><blockquote>
+<p>用var声明变量，在函数内部任意地方定义变量和函数顶部定义变量是完全一样的，因此所有的变量声明应该放在函数顶部而不是散落在各个角落。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomethingWithItems</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> value = <span class="number">10</span>,</span><br><span class="line">      result = value + <span class="number">10</span>,</span><br><span class="line">      i,</span><br><span class="line">      len;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>, len=items.length; i &lt; len; i++) &#123;</span><br><span class="line">    doSomething(items[i])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><blockquote>
+<p>和变量声明一样，函数声明也会被js引擎提前。推荐先声明函数然后使用函数，函数内部的局部函数应当紧接着变量声明之后声明</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomethingWithItems</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> value = <span class="number">10</span>,</span><br><span class="line">      result = value + <span class="number">10</span>,</span><br><span class="line">      i,</span><br><span class="line">      len;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// doanythong</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>, len=items.length; i &lt; len; i++) &#123;</span><br><span class="line">    doSomething(items[i])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、函数调用间隔"><a href="#三、函数调用间隔" class="headerlink" title="三、函数调用间隔"></a>三、函数调用间隔</h3><blockquote>
+<p>一般情况下，对于函数调用写法推荐的风格是，在函数名和左括号之间没有空格，为了将它和块语句区分开。</p>
+</blockquote>
+<h3 id="四、立即调用函数"><a href="#四、立即调用函数" class="headerlink" title="四、立即调用函数"></a>四、立即调用函数</h3><blockquote>
+<p>在js中允许声明匿名函数，并将匿名函数赋值给变量或者属性。为了将立即执行函数能够被一眼看出来，可以将函数用一对圆括号包裹起来：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 函数体</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    message: <span class="string">"Hello"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+
+<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><blockquote>
+<p>通过这种方式来谨慎地解析执行JS，以减少错误。不推荐在全局作用域中使用，因为这会让文件中所有代码都以严格模式来解析。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果希望在多个函数中应用严格模式</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  "use strict"</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// do</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomethingElse</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// do</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h3 id="相等"><a href="#相等" class="headerlink" title="相等"></a>相等</h3><p>由于js具有强制类型转换机制，会驱使某种类型都变量自动转换成其他不同类型，所以推荐使用===和!==来作比较。</p>
+<ul>
+<li>使用来判断相等运算符==和!=的时候，使用===和!==的时候</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> == <span class="string">"5"</span>)    <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span> === <span class="string">"5"</span>)   <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">25</span> == <span class="string">"0x19"</span>)   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">25</span> === <span class="string">"0x19"</span>)  <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> == <span class="literal">true</span>)   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> === <span class="literal">true</span>)   <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>null、undefined</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> == <span class="literal">undefined</span>)   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> === <span class="literal">undefined</span>)  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h3><blockquote>
+<p>参数是一个字符串，会将传入的字符串当作代码来执行。严格模式对于eval()有着严格的限制，禁止在一个封闭的作用域中使用它创建新变量或者函数，这条限制帮助我们避免了eval()先天的安全漏洞（严格模式下，传入eval()的字符串无法在调用函数所在的上下文声明变量或函数）。特殊情况：将ajax的返回值转换为js值的场景下</p>
+</blockquote>
+<h3 id="原始包装类型"><a href="#原始包装类型" class="headerlink" title="原始包装类型"></a>原始包装类型</h3><blockquote>
+<p>js中一个不易被了解且常常被误解的方面是，对原始包装类型的依赖。3种原始包装类型。禁止使用原始类型</p>
+</blockquote>
+<ul>
+<li><p>String</p>
+</li>
+<li><p>Number</p>
+</li>
+<li><p>Boolean</p>
+</li>
+</ul>
+<p><strong>每种类型都代表全局作用域中的一个构造函数，并分别表示各自对应的原始值的对象，主要作用是让原始值具有对象般的行为</strong></p>
+
+        </div>
+
+        <!-- 
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Janely</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://janely.cn/2019/08/14/js/js-rule-variable-function/">http://janely.cn/2019/08/14/js/js-rule-variable-function/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span></span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span></span>
+                     </p>
+                
+
+            </section>
+         -->
+
+        <section class="post-tags">
+            <div>
+                <span>归档:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Rules/">～ Rules</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/08/14/topic/js-topic-1/">JsTopic日常整理一</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/14/js/js-rule-statements-expressions/">我的JS规范三语句和表达式</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
