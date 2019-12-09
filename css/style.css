@@ -283,6 +283,7 @@ input[type="radio"]:not(:checked) + label:after {
      position: relative;
      box-shadow: 0.2px 0.2px 1px 0.5px rgb(180,180,180);
      width: 30px;
+     margin-left: 0;
  }
 .switch_default + label:after{
     background-color: #fff;
@@ -296,7 +297,7 @@ input[type="radio"]:not(:checked) + label:after {
     box-shadow: 0.2px 0.2px 1px 0.5px rgb(180,180,180);
 }
 .switch_default:checked + label{
-    background-color: #1ABC9C;
+    background-color: #409EFF;
     box-shadow:none;
 }
 .switch_default:checked + label:after{
