@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JavaScript中常用数据类型 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="一、基本数据类型1. Number(数字) 包括常规数字、NaN  NaNnot a number）不是一个数，但它率属于数字类型NaN和任何值（包括自己）都不相等：所以不能用相等但方式判断是否有效数字 123&apos;AA&apos; == NaN  // false10 == NaN    // falseNaN == NaN   // false  isNaN检测一个值是否为非有效数字，如果不是有效数字返回t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中常用数据类型">
+<meta property="og:url" content="http://janely.cn/2019/12/12/js/data-type/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="一、基本数据类型1. Number(数字) 包括常规数字、NaN  NaNnot a number）不是一个数，但它率属于数字类型NaN和任何值（包括自己）都不相等：所以不能用相等但方式判断是否有效数字 123&apos;AA&apos; == NaN  // false10 == NaN    // falseNaN == NaN   // false  isNaN检测一个值是否为非有效数字，如果不是有效数字返回t">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-12T14:16:56.284Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中常用数据类型">
+<meta name="twitter:description" content="一、基本数据类型1. Number(数字) 包括常规数字、NaN  NaNnot a number）不是一个数，但它率属于数字类型NaN和任何值（包括自己）都不相等：所以不能用相等但方式判断是否有效数字 123&apos;AA&apos; == NaN  // false10 == NaN    // falseNaN == NaN   // false  isNaN检测一个值是否为非有效数字，如果不是有效数字返回t">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基本数据类型"><span class="toc-text">一、基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Number-数字"><span class="toc-text">1. Number(数字)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NaN"><span class="toc-text">NaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isNaN"><span class="toc-text">isNaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型值转换为数字类型"><span class="toc-text">把其他类型值转换为数字类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-String-字符串"><span class="toc-text">2. String(字符串)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#其他类型转换为字符串"><span class="toc-text">其他类型转换为字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Boolean（布尔值）"><span class="toc-text">3. Boolean（布尔值）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型值转换为布尔值"><span class="toc-text">把其他类型值转换为布尔值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#空对象指针null"><span class="toc-text">空对象指针null</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未定义undefined"><span class="toc-text">未定义undefined</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、引用类型"><span class="toc-text">二、引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象数据类型object"><span class="toc-text">对象数据类型object</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-js/data-type" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JavaScript中常用数据类型</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.12.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="一、基本数据类型"><a href="#一、基本数据类型" class="headerlink" title="一、基本数据类型"></a>一、基本数据类型</h1><h2 id="1-Number-数字"><a href="#1-Number-数字" class="headerlink" title="1. Number(数字)"></a>1. Number(数字)</h2><blockquote>
+<p>包括常规数字、<strong>NaN</strong></p>
+</blockquote>
+<h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p>not a number）不是一个数，但它率属于数字类型<br><strong>NaN和任何值（包括自己）都不相等：所以不能用相等但方式判断是否有效数字</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'AA'</span> == <span class="literal">NaN</span>  <span class="comment">// false</span></span><br><span class="line"><span class="number">10</span> == <span class="literal">NaN</span>    <span class="comment">// false</span></span><br><span class="line"><span class="literal">NaN</span> == <span class="literal">NaN</span>   <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="isNaN"><a href="#isNaN" class="headerlink" title="isNaN"></a>isNaN</h3><p><strong>检测一个值是否为非有效数字，如果不是有效数字返回true，反之是有效数字返回false</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isNaN</span>(<span class="number">10</span>)   <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">'AA'</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">'10'</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注意：</font> 在使用isNaN进行检测时，首先会验证检测的值是否为数字类型，如果不是，先基于Number()方法把值转换为数字类型，然后再检测</p>
+<h3 id="把其他类型值转换为数字类型"><a href="#把其他类型值转换为数字类型" class="headerlink" title="把其他类型值转换为数字类型"></a>把其他类型值转换为数字类型</h3><p>a、 Number([val])<br>b、parseInt/parseFloat([val], [进制])，<strong>从左到右依次查找有效数字字符，直到遇到非有效数字字符。</strong></p>
+<ul>
+<li>字符串转换为数字，<strong>空字符串会变为数字0</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'12.5'</span>)    <span class="comment">// =&gt; 12.5</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'12.5px'</span>)  <span class="comment">// =&gt; NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将字符串 '12.5px' 转换为数字</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'12.5px'</span>)    <span class="comment">// =&gt; 12</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'12.5px'</span>)  <span class="comment">// =&gt; 12.5</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'width: 12.5px'</span>)  <span class="comment">// =&gt; NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'12.5.5'</span>)  <span class="comment">// =&gt; NaN</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">''</span>)        <span class="comment">// =&gt; 0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>布尔值转换为数字</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">false</span>) <span class="comment">// =&gt; 0</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>)  <span class="comment">// =&gt; 1</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">false</span>)  <span class="comment">// =&gt; false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>null和undefined</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// =&gt; 0</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>) <span class="comment">// =&gt; NaN</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把引用数据类型转换为数字，是先把它基于toString的方法转化为字符串，然后再转换为数字(底层渲染规则)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;<span class="attr">name</span>: <span class="string">'jane'</span>&#125;) <span class="comment">// =&gt; NaN</span></span><br><span class="line"><span class="built_in">Number</span>(&#123;&#125;)             <span class="comment">// =&gt; NaN</span></span><br><span class="line"><span class="built_in">Number</span>([])  =&gt; <span class="built_in">Number</span>(<span class="string">''</span>)   <span class="comment">// =&gt; 0</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">12</span>])           <span class="comment">// =&gt; 12</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">12</span>, <span class="number">13</span>])       <span class="comment">// =&gt; NaN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-String-字符串"><a href="#2-String-字符串" class="headerlink" title="2. String(字符串)"></a>2. String(字符串)</h2><blockquote>
+<p>单引号，双引号、反引号包起来的都是字符串</p>
+</blockquote>
+<h3 id="其他类型转换为字符串"><a href="#其他类型转换为字符串" class="headerlink" title="其他类型转换为字符串"></a>其他类型转换为字符串</h3><p><strong>null和undefined是禁止直接toString方法的</strong></p>
+<ul>
+<li>[val].toString()</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">12</span></span><br><span class="line">a.toString() <span class="comment">// =&gt; '12'</span></span><br><span class="line">(<span class="literal">NaN</span>).toString() <span class="comment">// =&gt; 'NaN'</span></span><br><span class="line">(<span class="literal">true</span>).toString() <span class="comment">// =&gt; 'true'</span></span><br><span class="line">[].toString() <span class="comment">// =&gt; "[]"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>普通对象.toString()的结果”[object, object]”, 因为Object.prototype.toString方法不是转换为字符串的，而是用来检测数据类型的</strong></p>
+<ul>
+<li>字符串拼接</li>
+</ul>
+<p>四则运算法则中，除加法之外，其余都是数学计算，只有加法可能存在字符串拼接。（一旦遇到字符串，则不是数学运算，而是字符串拼接）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'10'</span> + <span class="number">10</span>     <span class="comment">// =&gt; '1010'</span></span><br><span class="line"><span class="string">'10'</span> - <span class="number">10</span>     <span class="comment">// =&gt; 0</span></span><br><span class="line"><span class="string">'10px'</span> - <span class="number">10</span>   <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>题目</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span> + <span class="literal">null</span> + <span class="literal">true</span> + [] + <span class="literal">undefined</span> + <span class="string">'珠峰'</span> + <span class="literal">null</span> + [] + <span class="number">10</span> + fasle;</span><br><span class="line"></span><br><span class="line"><span class="number">10</span> + <span class="function"><span class="params">null</span> =&gt;</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="number">10</span> + <span class="function"><span class="params">true</span> =&gt;</span> <span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// []先变为空字符串，遇到字符串就是拼接</span></span><br><span class="line"><span class="number">11</span> + [] = <span class="number">11</span> + <span class="string">''</span> =&gt; <span class="string">'11'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'11'</span> + <span class="string">'undefined'</span> + <span class="string">'珠峰'</span> + <span class="literal">null</span> + [] + <span class="number">10</span> + <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">//'11undefined珠峰null10false'</span></span><br><span class="line"></span><br><span class="line"><span class="number">11</span> + [<span class="number">12</span>] =&gt; <span class="number">11</span> + <span class="string">'12'</span> =&gt; <span class="string">'1112'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Boolean（布尔值）"><a href="#3-Boolean（布尔值）" class="headerlink" title="3. Boolean（布尔值）"></a>3. Boolean（布尔值）</h2><blockquote>
+<p>只有两个值 true / false</p>
+</blockquote>
+<h3 id="把其他类型值转换为布尔值"><a href="#把其他类型值转换为布尔值" class="headerlink" title="把其他类型值转换为布尔值"></a>把其他类型值转换为布尔值</h3><p><strong>只有0、NaN、’’、null、undefined 五个值转换为false，其余都转换为true。(而且没有任何的特殊情况)</strong></p>
+<ul>
+<li>Boolean([val])</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>)     <span class="comment">// =&gt; false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>)    <span class="comment">// =&gt; false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">' '</span>)   <span class="comment">// =&gt; true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>)  <span class="comment">// =&gt; false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>)  <span class="comment">// =&gt; false</span></span><br><span class="line"><span class="built_in">Boolean</span>([])    <span class="comment">// =&gt; true</span></span><br><span class="line"><span class="built_in">Boolean</span>([<span class="number">12</span>])  <span class="comment">// =&gt; true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">-1</span>)  <span class="comment">// =&gt; true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>!/!!, !先转为布尔值，然后取反</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(!<span class="number">1</span>)   <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(!!<span class="number">1</span>)  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>条件判断</li>
+</ul>
+<p>如果条件只是一个值，不是==/===/!=/&gt;= 等这些比较，先转换为布尔值，再验证真假</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="number">1</span>) &#123; <span class="comment">// true</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'成立'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">'2px'</span> + <span class="number">3</span>) &#123; <span class="comment">// '2px3' =&gt; true</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'成立'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">'3px'</span> - <span class="number">3</span>) &#123; <span class="comment">// NaN =&gt; false</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'成立'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空对象指针null"><a href="#空对象指针null" class="headerlink" title="空对象指针null"></a>空对象指针null</h2><h2 id="未定义undefined"><a href="#未定义undefined" class="headerlink" title="未定义undefined"></a>未定义undefined</h2><hr>
+<h1 id="二、引用类型"><a href="#二、引用类型" class="headerlink" title="二、引用类型"></a>二、引用类型</h1><h2 id="对象数据类型object"><a href="#对象数据类型object" class="headerlink" title="对象数据类型object"></a>对象数据类型object</h2><ul>
+<li><p>{ } 普通对象</p>
+</li>
+<li><input disabled type="checkbox"> <p>数组对象</p>
+</li>
+<li><p>/^…+/ 正则对象</p>
+</li>
+<li><p>Math数学函数对象</p>
+</li>
+<li><p>日期对象</p>
+</li>
+</ul>
+<!-- + 函数数据类型function -->
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/11/28/mysql/basicCommands/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
