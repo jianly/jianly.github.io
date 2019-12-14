@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JavaScript常见的逻辑语句 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="判断 条件成立，不成立。条件可以多样性  1、if / else if / else1234567if (条件1) &amp;#123;  // do something&amp;#125; else if (条件2) &amp;#123;  // do something&amp;#125; else &amp;#123;  // do something&amp;#125;  2、三元运算符 简单if/else的特殊处理方式  条件 ？ 成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript常见的逻辑语句">
+<meta property="og:url" content="http://janely.cn/2019/12/13/js/ logical-statement/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="判断 条件成立，不成立。条件可以多样性  1、if / else if / else1234567if (条件1) &amp;#123;  // do something&amp;#125; else if (条件2) &amp;#123;  // do something&amp;#125; else &amp;#123;  // do something&amp;#125;  2、三元运算符 简单if/else的特殊处理方式  条件 ？ 成">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-13T12:22:19.223Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript常见的逻辑语句">
+<meta name="twitter:description" content="判断 条件成立，不成立。条件可以多样性  1、if / else if / else1234567if (条件1) &amp;#123;  // do something&amp;#125; else if (条件2) &amp;#123;  // do something&amp;#125; else &amp;#123;  // do something&amp;#125;  2、三元运算符 简单if/else的特殊处理方式  条件 ？ 成">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#判断"><span class="toc-text">判断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、if-else-if-else"><span class="toc-text">1、if / else if / else</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、三元运算符"><span class="toc-text">2、三元运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、switch-case"><span class="toc-text">3、switch case</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、-VS"><span class="toc-text">4、== VS ===</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、两个关键词"><span class="toc-text">1、两个关键词</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、for"><span class="toc-text">2、for</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、for-in"><span class="toc-text">3、for in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、for-of"><span class="toc-text">4、for of</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、while"><span class="toc-text">5、while</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、do-while"><span class="toc-text">6、do while</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-js/ logical-statement" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JavaScript常见的逻辑语句</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.12.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h1><blockquote>
+<p>条件成立，不成立。条件可以多样性</p>
+</blockquote>
+<h2 id="1、if-else-if-else"><a href="#1、if-else-if-else" class="headerlink" title="1、if / else if / else"></a>1、if / else if / else</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (条件<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (条件<span class="number">2</span>) &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、三元运算符"><a href="#2、三元运算符" class="headerlink" title="2、三元运算符"></a>2、三元运算符</h2><blockquote>
+<p>简单if/else的特殊处理方式</p>
+</blockquote>
+<p><strong>条件 ？ 成立处理的事 ： 不成立处理的事</strong></p>
+<ul>
+<li><p>如果处理的事比较多，我们括号包起来，每一件事情用逗号隔开</p>
+</li>
+<li><p>如果不需要处理事情，可以使用null/undefined占位</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line">a&gt;=<span class="number">10</span> ? <span class="built_in">console</span>.log(<span class="string">'1'</span>) : <span class="built_in">console</span>.log(<span class="string">'2'</span>) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">a &gt; <span class="number">0</span> &amp;&amp; a &lt; <span class="number">20</span> ? (a++, <span class="built_in">console</span>.log(a)) : <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">if</span>(a &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (a &lt;<span class="number">10</span>) &#123;</span><br><span class="line">    a++;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    a--;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (a &gt; <span class="number">-10</span>) &#123;</span><br><span class="line">    a += <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 转换为</span></span><br><span class="line">a &gt; <span class="number">0</span> ? (a &lt; <span class="number">10</span> ? a++ : a--) : (a &gt; <span class="number">-10</span> ? a+=<span class="number">2</span> : <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、switch-case"><a href="#3、switch-case" class="headerlink" title="3、switch case"></a>3、switch case</h2><blockquote>
+<p>一个变量在不同值情况下的不同操作</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(n) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>: </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">3</span>: </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">5</span>: </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">10</span>: </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'success'</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>: </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'none'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>若不加break，当前条件成立执行完成后，后面条件不论是否成立都要执行，直到break为止。(不加break可以实现变量在某些值的情况下做相同的事情)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(a) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    a++</span><br><span class="line">  <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">    a += <span class="number">2</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    a--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// =&gt; 4</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每一种case情况的比较用的都是===绝对相等</li>
+</ul>
+<h2 id="4、-VS"><a href="#4、-VS" class="headerlink" title="4、== VS ==="></a>4、== VS ===</h2><ul>
+<li><p>==：相等。如果左右数据类型不同，是先默认转换为相同类型，然后比较</p>
+</li>
+<li><p>===：绝对相等。如果类型不同，肯定不相等，不会默认转换数据类型</p>
+</li>
+</ul>
+<h1 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h1><blockquote>
+<p>重复做某些事情就是循环</p>
+</blockquote>
+<h2 id="1、两个关键词"><a href="#1、两个关键词" class="headerlink" title="1、两个关键词"></a>1、两个关键词</h2><ul>
+<li><p>continue: 结束当前这轮循环（<strong>后面的代码不再执行</strong>），继续执行下一轮循环</p>
+</li>
+<li><p>break: 强制结束整个循环（后面的代码不再执行），而且整个循环<strong>直接结束</strong></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">    i += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (i &gt;= <span class="number">6</span>) &#123;</span><br><span class="line">    i--;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  i++;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'in'</span>, i) <span class="comment">// =&gt; 1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'out'</span>, i) <span class="comment">// =&gt; 11</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、for"><a href="#2、for" class="headerlink" title="2、for"></a>2、for</h2><ul>
+<li>创建循环初始值</li>
+<li>验证循环执行条件</li>
+<li>条件成立执行循环体中的内容</li>
+<li>当前循环结束执行步长累计操作</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i) <span class="comment">// =&gt; 0, 1, 2, 3, 4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">10</span>; i &gt; <span class="number">4</span>; i -= <span class="number">2</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i &lt; <span class="number">7</span>) &#123;</span><br><span class="line">    i++;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    i--;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// =&gt; 10 &gt; 4  10-1 = 9 9-2 = 7</span></span><br><span class="line"><span class="comment">// =&gt; 7 &gt; 4 7-1 = 6 6-2 = 4</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(i) <span class="comment">// =&gt; 4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、for-in"><a href="#3、for-in" class="headerlink" title="3、for in"></a>3、for in</h2><h2 id="4、for-of"><a href="#4、for-of" class="headerlink" title="4、for of"></a>4、for of</h2><h2 id="5、while"><a href="#5、while" class="headerlink" title="5、while"></a>5、while</h2><h2 id="6、do-while"><a href="#6、do-while" class="headerlink" title="6、do while"></a>6、do while</h2>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/12/13/js/datatype-check/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

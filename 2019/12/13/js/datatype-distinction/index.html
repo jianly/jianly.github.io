@@ -22,13 +22,15 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="简单案例1234567891011let a = 12let b = ab = 13console.log(a) // 12let n = &amp;#123;  name: &apos;jane&apos;&amp;#125;let m = nm.name = &apos;symbol&apos;console.log(n.name)  // &apos;symbol&apos;  浏览器执行JS流程 从电脑内存中分配一块内存，用来执行代码（栈内存 =&amp;gt; stac">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png?Expires=1576216896&OSSAccessKeyId=TMP.hjA8uovisGG4qbJp8XAHqfoZYETHCB16P2cwYxhXp4y64ELJbErhmFVK47j1hWcsaezVkq6WybXVPSqPEf6KTRyRp84ts3hEr5f6wUh8HV8uqbfPRY2C97U8McgCgA.tmp&Signature=T%2B85GYHtSXrLNUOqZde4XTsHdr0%3D">
-<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-yinyong.png?Expires=1576218870&OSSAccessKeyId=TMP.hjA8uovisGG4qbJp8XAHqfoZYETHCB16P2cwYxhXp4y64ELJbErhmFVK47j1hWcsaezVkq6WybXVPSqPEf6KTRyRp84ts3hEr5f6wUh8HV8uqbfPRY2C97U8McgCgA.tmp&Signature=5eX6ImxXhnCRKLO2UuFozth5ZSE%3D">
-<meta property="og:updated_time" content="2019-12-13T05:34:40.334Z">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-yinyong.png">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-case.png">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-alibaba.png">
+<meta property="og:updated_time" content="2019-12-13T09:06:43.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS数据类型之间的区别">
 <meta name="twitter:description" content="简单案例1234567891011let a = 12let b = ab = 13console.log(a) // 12let n = &amp;#123;  name: &apos;jane&apos;&amp;#125;let m = nm.name = &apos;symbol&apos;console.log(n.name)  // &apos;symbol&apos;  浏览器执行JS流程 从电脑内存中分配一块内存，用来执行代码（栈内存 =&amp;gt; stac">
-<meta name="twitter:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png?Expires=1576216896&OSSAccessKeyId=TMP.hjA8uovisGG4qbJp8XAHqfoZYETHCB16P2cwYxhXp4y64ELJbErhmFVK47j1hWcsaezVkq6WybXVPSqPEf6KTRyRp84ts3hEr5f6wUh8HV8uqbfPRY2C97U8McgCgA.tmp&Signature=T%2B85GYHtSXrLNUOqZde4XTsHdr0%3D">
+<meta name="twitter:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png">
 
   
 
@@ -165,7 +167,7 @@ ga('send', 'pageview');
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单案例"><span class="toc-text">简单案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器执行JS流程"><span class="toc-text">浏览器执行JS流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型值的存储"><span class="toc-text">基本类型值的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂值（引用类型的存储）"><span class="toc-text">复杂值（引用类型的存储）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别"><span class="toc-text">区别</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单案例"><span class="toc-text">简单案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器执行JS流程"><span class="toc-text">浏览器执行JS流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型值的存储"><span class="toc-text">基本类型值的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂值（引用类型的存储）"><span class="toc-text">复杂值（引用类型的存储）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别-按值区分"><span class="toc-text">区别(按值区分)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#练习题目"><span class="toc-text">练习题目</span></a></li></ol>
   </div>
 
 
@@ -227,7 +229,7 @@ ga('send', 'pageview');
 <li><p>=为赋值，其实赋值是让变量和值相互关联的过程</p>
 </li>
 </ul>
-<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png?Expires=1576216896&OSSAccessKeyId=TMP.hjA8uovisGG4qbJp8XAHqfoZYETHCB16P2cwYxhXp4y64ELJbErhmFVK47j1hWcsaezVkq6WybXVPSqPEf6KTRyRp84ts3hEr5f6wUh8HV8uqbfPRY2C97U8McgCgA.tmp&Signature=T%2B85GYHtSXrLNUOqZde4XTsHdr0%3D" alt="流程"></p>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png" alt="流程"></p>
 <h2 id="复杂值（引用类型的存储）"><a href="#复杂值（引用类型的存储）" class="headerlink" title="复杂值（引用类型的存储）"></a>复杂值（引用类型的存储）</h2><ul>
 <li><p>在内存中分配一块新内存，用来存储引用类型值（堆内存 =&gt; heap）=&gt; 内存有一个16进制地址</p>
 </li>
@@ -236,13 +238,21 @@ ga('send', 'pageview');
 <li><p>把堆内存地址和变量关联起来</p>
 </li>
 </ul>
-<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-yinyong.png?Expires=1576218870&OSSAccessKeyId=TMP.hjA8uovisGG4qbJp8XAHqfoZYETHCB16P2cwYxhXp4y64ELJbErhmFVK47j1hWcsaezVkq6WybXVPSqPEf6KTRyRp84ts3hEr5f6wUh8HV8uqbfPRY2C97U8McgCgA.tmp&Signature=5eX6ImxXhnCRKLO2UuFozth5ZSE%3D" alt="流程"></p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-yinyong.png" alt="流程"></p>
+<h2 id="区别-按值区分"><a href="#区别-按值区分" class="headerlink" title="区别(按值区分)"></a>区别(按值区分)</h2><ul>
 <li><p>基本类型：按值操作，所以也叫作值类型</p>
 </li>
 <li><p>引用类型：操作的是堆内存的地址（按引用地址操作的）</p>
 </li>
 </ul>
+<h1 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = [<span class="number">10</span>, <span class="number">20</span>];</span><br><span class="line"><span class="keyword">let</span> m = n;</span><br><span class="line"><span class="keyword">let</span> x = m;</span><br><span class="line">m[<span class="number">0</span>] = <span class="number">100</span>;</span><br><span class="line">x = [<span class="number">30</span>, <span class="number">40</span>];</span><br><span class="line">x[<span class="number">0</span>] = <span class="number">200</span>;</span><br><span class="line">m = x</span><br><span class="line">m[<span class="number">1</span>] = <span class="number">300</span></span><br><span class="line">n[<span class="number">2</span>] = <span class="number">400</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(n, m, x)</span><br><span class="line"></span><br><span class="line"><span class="comment">// n =&gt; [100, 20, 400]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// m=x =&gt; [200, 300]</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-case.png" alt="解析"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  n: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = a;</span><br><span class="line"></span><br><span class="line">a.x = a = &#123;</span><br><span class="line">  n: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.x) <span class="comment">// =&gt; undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// &#123;n: 1, x: &#123;n: 2&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>赋值运算符是右关联的，从右往左执行</strong></p>
+<p>```js<br>a = b = 5; // =&gt; b被赋值为5，然后a赋值为5<br>···</p>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-alibaba.png" alt="解析"></p>
 
     
   </div>
@@ -257,7 +267,7 @@ ga('send', 'pageview');
     <a class="show pull-left" href="/2019/12/12/js/data-type/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="hide pull-right" href="/">
+    <a class="show pull-right" href="/2019/12/13/js/datatype-check/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
