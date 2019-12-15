@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS数据类型检测方法 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="一、typeof typeof[val]: 用来检测数据类型的运算符   首先是个字符串 字符串中包含对应的类型  123456789typeof 1  // =&amp;gt; numberlet a = NaNtypeof a // =&amp;gt; numbertypeof true // Booleantypeof &apos;123&apos; // Stringtypeof null // objecttypeof u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS数据类型检测方法">
+<meta property="og:url" content="http://janely.cn/2018/07/25/js/datatype-check/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="一、typeof typeof[val]: 用来检测数据类型的运算符   首先是个字符串 字符串中包含对应的类型  123456789typeof 1  // =&amp;gt; numberlet a = NaNtypeof a // =&amp;gt; numbertypeof true // Booleantypeof &apos;123&apos; // Stringtypeof null // objecttypeof u">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-15T14:06:52.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS数据类型检测方法">
+<meta name="twitter:description" content="一、typeof typeof[val]: 用来检测数据类型的运算符   首先是个字符串 字符串中包含对应的类型  123456789typeof 1  // =&amp;gt; numberlet a = NaNtypeof a // =&amp;gt; numbertypeof true // Booleantypeof &apos;123&apos; // Stringtypeof null // objecttypeof u">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、typeof"><span class="toc-text">一、typeof</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#局限性"><span class="toc-text">局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、instanceof"><span class="toc-text">二、instanceof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、constructor"><span class="toc-text">三、constructor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、Object-prototype-toString-call"><span class="toc-text">四、Object.prototype.toString.call()</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-js/datatype-check" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JS数据类型检测方法</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.07.25</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="一、typeof"><a href="#一、typeof" class="headerlink" title="一、typeof"></a>一、typeof</h2><blockquote>
+<p>typeof[val]: 用来检测数据类型的运算符</p>
+</blockquote>
+<ul>
+<li>首先是个字符串</li>
+<li>字符串中包含对应的类型</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">1</span>  <span class="comment">// =&gt; number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">NaN</span></span><br><span class="line"><span class="keyword">typeof</span> a <span class="comment">// =&gt; number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span> <span class="comment">// Boolean</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">'123'</span> <span class="comment">// String</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> <span class="comment">// object</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><ul>
+<li><p>typeof null =&gt; “object” 但是null并不是对象</p>
+</li>
+<li><p>基于typeof无法细分出当前值是普通对象还是数组对象，因为只要是对象数据类型，返回的结果都是”object”</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="keyword">typeof</span> <span class="keyword">typeof</span> [] <span class="comment">// ==&gt; "string"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> [] <span class="comment">// =&gt; "object"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">"object"</span> <span class="comment">// =&gt; "string"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、instanceof"><a href="#二、instanceof" class="headerlink" title="二、instanceof"></a>二、instanceof</h2><blockquote>
+<p>用来检测当前实例是否率属于某个类</p>
+</blockquote>
+<h2 id="三、constructor"><a href="#三、constructor" class="headerlink" title="三、constructor"></a>三、constructor</h2><blockquote>
+<p>基于构造函数检测数据类型（也是基于某个类）</p>
+</blockquote>
+<h2 id="四、Object-prototype-toString-call"><a href="#四、Object-prototype-toString-call" class="headerlink" title="四、Object.prototype.toString.call()"></a>四、Object.prototype.toString.call()</h2><blockquote>
+<p>检测数据类型最好的办法</p>
+</blockquote>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/07/18/js/data-type/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/08/28/js/ logical-statement/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

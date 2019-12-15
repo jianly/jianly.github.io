@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS数据类型之间的区别 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="简单案例1234567891011let a = 12let b = ab = 13console.log(a) // 12let n = &amp;#123;  name: &apos;jane&apos;&amp;#125;let m = nm.name = &apos;symbol&apos;console.log(n.name)  // &apos;symbol&apos;  浏览器执行JS流程 从电脑内存中分配一块内存，用来执行代码（栈内存 =&amp;gt; stac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS数据类型之间的区别">
+<meta property="og:url" content="http://janely.cn/2018/06/17/js/datatype-distinction/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="简单案例1234567891011let a = 12let b = ab = 13console.log(a) // 12let n = &amp;#123;  name: &apos;jane&apos;&amp;#125;let m = nm.name = &apos;symbol&apos;console.log(n.name)  // &apos;symbol&apos;  浏览器执行JS流程 从电脑内存中分配一块内存，用来执行代码（栈内存 =&amp;gt; stac">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-yinyong.png">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-case.png">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-alibaba.png">
+<meta property="og:updated_time" content="2019-12-15T14:06:48.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS数据类型之间的区别">
+<meta name="twitter:description" content="简单案例1234567891011let a = 12let b = ab = 13console.log(a) // 12let n = &amp;#123;  name: &apos;jane&apos;&amp;#125;let m = nm.name = &apos;symbol&apos;console.log(n.name)  // &apos;symbol&apos;  浏览器执行JS流程 从电脑内存中分配一块内存，用来执行代码（栈内存 =&amp;gt; stac">
+<meta name="twitter:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单案例"><span class="toc-text">简单案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器执行JS流程"><span class="toc-text">浏览器执行JS流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型值的存储"><span class="toc-text">基本类型值的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂值（引用类型的存储）"><span class="toc-text">复杂值（引用类型的存储）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别-按值区分"><span class="toc-text">区别(按值区分)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#练习题目"><span class="toc-text">练习题目</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-js/datatype-distinction" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JS数据类型之间的区别</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.06.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">12</span></span><br><span class="line"><span class="keyword">let</span> b = a</span><br><span class="line">b = <span class="number">13</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> n = &#123;</span><br><span class="line">  name: <span class="string">'jane'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> m = n</span><br><span class="line">m.name = <span class="string">'symbol'</span></span><br><span class="line"><span class="built_in">console</span>.log(n.name)  <span class="comment">// 'symbol'</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="浏览器执行JS流程"><a href="#浏览器执行JS流程" class="headerlink" title="浏览器执行JS流程"></a>浏览器执行JS流程</h1><ul>
+<li><p>从电脑内存中分配一块内存，用来执行代码（栈内存 =&gt; stack）</p>
+</li>
+<li><p>浏览器分配一个主线程用来自上而下执行js代码</p>
+</li>
+</ul>
+<h2 id="基本类型值的存储"><a href="#基本类型值的存储" class="headerlink" title="基本类型值的存储"></a>基本类型值的存储</h2><ul>
+<li><p>创建变量，将变量放到当前栈内存的变量存储区域中</p>
+</li>
+<li><p>创建一个值，将这个值放到当前栈内存值的区域中</p>
+</li>
+<li><p>=为赋值，其实赋值是让变量和值相互关联的过程</p>
+</li>
+</ul>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack.png" alt="流程"></p>
+<h2 id="复杂值（引用类型的存储）"><a href="#复杂值（引用类型的存储）" class="headerlink" title="复杂值（引用类型的存储）"></a>复杂值（引用类型的存储）</h2><ul>
+<li><p>在内存中分配一块新内存，用来存储引用类型值（堆内存 =&gt; heap）=&gt; 内存有一个16进制地址</p>
+</li>
+<li><p>把对象中的键值对依次存储到堆内存中</p>
+</li>
+<li><p>把堆内存地址和变量关联起来</p>
+</li>
+</ul>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-yinyong.png" alt="流程"></p>
+<h2 id="区别-按值区分"><a href="#区别-按值区分" class="headerlink" title="区别(按值区分)"></a>区别(按值区分)</h2><ul>
+<li><p>基本类型：按值操作，所以也叫作值类型</p>
+</li>
+<li><p>引用类型：操作的是堆内存的地址（按引用地址操作的）</p>
+</li>
+</ul>
+<h1 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = [<span class="number">10</span>, <span class="number">20</span>];</span><br><span class="line"><span class="keyword">let</span> m = n;</span><br><span class="line"><span class="keyword">let</span> x = m;</span><br><span class="line">m[<span class="number">0</span>] = <span class="number">100</span>;</span><br><span class="line">x = [<span class="number">30</span>, <span class="number">40</span>];</span><br><span class="line">x[<span class="number">0</span>] = <span class="number">200</span>;</span><br><span class="line">m = x</span><br><span class="line">m[<span class="number">1</span>] = <span class="number">300</span></span><br><span class="line">n[<span class="number">2</span>] = <span class="number">400</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(n, m, x)</span><br><span class="line"></span><br><span class="line"><span class="comment">// n =&gt; [100, 20, 400]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// m=x =&gt; [200, 300]</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-case.png" alt="解析"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  n: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = a;</span><br><span class="line"></span><br><span class="line">a.x = a = &#123;</span><br><span class="line">  n: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.x) <span class="comment">// =&gt; undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// &#123;n: 1, x: &#123;n: 2&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>赋值运算符是右关联的，从右往左执行</strong></p>
+<p>```js<br>a = b = 5; // =&gt; b被赋值为5，然后a赋值为5<br>···</p>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/stack-alibaba.png" alt="解析"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/05/14/js/js-date/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/07/12/server/ubuntu-ss/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

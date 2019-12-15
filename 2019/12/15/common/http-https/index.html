@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>对HTTP、HTTPs的理解 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="基本常识1、什么是TCP/IP协议TCP/IP（传输控制协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP和IP两个协议，而是指一个有FTP、SMTP、TCP、UDP、IP等协议构成等协议簇，只是因为TCP、IP具有代表性，所以被成为TCP/IP协议 2、什么是DNSDNS(域名系统协议)，是一种分布式网络目录服务，主要用于域名与IP地址对相互转换，以及控制因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对HTTP、HTTPs的理解">
+<meta property="og:url" content="http://janely.cn/2019/12/15/common/http-https/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="基本常识1、什么是TCP/IP协议TCP/IP（传输控制协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP和IP两个协议，而是指一个有FTP、SMTP、TCP、UDP、IP等协议构成等协议簇，只是因为TCP、IP具有代表性，所以被成为TCP/IP协议 2、什么是DNSDNS(域名系统协议)，是一种分布式网络目录服务，主要用于域名与IP地址对相互转换，以及控制因">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/http.png">
+<meta property="og:updated_time" content="2019-12-15T14:31:41.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对HTTP、HTTPs的理解">
+<meta name="twitter:description" content="基本常识1、什么是TCP/IP协议TCP/IP（传输控制协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP和IP两个协议，而是指一个有FTP、SMTP、TCP、UDP、IP等协议构成等协议簇，只是因为TCP、IP具有代表性，所以被成为TCP/IP协议 2、什么是DNSDNS(域名系统协议)，是一种分布式网络目录服务，主要用于域名与IP地址对相互转换，以及控制因">
+<meta name="twitter:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/http.png">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本常识"><span class="toc-text">基本常识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、什么是TCP-IP协议"><span class="toc-text">1、什么是TCP/IP协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、什么是DNS"><span class="toc-text">2、什么是DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、什么是SSL-TSL"><span class="toc-text">3、什么是SSL/TSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、什么是URL-URI"><span class="toc-text">4、什么是URL/URI</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、工作原理"><span class="toc-text">1、工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、报文格式"><span class="toc-text">2、报文格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#请求报文："><span class="toc-text">请求报文：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应答报文："><span class="toc-text">应答报文：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、状态码"><span class="toc-text">3、状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见状态码"><span class="toc-text">常见状态码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、特点"><span class="toc-text">4、特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、请求方法"><span class="toc-text">5、请求方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get和post区别"><span class="toc-text">get和post区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-0和1-1的区别"><span class="toc-text">1.0和1.1的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-0和1-x的区别"><span class="toc-text">2.0和1.x的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2、作用"><span class="toc-text">2、作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-HTTPS区别"><span class="toc-text">HTTP/HTTPS区别</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-common/http-https" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">对HTTP、HTTPs的理解</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.12.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/http/">http</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/http.png" alt="HTTP"></p>
+<h1 id="基本常识"><a href="#基本常识" class="headerlink" title="基本常识"></a>基本常识</h1><h2 id="1、什么是TCP-IP协议"><a href="#1、什么是TCP-IP协议" class="headerlink" title="1、什么是TCP/IP协议"></a>1、什么是TCP/IP协议</h2><p>TCP/IP（传输控制协议）是指能够在多个不同网络间实现信息传输的协议簇。TCP/IP协议不仅仅指的是TCP和IP两个协议，而是指一个有FTP、SMTP、TCP、UDP、IP等协议构成等协议簇，只是因为TCP、IP具有代表性，所以被成为TCP/IP协议</p>
+<h2 id="2、什么是DNS"><a href="#2、什么是DNS" class="headerlink" title="2、什么是DNS"></a>2、什么是DNS</h2><p>DNS(域名系统协议)，是一种分布式网络目录服务，主要用于域名与IP地址对相互转换，以及控制因特网对电子邮件对发送</p>
+<h2 id="3、什么是SSL-TSL"><a href="#3、什么是SSL-TSL" class="headerlink" title="3、什么是SSL/TSL"></a>3、什么是SSL/TSL</h2><p>SSL(安全套接层)及其继任者TSL传输层安全是为网络通信提供安全及数据完整性对一种安全协议。TSL/SSL在传输层与应用直接对网络链接进行加密。</p>
+<h2 id="4、什么是URL-URI"><a href="#4、什么是URL-URI" class="headerlink" title="4、什么是URL/URI"></a>4、什么是URL/URI</h2><p>http使用统一资源标识符（URI）来传输和建立连接。</p>
+<ul>
+<li><p>URI: 统一资源标识符，用来标示一个具体的资源的，可以通过它知道一个资源是什么</p>
+</li>
+<li><p>URL: 统一资源定位符，用来定位具体资源，标示一个具体的资源位置</p>
+</li>
+</ul>
+<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p>超文本传输协议，是一个简单对请求响应协议，运行在TCP之上。</p>
+<h2 id="1、工作原理"><a href="#1、工作原理" class="headerlink" title="1、工作原理"></a>1、工作原理</h2><p>基于客户端/服务器模式，且面向链接对，事务处理的过程：</p>
+<ul>
+<li><p>客户端与服务器建立tcp链接</p>
+</li>
+<li><p>客户端向服务器发送请求命令，客户端发送请求头信息</p>
+</li>
+<li><p>服务器接收请求，并根据请求返回响应的文件作为应答</p>
+</li>
+<li><p>客户端与服务端关闭链接</p>
+</li>
+</ul>
+<h2 id="2、报文格式"><a href="#2、报文格式" class="headerlink" title="2、报文格式"></a>2、报文格式</h2><h3 id="请求报文："><a href="#请求报文：" class="headerlink" title="请求报文："></a>请求报文：</h3><ul>
+<li><p>请求行：包括方法、URL、协议/版本</p>
+</li>
+<li><p>消息报头：request header</p>
+</li>
+<li><p>请求正文</p>
+</li>
+</ul>
+<h3 id="应答报文："><a href="#应答报文：" class="headerlink" title="应答报文："></a>应答报文：</h3><ul>
+<li><p>状态行：版本、状态码</p>
+</li>
+<li><p>消息报头</p>
+</li>
+<li><p>响应正文</p>
+</li>
+</ul>
+<h2 id="3、状态码"><a href="#3、状态码" class="headerlink" title="3、状态码"></a>3、状态码</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><p>1xx：信息型，服务器收到请求，需要请求者继续操作</p>
+</li>
+<li><p>2xx：成功型，请求成功收到，解析并处理</p>
+</li>
+<li><p>3xx：重定向，需要进一步的操作完成请求</p>
+</li>
+<li><p>4xx：客户端错误，请求包含语法错误或无法完成请求</p>
+</li>
+<li><p>5xx：服务器错误，服务器在处理请求过程中发送了错误</p>
+</li>
+</ul>
+<h3 id="常见状态码"><a href="#常见状态码" class="headerlink" title="常见状态码"></a>常见状态码</h3><ul>
+<li><p>200：客户端请求成功</p>
+</li>
+<li><p>301：资源被永久转移到其他URL</p>
+</li>
+<li><p>302：临时跳转</p>
+</li>
+<li><p>400：bad request 客户端请求有语法错误，不能被服务器所理解</p>
+</li>
+<li><p>401：unauthorized 请求未经授权，这个状态码必须和www-authenticate报头域一起使用</p>
+</li>
+<li><p>404：请求资源不存在，可能输入了错误的URL</p>
+</li>
+<li><p>500：服务器内部发生了不可预期的错误</p>
+</li>
+<li><p>503：服务器当前不能处理客户端的请求，一段时间后可能恢复正常</p>
+</li>
+</ul>
+<h2 id="4、特点"><a href="#4、特点" class="headerlink" title="4、特点"></a>4、特点</h2><ul>
+<li><p>支持客户/服务器模式</p>
+</li>
+<li><p>简单快速：请求服务时，只需要传送请求方法和路径</p>
+</li>
+<li><p>灵活：允许传输任意类型的数据对象，传输类型由content-type标记</p>
+</li>
+<li><p>无连接：限制每次链接只处理一个请求，服务器处理完请求，并收到客户的应答后，即断开连接，但是却不利于客户端与服务器保持会话连接，为了弥补这种不足，产生了两项记录http状态的技术，一个叫cookie，一个叫session</p>
+</li>
+<li><p>无状态：协议对于事物处理没有记忆，后续处理需要前面的信息，则必须重传</p>
+</li>
+</ul>
+<h2 id="5、请求方法"><a href="#5、请求方法" class="headerlink" title="5、请求方法"></a>5、请求方法</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><p>get：向特定资源发起请求</p>
+</li>
+<li><p>post：向指定资源提交数据进行数据处理。数据包含在请求体中，post请求可能用于新的资源的创建以及已有资源的修改</p>
+</li>
+<li><p>delete：请求服务器删除指定资源</p>
+</li>
+<li><p>put：向指定资源上传最新内容</p>
+</li>
+<li><p>options：返回服务器对特定资源支持的http方法，用来向服务器发送‘*’的请求来测试服务器的功能性</p>
+</li>
+<li><p>head：类似与get请求，只不过没有返回体，用于获取包含在响应消息头中的元信息</p>
+</li>
+</ul>
+<h3 id="get和post区别"><a href="#get和post区别" class="headerlink" title="get和post区别"></a>get和post区别</h3><ul>
+<li><p>get从服务器上获取资源，post向服务器发送数据</p>
+</li>
+<li><p>get传输数据是通过URL请求，post是通过http的post机制，将字段与对应值封存在请求实体中发送给服务器的</p>
+</li>
+<li><p>get传输的数量小，因为受URL长度限制，但是效率高。post可以传输大量数据</p>
+</li>
+<li><p>get不安全，因为URL可见，相对来说post比较安全</p>
+</li>
+<li><p>get只能支持ASCII字符，向服务器传的中文字符可能会乱码。post支持标准字符集，可以正确传递中文字符。</p>
+</li>
+</ul>
+<h2 id="1-0和1-1的区别"><a href="#1-0和1-1的区别" class="headerlink" title="1.0和1.1的区别"></a>1.0和1.1的区别</h2><ul>
+<li><p>长链接：在一个tcp连接上可以传送多个http请求和响应，减少了建立和关闭连接的消耗和延迟，在http1.1中默认开启connection：keep-alive，而http1.0每次请求都要创建连接</p>
+</li>
+<li><p>缓存处理：1.1引入了更多的缓存控制策略如if-Match、if-NoneMatch等</p>
+</li>
+<li><p>错误通知的管理：增加了24个错误状态响应码</p>
+</li>
+<li><p>节约带宽：例如客户端只需要某一个对象的一部分，1.0中服务器将整个对象送过来，并不支持断点续传功能。1.1引入了range头域，允许只请求资源的某个部分</p>
+</li>
+<li><p>Host的头处理：1.0中认为每个服务器都绑定一个唯一的ip地址，但是一台物理服务器上可以存在多个虚拟主机，并且共享一个ip。</p>
+</li>
+</ul>
+<h2 id="2-0和1-x的区别"><a href="#2-0和1-x的区别" class="headerlink" title="2.0和1.x的区别"></a>2.0和1.x的区别</h2><ul>
+<li><p>二进制分帧：http1.x的解析上基于文本，存在缺陷，因为文本的表现形式多样性，做到健壮性考虑的场景比较多。然后二进制只认0和1的组合</p>
+</li>
+<li><p>多路复用：连接共享，即每一个request都是用左连接共享机制的。一个request对应一个id，这个一个连接上可以有多个request，每个连接的request可以随机混杂在一起，接收方可以根据request的ID将request再归属到各自不同的服务器请求里</p>
+</li>
+<li><p>头部压缩：http1.x中头部带有大量信息，每次都要重复发送，2.0使用encoder来减少需要传输的header大小</p>
+</li>
+<li><p>服务器推送</p>
+</li>
+</ul>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p>HTTPS在HTTP上建立SSL加密层，并对传输数据进行加密，是HTTP协议对安全版。</p>
+<h2 id="2、作用"><a href="#2、作用" class="headerlink" title="2、作用"></a>2、作用</h2><ul>
+<li><p>对数据进行加密，并建立一个信息安全通道，来保证传输过程中的数据安全。</p>
+</li>
+<li><p>对网站服务器进行真实身份认证</p>
+</li>
+</ul>
+<h1 id="HTTP-HTTPS区别"><a href="#HTTP-HTTPS区别" class="headerlink" title="HTTP/HTTPS区别"></a>HTTP/HTTPS区别</h1><ul>
+<li><p>HTTPS可以有效的防止运营商劫持</p>
+</li>
+<li><p>http和https使用的是完全不同的连接方式，http是80端口，https是443端口</p>
+</li>
+<li><p>https需要认证证书</p>
+</li>
+<li><p>http运行在tcp之上，明文传输，https运行在ssl和tsl之上，ssl/tsl运行在tcp之上，且加密传输</p>
+</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/05/12/server/ubuntu-v2ray/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/12/15/common/http缓存/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
