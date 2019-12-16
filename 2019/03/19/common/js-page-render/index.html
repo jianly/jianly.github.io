@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-15T16:41:55.280Z">
+<meta property="og:updated_time" content="2019-12-15T16:57:18.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器原理和页面渲染原理">
 <meta name="twitter:description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
@@ -287,7 +287,8 @@ ga('send', 'pageview');
 <h2 id="js运行机制"><a href="#js运行机制" class="headerlink" title="js运行机制"></a>js运行机制</h2><h3 id="为什么是单线程"><a href="#为什么是单线程" class="headerlink" title="为什么是单线程"></a>为什么是单线程</h3><p>JavaScript作为浏览器脚本语言，主要用途是与用户互动，以及操作DOM，所以只能是单线程，否则会带来复杂的同步问题。</p>
 <h3 id="什么是任务队列"><a href="#什么是任务队列" class="headerlink" title="什么是任务队列"></a>什么是任务队列</h3><p>JavaScript单线程，同一个时间只能做一个任务，任务结束，才能执行下一件任务，若任务耗时很长，那么下一个任务就得一直等待。于是将任务分成两种，一种同步任务、一种异步任务（<a href="janely.cn/fastjson/">详细理解同步、异步点击这里</a>）。</p>
 <p>异步任务不进入主线程，而进入“任务队列”的任务，只有“任务队列”通知主线程，某个异步任务可以执行力，该任务才会进入主线程。</p>
-<h3 id="什么是回调函数"><a href="#什么是回调函数" class="headerlink" title="什么是回调函数"></a>什么是回调函数</h3><h3 id="什么是Event-loop（事件循环）"><a href="#什么是Event-loop（事件循环）" class="headerlink" title="什么是Event loop（事件循环）"></a>什么是Event loop（事件循环）</h3><p>异步执行的运行机制：</p>
+<h3 id="什么是回调函数"><a href="#什么是回调函数" class="headerlink" title="什么是回调函数"></a>什么是回调函数</h3><p>回调函数，也被称作高阶函数，就是把一个函数作为参数传入“另一个函数”，然后回调函数在“另一个函数”中调用。回调函数本质上是一种模式（对一种问题的确定解决方案），因此使用回调函数我们也称之为回调模式。有两种，一种是函数回调，一种是匿名函数回调。</p>
+<h3 id="什么是Event-loop（事件循环）"><a href="#什么是Event-loop（事件循环）" class="headerlink" title="什么是Event loop（事件循环）"></a>什么是Event loop（事件循环）</h3><p>异步执行的运行机制：</p>
 <ul>
 <li><p>所有同步任务都在主线程执行，形成一个执行栈</p>
 </li>
@@ -313,7 +314,7 @@ ga('send', 'pageview');
     <a class="show pull-left" href="/2019/02/25/algorithm/string/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2019/04/09/js/ajax/">
+    <a class="show pull-right" href="/2019/04/09/common/ajax/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>

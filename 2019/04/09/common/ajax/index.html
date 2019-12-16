@@ -15,17 +15,17 @@
     <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
   
 
-  <meta name="description" content="Ajax的工作原理 XMLHttpRequest对象  1. 创建ajax对象1var xhr = new XMLHttpRequest()  2. xhr 发送请求12xhr.open(&apos;get&apos;, &apos;test.html&apos;, &apos;true&apos;)xhr.send()  3. xhr获取响应12345678910111213xhr.onreadystatechange = function () &amp;#1">
+  <meta name="description" content="Ajax的工作原理异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。 XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ajax以及跨域的整理">
-<meta property="og:url" content="http://janely.cn/2019/04/09/js/ajax/index.html">
+<meta property="og:url" content="http://janely.cn/2019/04/09/common/ajax/index.html">
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
-<meta property="og:description" content="Ajax的工作原理 XMLHttpRequest对象  1. 创建ajax对象1var xhr = new XMLHttpRequest()  2. xhr 发送请求12xhr.open(&apos;get&apos;, &apos;test.html&apos;, &apos;true&apos;)xhr.send()  3. xhr获取响应12345678910111213xhr.onreadystatechange = function () &amp;#1">
+<meta property="og:description" content="Ajax的工作原理异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。 XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-15T14:03:33.284Z">
+<meta property="og:updated_time" content="2019-12-16T09:06:53.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax以及跨域的整理">
-<meta name="twitter:description" content="Ajax的工作原理 XMLHttpRequest对象  1. 创建ajax对象1var xhr = new XMLHttpRequest()  2. xhr 发送请求12xhr.open(&apos;get&apos;, &apos;test.html&apos;, &apos;true&apos;)xhr.send()  3. xhr获取响应12345678910111213xhr.onreadystatechange = function () &amp;#1">
+<meta name="twitter:description" content="Ajax的工作原理异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。 XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器">
 
   
 
@@ -168,7 +168,7 @@ ga('send', 'pageview');
 
 
 <div class="content content-post CENTER">
-   <article id="post-js/ajax" class="article article-type-post" itemprop="blogPost">
+   <article id="post-common/ajax" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
     <h1 class="post-title">Ajax以及跨域的整理</h1>
 
@@ -208,9 +208,8 @@ ga('send', 'pageview');
 
   <div class="article-content">
     
-      <h1 id="Ajax的工作原理"><a href="#Ajax的工作原理" class="headerlink" title="Ajax的工作原理"></a>Ajax的工作原理</h1><blockquote>
-<p>XMLHttpRequest对象</p>
-</blockquote>
+      <h1 id="Ajax的工作原理"><a href="#Ajax的工作原理" class="headerlink" title="Ajax的工作原理"></a>Ajax的工作原理</h1><p>异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。</p>
+<p>XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器提出请求和处理响应，而不阻塞用户，达到无刷新的效果。</p>
 <h2 id="1-创建ajax对象"><a href="#1-创建ajax对象" class="headerlink" title="1. 创建ajax对象"></a>1. 创建ajax对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-xhr-发送请求"><a href="#2-xhr-发送请求" class="headerlink" title="2. xhr 发送请求"></a>2. xhr 发送请求</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'test.html'</span>, <span class="string">'true'</span>)</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure>
