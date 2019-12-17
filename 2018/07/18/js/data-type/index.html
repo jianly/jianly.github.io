@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="一、基本数据类型1. Number(数字) 包括常规数字、NaN  NaNnot a number）不是一个数，但它率属于数字类型NaN和任何值（包括自己）都不相等：所以不能用相等但方式判断是否有效数字 123&apos;AA&apos; == NaN  // false10 == NaN    // falseNaN == NaN   // false  isNaN检测一个值是否为非有效数字，如果不是有效数字返回t">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-15T14:06:56.664Z">
+<meta property="og:updated_time" content="2019-12-17T09:17:08.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中常用数据类型">
 <meta name="twitter:description" content="一、基本数据类型1. Number(数字) 包括常规数字、NaN  NaNnot a number）不是一个数，但它率属于数字类型NaN和任何值（包括自己）都不相等：所以不能用相等但方式判断是否有效数字 123&apos;AA&apos; == NaN  // false10 == NaN    // falseNaN == NaN   // false  isNaN检测一个值是否为非有效数字，如果不是有效数字返回t">
@@ -41,48 +41,10 @@
   
 
   
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-38189205-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
-
 
   
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
 
   
-  <script type="text/javascript">
-	(function(){
-	    var bp = document.createElement('script');
-	    var curProtocol = window.location.protocol.split(':')[0];
-	    if (curProtocol === 'https') {
-	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-	    }
-	    else {
-	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-	    }
-	    var s = document.getElementsByTagName("script")[0];
-	    s.parentNode.insertBefore(bp, s);
-	})();
-  </script>
-
 
 
   
@@ -134,17 +96,6 @@ ga('send', 'pageview');
         <li class="item-toolbox">
           <a
             class="CIRCLE"
-            href="/tag/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            标签
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
             href="/about/"
             rel="noopener noreferrer"
             target="_self"
@@ -162,7 +113,7 @@ ga('send', 'pageview');
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基本数据类型"><span class="toc-text">一、基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Number-数字"><span class="toc-text">1. Number(数字)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NaN"><span class="toc-text">NaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isNaN"><span class="toc-text">isNaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型值转换为数字类型"><span class="toc-text">把其他类型值转换为数字类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-String-字符串"><span class="toc-text">2. String(字符串)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#其他类型转换为字符串"><span class="toc-text">其他类型转换为字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Boolean（布尔值）"><span class="toc-text">3. Boolean（布尔值）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型值转换为布尔值"><span class="toc-text">把其他类型值转换为布尔值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-null-空对象指针-undefined-未定义"><span class="toc-text">4. null(空对象指针) / undefined(未定义)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-text">区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、引用类型"><span class="toc-text">二、引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-object-普通对象"><span class="toc-text">1. object-普通对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取属性名对应的属性值"><span class="toc-text">获取属性名对应的属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置属性值"><span class="toc-text">设置属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除属性"><span class="toc-text">删除属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-object-数组对象"><span class="toc-text">2. object-数组对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-object-函数对象"><span class="toc-text">3. object-函数对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-object-正则对象"><span class="toc-text">4. object-正则对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-object-Math数学函数对象"><span class="toc-text">5. object-Math数学函数对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-object-日期对象"><span class="toc-text">5. object-日期对象</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基本数据类型"><span class="toc-text">一、基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Number-数字"><span class="toc-text">1. Number(数字)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NaN"><span class="toc-text">NaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isNaN"><span class="toc-text">isNaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型值转换为数字类型"><span class="toc-text">把其他类型值转换为数字类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-String-字符串"><span class="toc-text">2. String(字符串)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#其他类型转换为字符串"><span class="toc-text">其他类型转换为字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Boolean（布尔值）"><span class="toc-text">3. Boolean（布尔值）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型值转换为布尔值"><span class="toc-text">把其他类型值转换为布尔值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-null-空对象指针-undefined-未定义"><span class="toc-text">4. null(空对象指针) / undefined(未定义)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-text">区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol"><span class="toc-text">Symbol</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、引用类型"><span class="toc-text">二、引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-object-普通对象"><span class="toc-text">1. object-普通对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取属性名对应的属性值"><span class="toc-text">获取属性名对应的属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置属性值"><span class="toc-text">设置属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除属性"><span class="toc-text">删除属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-object-数组对象"><span class="toc-text">2. object-数组对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-object-函数对象"><span class="toc-text">3. object-函数对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-object-正则对象"><span class="toc-text">4. object-正则对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-object-Math数学函数对象"><span class="toc-text">5. object-Math数学函数对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-object-日期对象"><span class="toc-text">5. object-日期对象</span></a></li></ol></li></ol>
   </div>
 
 
@@ -291,7 +242,11 @@ ga('send', 'pageview');
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num;</span><br></pre></td></tr></table></figure>
 
-<hr>
+<h3 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h3><blockquote>
+<p>ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID。Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含在对象自身的属性名集合(property names)之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">   [<span class="built_in">Symbol</span>(<span class="string">'name'</span>)]: <span class="string">'jane'</span>,</span><br><span class="line">   age: <span class="number">18</span>,</span><br><span class="line">   title: <span class="string">'Engineer'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj)   <span class="comment">// ['age', 'title']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">in</span> obj) &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(p)   <span class="comment">// 分别会输出：'age' 和 'title'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)   <span class="comment">// ['age', 'title']</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="二、引用类型"><a href="#二、引用类型" class="headerlink" title="二、引用类型"></a>二、引用类型</h1><h2 id="1-object-普通对象"><a href="#1-object-普通对象" class="headerlink" title="1. object-普通对象"></a>1. object-普通对象</h2><blockquote>
 <p>{[key]: [value], …} 任何一个对象都是由零到多组键值（属性名：属性值）对组成的（并且属性名不能重复）</p>
 </blockquote>
@@ -384,17 +339,6 @@ ga('send', 'pageview');
               target="_self"
               >
               分类
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/tag/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              标签
             </a>
           </li>
         
