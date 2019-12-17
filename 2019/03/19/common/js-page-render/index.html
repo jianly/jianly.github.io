@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-15T16:57:18.551Z">
+<meta property="og:updated_time" content="2019-12-17T16:28:00.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器原理和页面渲染原理">
 <meta name="twitter:description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
@@ -113,7 +113,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DOCTYPE以及作用"><span class="toc-text">什么是DOCTYPE以及作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标准模式和怪异模式"><span class="toc-text">标准模式和怪异模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入url发生什么"><span class="toc-text">输入url发生什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页渲染的过程"><span class="toc-text">网页渲染的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重排Reflow、重绘Repaint"><span class="toc-text">重排Reflow、重绘Repaint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面性能"><span class="toc-text">页面性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js运行机制"><span class="toc-text">js运行机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么是单线程"><span class="toc-text">为什么是单线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是任务队列"><span class="toc-text">什么是任务队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是回调函数"><span class="toc-text">什么是回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Event-loop（事件循环）"><span class="toc-text">什么是Event loop（事件循环）</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DOCTYPE以及作用"><span class="toc-text">什么是DOCTYPE以及作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标准模式和怪异模式"><span class="toc-text">标准模式和怪异模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入url发生什么"><span class="toc-text">输入url发生什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、构建请求，浏览器开启一个线程来处理请求"><span class="toc-text">1、构建请求，浏览器开启一个线程来处理请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下："><span class="toc-text">2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、建立TCP链接"><span class="toc-text">3、建立TCP链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、发送http请求"><span class="toc-text">4、发送http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、网络响应"><span class="toc-text">5、网络响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、根据响应内容，渲染页面"><span class="toc-text">6、根据响应内容，渲染页面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重排（也叫回流）Reflow、重绘Repaint"><span class="toc-text">重排（也叫回流）Reflow、重绘Repaint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面性能"><span class="toc-text">页面性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js运行机制"><span class="toc-text">js运行机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么是单线程"><span class="toc-text">为什么是单线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是任务队列"><span class="toc-text">什么是任务队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是回调函数"><span class="toc-text">什么是回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Event-loop（事件循环）"><span class="toc-text">什么是Event loop（事件循环）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节流（throttle）"><span class="toc-text">节流（throttle）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防抖（debounce）"><span class="toc-text">防抖（debounce）</span></a></li></ol>
   </div>
 
 
@@ -169,9 +169,7 @@
 </li>
 </ul>
 <h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版本：严格、过度、基于框架</p>
-<h2 id="输入url发生什么"><a href="#输入url发生什么" class="headerlink" title="输入url发生什么"></a>输入url发生什么</h2><ul>
-<li><p>浏览器开启一个线程来处理请求, 启动一个dns查询获取请求对应但IP地址，dns查询过程如下：</p>
-<ul>
+<h2 id="输入url发生什么"><a href="#输入url发生什么" class="headerlink" title="输入url发生什么"></a>输入url发生什么</h2><h3 id="1、构建请求，浏览器开启一个线程来处理请求"><a href="#1、构建请求，浏览器开启一个线程来处理请求" class="headerlink" title="1、构建请求，浏览器开启一个线程来处理请求"></a>1、构建请求，浏览器开启一个线程来处理请求</h3><h3 id="2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下："><a href="#2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下：" class="headerlink" title="2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下："></a>2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下：</h3><ul>
 <li><p>浏览器缓存：浏览器会缓存DNS记录一段时间</p>
 </li>
 <li><p>系统缓存：如果在浏览器缓存中没有找到需要的记录，浏览器会做一个系统调用，查询系统缓存中的记录</p>
@@ -183,21 +181,36 @@
 <li><p>递归搜索</p>
 </li>
 </ul>
+<h3 id="3、建立TCP链接"><a href="#3、建立TCP链接" class="headerlink" title="3、建立TCP链接"></a>3、建立TCP链接</h3><ul>
+<li>通过三次握手（发送3个数据包确认已经建立连接）建立客户端和服务器直接的连接。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">三次握手的流程：</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sequence Number: 序列号 SYN: 同步序列编号，是建立连接的信号，ACK：响应，</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、客户端主动打开，发送请求报文段，将SYN标识位置为<span class="number">1</span>，Sequence <span class="built_in">Number</span>置为x，然后进入SYN_SEND状态</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、服务器收到SYN报文段进行确认，将SYN标识位置为<span class="number">1</span>，ACK置为<span class="number">1</span>，Sequence <span class="built_in">Number</span>置为y，Acknowledgment <span class="built_in">Number</span>（确认号）置为x+<span class="number">1</span>，然后进入SYN_RECV状态，这个状态被称为半连接状态</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、客户端再进行一次确认，将ACK置为<span class="number">1</span>（此时不用SYN），Sequence <span class="built_in">Number</span>置为x+<span class="number">1</span>，Acknowledgment <span class="built_in">Number</span>置为y+<span class="number">1</span>发向服务器，最后客户端与服务器都进入ESTABLISHED状态</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>进行数据传输，数据包校验保证数据到达接收方</p>
 </li>
-<li><p>TCP/IP链接建立，向这个ip的服务器发送http请求</p>
-</li>
-<li><p>网站服务的永久重定向响应</p>
-</li>
-<li><p>浏览器跟踪重定向地址</p>
-</li>
-<li><p>服务器收到请求，处理并返回响应内容</p>
-</li>
-<li><p>释放tcp连接</p>
-</li>
-<li><p>浏览器得到反馈内容，开始渲染页面</p>
+<li><p>断开连接，四次挥手</p>
 </li>
 </ul>
-<h2 id="网页渲染的过程"><a href="#网页渲染的过程" class="headerlink" title="网页渲染的过程"></a>网页渲染的过程</h2><ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">四次挥手的过程：</span><br><span class="line"></span><br><span class="line"><span class="comment">// FIN：关闭连接，</span></span><br><span class="line"><span class="number">1</span>、先由客户端向服务器端发送一个FIN，请求关闭数据传输。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、当服务器接收到客户端的FIN时，向客户端发送一个ACK，其中ack的值等于FIN+SEQ</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、然后服务器向客户端发送一个FIN，告诉客户端应用程序关闭。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、当客户端收到服务器端的FIN是，回复一个ACK给服务器端。其中ack的值等于FIN+SEQ</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、发送http请求"><a href="#4、发送http请求" class="headerlink" title="4、发送http请求"></a>4、发送http请求</h3><ul>
+<li><p>请求行</p>
+</li>
+<li><p>请求头</p>
+</li>
+<li><p>请求体</p>
+</li>
+</ul>
+<h3 id="5、网络响应"><a href="#5、网络响应" class="headerlink" title="5、网络响应"></a>5、网络响应</h3><ul>
+<li><p>响应行</p>
+</li>
+<li><p>响应头</p>
+</li>
+<li><p>响应体</p>
+</li>
+</ul>
+<h3 id="6、根据响应内容，渲染页面"><a href="#6、根据响应内容，渲染页面" class="headerlink" title="6、根据响应内容，渲染页面"></a>6、根据响应内容，渲染页面</h3><ul>
 <li><p>解析HTML（HTML Parser）</p>
 </li>
 <li><p>构建DOM树（DOM Tree）</p>
@@ -211,7 +224,7 @@
 <li><p>绘制渲染树（Painting）</p>
 </li>
 </ul>
-<h2 id="重排Reflow、重绘Repaint"><a href="#重排Reflow、重绘Repaint" class="headerlink" title="重排Reflow、重绘Repaint"></a>重排Reflow、重绘Repaint</h2><p>重排即重新生成布局，重绘即重新绘制页面。<strong>注意</strong>：重绘不一定需要重排，只要布局没有发烧改变，就不会重排。所以，重排必然导致重绘制，布局发生改变。</p>
+<h2 id="重排（也叫回流）Reflow、重绘Repaint"><a href="#重排（也叫回流）Reflow、重绘Repaint" class="headerlink" title="重排（也叫回流）Reflow、重绘Repaint"></a>重排（也叫回流）Reflow、重绘Repaint</h2><p>重排即重新生成布局，重绘即重新绘制页面。<strong>注意</strong>：重绘不一定需要重排，只要布局没有发烧改变，就不会重排。所以，重排必然导致重绘制，布局发生改变。</p>
 <p><strong>导致网页重新渲染的原因：</strong></p>
 <ul>
 <li><p>修改dom</p>
@@ -251,7 +264,11 @@
 </li>
 </ul>
 <p><strong>主线程从“任务队列”中读取事件，这个过程的循环不断的，所以整个的这种运行机制又称为事件循环。只要主线程空了，就会读取任务队列，这就是JavaScript的运行机制</strong></p>
+<h2 id="节流（throttle）"><a href="#节流（throttle）" class="headerlink" title="节流（throttle）"></a>节流（throttle）</h2><p>如果在定时器的时间范围内再次触发，则不予理踩，等当前定时器完成，才能启动下一个定时任务</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">if</span> (!flag) <span class="keyword">return</span>;</span><br><span class="line">    flag = <span class="literal">false</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      fn.apply(context,args);</span><br><span class="line">      flag = <span class="literal">true</span>;</span><br><span class="line">    &#125;, interval)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="防抖（debounce）"><a href="#防抖（debounce）" class="headerlink" title="防抖（debounce）"></a>防抖（debounce）</h2><p>每次事件触发则删除原来的定时器，建立新的定时器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      fn.apply(context, args);</span><br><span class="line">    &#125;, delay);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     
   </div>
 

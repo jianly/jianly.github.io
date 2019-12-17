@@ -15,17 +15,17 @@
     <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
   
 
-  <meta name="description" content="为什么要缓存网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。 呈现形式策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为强缓存和协商缓存两大类。 强缓存（Expires、Cache-Control）紧跟着一个缓存时间期限，当浏览器请求资源的时候">
+  <meta name="description" content="为什么要缓存网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。 呈现形式策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为强缓存和协商缓存两大类。 强缓存（Expires、Cache-Control）不需要发送http请求，紧跟着一个缓存时间期限">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP缓存机制">
 <meta property="og:url" content="http://janely.cn/2019/05/16/common/http缓存/index.html">
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
-<meta property="og:description" content="为什么要缓存网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。 呈现形式策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为强缓存和协商缓存两大类。 强缓存（Expires、Cache-Control）紧跟着一个缓存时间期限，当浏览器请求资源的时候">
+<meta property="og:description" content="为什么要缓存网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。 呈现形式策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为强缓存和协商缓存两大类。 强缓存（Expires、Cache-Control）不需要发送http请求，紧跟着一个缓存时间期限">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-15T16:46:40.722Z">
+<meta property="og:updated_time" content="2019-12-17T13:39:19.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP缓存机制">
-<meta name="twitter:description" content="为什么要缓存网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。 呈现形式策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为强缓存和协商缓存两大类。 强缓存（Expires、Cache-Control）紧跟着一个缓存时间期限，当浏览器请求资源的时候">
+<meta name="twitter:description" content="为什么要缓存网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。 呈现形式策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为强缓存和协商缓存两大类。 强缓存（Expires、Cache-Control）不需要发送http请求，紧跟着一个缓存时间期限">
 
   
 
@@ -113,7 +113,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要缓存"><span class="toc-text">为什么要缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#呈现形式"><span class="toc-text">呈现形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强缓存（Expires、Cache-Control）"><span class="toc-text">强缓存（Expires、Cache-Control）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存在保质期内"><span class="toc-text">缓存在保质期内</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存超过保质期"><span class="toc-text">缓存超过保质期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协商缓存"><span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存中命中"><span class="toc-text">缓存中命中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存未命中"><span class="toc-text">缓存未命中</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要缓存"><span class="toc-text">为什么要缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#呈现形式"><span class="toc-text">呈现形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强缓存（Expires、Cache-Control）"><span class="toc-text">强缓存（Expires、Cache-Control）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#expires"><span class="toc-text">expires</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-control"><span class="toc-text">cache-control</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#其他的属性"><span class="toc-text">其他的属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存在保质期内"><span class="toc-text">缓存在保质期内</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存超过保质期"><span class="toc-text">缓存超过保质期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协商缓存"><span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存中命中"><span class="toc-text">缓存中命中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存未命中"><span class="toc-text">缓存未命中</span></a></li></ol></li></ol>
   </div>
 
 
@@ -161,7 +161,23 @@
     
       <h2 id="为什么要缓存"><a href="#为什么要缓存" class="headerlink" title="为什么要缓存"></a>为什么要缓存</h2><p>网络请求资源缓慢会影响用户体验，很多短期之内不会经常发生变化的资源文件没有必要每次访问都向服务端进行数据请求，缓存策略的使用就是为了改善客户端的呈现时间，降低服务端的负担。</p>
 <h2 id="呈现形式"><a href="#呈现形式" class="headerlink" title="呈现形式"></a>呈现形式</h2><p>策略体现在HTTP头部信息字段上，这些策略根据是否需要重新向服务端发起请求可以分为<strong>强缓存</strong>和<strong>协商缓存</strong>两大类。</p>
-<h2 id="强缓存（Expires、Cache-Control）"><a href="#强缓存（Expires、Cache-Control）" class="headerlink" title="强缓存（Expires、Cache-Control）"></a>强缓存（Expires、Cache-Control）</h2><p>紧跟着一个缓存时间期限，当浏览器请求资源的时候会查看缓存中的资源是否存在并且确定该缓存的资源是否过期</p>
+<h2 id="强缓存（Expires、Cache-Control）"><a href="#强缓存（Expires、Cache-Control）" class="headerlink" title="强缓存（Expires、Cache-Control）"></a>强缓存（Expires、Cache-Control）</h2><p>不需要发送http请求，紧跟着一个缓存时间期限，当浏览器请求资源的时候会查看缓存中的资源是否存在并且确定该缓存的资源是否过期</p>
+<h3 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h3><p>即过期时间，存在于服务端返回的响应头中，可以直接获取，不需要再次请求。缺点：<strong>服务器的时间和浏览器的时间可能并不一致</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expires: Wed, <span class="number">17</span> Nov <span class="number">2019</span> <span class="number">21</span>:<span class="number">23</span>:<span class="number">00</span> GMT</span><br></pre></td></tr></table></figure>
+
+<h3 id="cache-control"><a href="#cache-control" class="headerlink" title="cache-control"></a>cache-control</h3><p>采用过期时长来控制缓存，对应的字段是max-age，多少秒内可以直接使用缓存。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control:max-age=<span class="number">1200</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="其他的属性"><a href="#其他的属性" class="headerlink" title="其他的属性"></a>其他的属性</h4><ul>
+<li><p>public：表示响应可以被任何对象缓存，即使是通常不可缓存的内容</p>
+</li>
+<li><p>private：表示响应只能被单个用户缓存，不能作为共享缓存，即私有缓存</p>
+</li>
+<li><p>no-cache：跳过当前的缓存，发送请求，进入协商缓存</p>
+</li>
+<li><p>no-store：不进行任何形式缓存</p>
+</li>
+</ul>
 <h3 id="缓存在保质期内"><a href="#缓存在保质期内" class="headerlink" title="缓存在保质期内"></a>缓存在保质期内</h3><ul>
 <li><p>客户端请求资源</p>
 </li>
@@ -181,6 +197,12 @@
 </li>
 </ul>
 <h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p>协商缓存无论什么情况都会和服务器交互，但是两种方式可以共同存在，强缓存的优先级较高，意味着请求一个资源时会先比较强缓存的字段，如果命中则不会再执行接下来协商缓存的过程。</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li><p>Last-Modified：最后修改时间。在浏览器第一次给服务器发送请求后，服务器会在响应头中加上这个字段。</p>
+</li>
+<li><p>ETag：是服务器根据当前文件的内容，给文件生成的唯一标识，只要里面的内容有改动，这个值就会变。服务器通过响应头把这个值给浏览器。</p>
+</li>
+</ul>
 <h3 id="缓存中命中"><a href="#缓存中命中" class="headerlink" title="缓存中命中"></a>缓存中命中</h3><ul>
 <li><p>客户端请求获取缓存资源的标识信息</p>
 </li>

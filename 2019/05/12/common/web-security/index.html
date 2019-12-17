@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>web网站安全及性能优化 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="XSS攻击什么是XSS攻击跨站脚本（Cross Site Scripting)，为了和 CSS 区分，故叫它XSS。XSS 攻击是指浏览器中执行恶意脚本(无论是跨域还是同域)，从而拿到用户的信息并进行操作。最常见的就是窃取Cookie 存储型将恶意脚本存储到服务器数据库，然后在客户端执行这些脚本，从而达到攻击效果。常见例子：留言评论区提交恶意代码 反射型指的是恶意脚本作为网络请求的一部分，通过作为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web网站安全及性能优化">
+<meta property="og:url" content="http://janely.cn/2019/05/12/common/web-security/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="XSS攻击什么是XSS攻击跨站脚本（Cross Site Scripting)，为了和 CSS 区分，故叫它XSS。XSS 攻击是指浏览器中执行恶意脚本(无论是跨域还是同域)，从而拿到用户的信息并进行操作。最常见的就是窃取Cookie 存储型将恶意脚本存储到服务器数据库，然后在客户端执行这些脚本，从而达到攻击效果。常见例子：留言评论区提交恶意代码 反射型指的是恶意脚本作为网络请求的一部分，通过作为">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-17T16:20:30.191Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web网站安全及性能优化">
+<meta name="twitter:description" content="XSS攻击什么是XSS攻击跨站脚本（Cross Site Scripting)，为了和 CSS 区分，故叫它XSS。XSS 攻击是指浏览器中执行恶意脚本(无论是跨域还是同域)，从而拿到用户的信息并进行操作。最常见的就是窃取Cookie 存储型将恶意脚本存储到服务器数据库，然后在客户端执行这些脚本，从而达到攻击效果。常见例子：留言评论区提交恶意代码 反射型指的是恶意脚本作为网络请求的一部分，通过作为">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS攻击"><span class="toc-text">XSS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是XSS攻击"><span class="toc-text">什么是XSS攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储型"><span class="toc-text">存储型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射型"><span class="toc-text">反射型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文档型"><span class="toc-text">文档型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防范措施"><span class="toc-text">防范措施</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSRF攻击"><span class="toc-text">CSRF攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是CSRF"><span class="toc-text">什么是CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动发起请求（GET-POST）"><span class="toc-text">自动发起请求（GET / POST）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防范措施-1"><span class="toc-text">防范措施</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-common/web-security" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">web网站安全及性能优化</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.05.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="XSS攻击"><a href="#XSS攻击" class="headerlink" title="XSS攻击"></a>XSS攻击</h1><h2 id="什么是XSS攻击"><a href="#什么是XSS攻击" class="headerlink" title="什么是XSS攻击"></a>什么是XSS攻击</h2><p>跨站脚本（Cross Site Scripting)，为了和 CSS 区分，故叫它XSS。XSS 攻击是指浏览器中执行恶意脚本(无论是跨域还是同域)，从而拿到用户的信息并进行操作。最常见的就是窃取Cookie</p>
+<h2 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h2><p>将恶意脚本存储到服务器数据库，然后在客户端执行这些脚本，从而达到攻击效果。常见例子：留言评论区提交恶意代码</p>
+<h2 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h2><p>指的是恶意脚本作为网络请求的一部分，通过作为请求的参数，经过服务器，然后再反射到页面中进行解析</p>
+<h2 id="文档型"><a href="#文档型" class="headerlink" title="文档型"></a>文档型</h2><p>并不会经过服务器，而是作为中间人到角色，在数据传输过程劫持到网络数据包，然后修改里面到html文档。</p>
+<h2 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h2><p>1、利用CSP，CSP是浏览器中的内容安全策略，核心是服务器决定浏览器加载哪些资源</p>
+<ul>
+<li>限制其他域下的资源加载，并且禁止向其他域提交数据</li>
+<li>提供上报机制</li>
+</ul>
+<p>2、利用httpOnly</p>
+<p>cookie设置httpOnly后，js无法读取cookie</p>
+<p>3、对用户输入对内容进行转码或者过滤</p>
+<h1 id="CSRF攻击"><a href="#CSRF攻击" class="headerlink" title="CSRF攻击"></a>CSRF攻击</h1><h2 id="什么是CSRF"><a href="#什么是CSRF" class="headerlink" title="什么是CSRF"></a>什么是CSRF</h2><p>跨站请求伪造 (Cross-site request forgery)，指的是黑客诱导用户点击链接，打开黑客对网站，然后利用用户目前对登录状态发起跨站请求。</p>
+<h2 id="自动发起请求（GET-POST）"><a href="#自动发起请求（GET-POST）" class="headerlink" title="自动发起请求（GET / POST）"></a>自动发起请求（GET / POST）</h2><p>请求会自动带上xxx.com的cookie信息，如果服务器没有相应的验证机制，会默认该用户为正常用户，那就可以进行各种操作</p>
+<h2 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h2><p>1、验证站点来源，要用到请求头中的两个字段: Origin和Referer，安全性差</p>
+<p>2、CSRF Token，浏览器向服务器发送请求时，服务器生成一个字符串，将其植入到返回的页面中。</p>
+<p>3、利用Cookie的SameSite属性</p>
+<ul>
+<li><p>在Strict模式下，浏览器完全禁止第三方请求携带Cookie。比如请求sanyuan.com网站只能在sanyuan.com域名当中请求才能携带 Cookie，在其他网站请求都不能。</p>
+</li>
+<li><p>在Lax模式，就宽松一点了，但是只能在 get 方法提交表单况或者a 标签发送 get 请求的情况下可以携带 Cookie，其他情况均不能。</p>
+</li>
+<li><p>在None模式下，也就是默认模式，请求会自动携带上 Cookie。</p>
+</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/05/12/server/ubuntu-v2ray/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/05/15/common/http-https/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
