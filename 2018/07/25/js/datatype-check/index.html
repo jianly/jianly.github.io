@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="一、typeof typeof[val]: 用来检测数据类型的运算符   首先是个字符串 字符串中包含对应的类型  123456789typeof 1  // =&amp;gt; numberlet a = NaNtypeof a // =&amp;gt; numbertypeof true // Booleantypeof &apos;123&apos; // Stringtypeof null // objecttypeof u">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-17T09:44:43.180Z">
+<meta property="og:updated_time" content="2019-12-18T07:20:03.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS数据类型检测方法">
 <meta name="twitter:description" content="一、typeof typeof[val]: 用来检测数据类型的运算符   首先是个字符串 字符串中包含对应的类型  123456789typeof 1  // =&amp;gt; numberlet a = NaNtypeof a // =&amp;gt; numbertypeof true // Booleantypeof &apos;123&apos; // Stringtypeof null // objecttypeof u">
@@ -177,7 +177,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="keyword">typeof</span> <span class="keyword">typeof</span> [] <span class="comment">// ==&gt; "string"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> [] <span class="comment">// =&gt; "object"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">"object"</span> <span class="comment">// =&gt; "string"</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="二、instanceof"><a href="#二、instanceof" class="headerlink" title="二、instanceof"></a>二、instanceof</h2><blockquote>
-<p>用来判断某个构造函数的 prototype 属性所指向的对象是否存在于另外一个要检测对象的原型链上。简单说就是判断一个引用类型的变量具体是不是某种类型的对象</p>
+<p>用来判断某个构造函数的 prototype 属性所指向的对象是否存在于另外一个要检测对象的原型链上。简单说就是判断一个引用类型的变量具体是不是某种类型的对象。<strong>内部机制是通过判断对象的原型链中是不是能找到对应的的prototype</strong></p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(&#123;&#125;) <span class="keyword">instanceof</span> <span class="built_in">Object</span>              <span class="comment">// true</span></span><br><span class="line">  </span><br><span class="line">([]) <span class="keyword">instanceof</span> <span class="built_in">Array</span>               <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">(<span class="regexp">/aa/g</span>) <span class="keyword">instanceof</span> <span class="built_in">RegExp</span>           <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;) <span class="keyword">instanceof</span> <span class="built_in">Function</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
