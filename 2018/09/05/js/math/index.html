@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中的数学函数Math | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="什么是Math 数学函数，但不是函数，是一个对象，对象中存储了很多操作数字但属性方法，因此被称为函数  常用但属性和方法.abs()Math.abs([number value])，返回数字的绝对值（绝对值永远是正数或者零）。 12345678Math.abs(-12.5) // 12.5Math.abs(10)    // 10Math.abs(0)     // 0// 参数不是数字类型但值，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的数学函数Math">
+<meta property="og:url" content="http://janely.cn/2018/09/05/js/math/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="什么是Math 数学函数，但不是函数，是一个对象，对象中存储了很多操作数字但属性方法，因此被称为函数  常用但属性和方法.abs()Math.abs([number value])，返回数字的绝对值（绝对值永远是正数或者零）。 12345678Math.abs(-12.5) // 12.5Math.abs(10)    // 10Math.abs(0)     // 0// 参数不是数字类型但值，">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-21T06:46:46.135Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中的数学函数Math">
+<meta name="twitter:description" content="什么是Math 数学函数，但不是函数，是一个对象，对象中存储了很多操作数字但属性方法，因此被称为函数  常用但属性和方法.abs()Math.abs([number value])，返回数字的绝对值（绝对值永远是正数或者零）。 12345678Math.abs(-12.5) // 12.5Math.abs(10)    // 10Math.abs(0)     // 0// 参数不是数字类型但值，">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是Math"><span class="toc-text">什么是Math</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用但属性和方法"><span class="toc-text">常用但属性和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#abs"><span class="toc-text">.abs()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ceil-floor"><span class="toc-text">.ceil() / .floor()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#round"><span class="toc-text">.round()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#max-min"><span class="toc-text">.max() / .min()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqrt-pow"><span class="toc-text">.sqrt() / .pow()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#random"><span class="toc-text">.random()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取-n-m-之间但随机整数，n-lt-m"><span class="toc-text">获取[n~m]之间但随机整数，n &lt; m</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/math" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">JS中的数学函数Math</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.05</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="什么是Math"><a href="#什么是Math" class="headerlink" title="什么是Math"></a>什么是Math</h1><blockquote>
+<p>数学函数，但不是函数，是一个对象，对象中存储了很多操作数字但属性方法，因此被称为函数</p>
+</blockquote>
+<h1 id="常用但属性和方法"><a href="#常用但属性和方法" class="headerlink" title="常用但属性和方法"></a>常用但属性和方法</h1><h2 id="abs"><a href="#abs" class="headerlink" title=".abs()"></a>.abs()</h2><p>Math.abs([number value])，返回数字的绝对值（绝对值永远是正数或者零）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.abs(<span class="number">-12.5</span>) <span class="comment">// 12.5</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="number">10</span>)    <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="number">0</span>)     <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数不是数字类型但值，先基于number转换成数字再处理</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="string">'-1'</span>)    <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="string">'-1px'</span>)  <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="literal">true</span>)    <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ceil-floor"><a href="#ceil-floor" class="headerlink" title=".ceil() / .floor()"></a>.ceil() / .floor()</h2><ul>
+<li>Math.ceil([number value])，向上取整</li>
+<li>Math.floor([number value])，向下取整</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">12</span>)     <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">12.1</span>)   <span class="comment">// 13</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">12.6</span>)   <span class="comment">// 13</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">-12.1</span>)  <span class="comment">// -12</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">-12.9</span>)  <span class="comment">// -12</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">12</span>)     <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">12.1</span>)   <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">12.6</span>)   <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">-12.1</span>)  <span class="comment">// -13</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">-12.9</span>)  <span class="comment">// -13</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="round"><a href="#round" class="headerlink" title=".round()"></a>.round()</h2><p>Math.round([number value])，四舍五入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">14</span>)    <span class="comment">// 14</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">14.1</span>)  <span class="comment">// 14</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">14.5</span>)  <span class="comment">// 15</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">14.9</span>)  <span class="comment">// 15</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">-14.1</span>) <span class="comment">// -14</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">-14.5</span>) <span class="comment">// -14</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">-14.9</span>) <span class="comment">// -15</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="max-min"><a href="#max-min" class="headerlink" title=".max() / .min()"></a>.max() / .min()</h2><ul>
+<li>Math.max([x[, y[, …]]])最大值</li>
+<li>Math.min([x[, y[, …]]])最小值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.max(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">42</span>, <span class="number">64</span>, <span class="number">12</span>, <span class="number">43</span>)  <span class="comment">// 64</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.min(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">42</span>, <span class="number">64</span>, <span class="number">12</span>, <span class="number">43</span>)  <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.max([<span class="number">3</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">20</span>])  <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sqrt-pow"><a href="#sqrt-pow" class="headerlink" title=".sqrt() / .pow()"></a>.sqrt() / .pow()</h2><ul>
+<li>Math.sqrt(x)，平方根，负数不能开平方</li>
+<li>Math.pow(x, y)，多少次幂</li>
+<li>场景：勾股定理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.sqrt(<span class="number">4</span>)  <span class="comment">// =&gt; 2</span></span><br><span class="line"><span class="built_in">Math</span>.sqrt(<span class="number">-4</span>)  <span class="comment">// =&gt; NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">4</span>, <span class="number">3</span>)   <span class="comment">// 64</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">10</span>)  <span class="comment">// 1024</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="random"><a href="#random" class="headerlink" title=".random()"></a>.random()</h2><p>返回介于0和1之间的伪随机数。</p>
+<h2 id="获取-n-m-之间但随机整数，n-lt-m"><a href="#获取-n-m-之间但随机整数，n-lt-m" class="headerlink" title="获取[n~m]之间但随机整数，n &lt; m"></a>获取[n~m]之间但随机整数，n &lt; m</h2><ul>
+<li>获取1-10之间但随机整数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * (<span class="number">10</span> - <span class="number">1</span>) + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * (m - n) + n)</span><br></pre></td></tr></table></figure>
+
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/08/30/js/function/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/09/13/js/arrary/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

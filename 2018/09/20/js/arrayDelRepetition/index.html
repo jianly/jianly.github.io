@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中的数组去重 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="为什么要去重数组中含有重复属性，需要去除 1let arr = [1, 2, 3, 1, 2, 3]  方案一 循环数组中的每一项，每拿到一项都往数组中添加 添加数组前验证新数组中是否存在，如果存在则不存  12345678910111213141516let arr = [1, 2, 3, 1, 2, 3]let newArr = []for(let i = 0; i &amp;lt; arr.leng">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的数组去重">
+<meta property="og:url" content="http://janely.cn/2018/09/20/js/arrayDelRepetition/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="为什么要去重数组中含有重复属性，需要去除 1let arr = [1, 2, 3, 1, 2, 3]  方案一 循环数组中的每一项，每拿到一项都往数组中添加 添加数组前验证新数组中是否存在，如果存在则不存  12345678910111213141516let arr = [1, 2, 3, 1, 2, 3]let newArr = []for(let i = 0; i &amp;lt; arr.leng">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-21T13:14:19.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中的数组去重">
+<meta name="twitter:description" content="为什么要去重数组中含有重复属性，需要去除 1let arr = [1, 2, 3, 1, 2, 3]  方案一 循环数组中的每一项，每拿到一项都往数组中添加 添加数组前验证新数组中是否存在，如果存在则不存  12345678910111213141516let arr = [1, 2, 3, 1, 2, 3]let newArr = []for(let i = 0; i &amp;lt; arr.leng">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要去重"><span class="toc-text">为什么要去重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方案一"><span class="toc-text">方案一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方案二"><span class="toc-text">方案二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方案三"><span class="toc-text">方案三</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方案四"><span class="toc-text">方案四</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封装去重方法"><span class="toc-text">封装去重方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组塌陷"><span class="toc-text">数组塌陷</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/arrayDelRepetition" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">JS中的数组去重</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.20</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="为什么要去重"><a href="#为什么要去重" class="headerlink" title="为什么要去重"></a>为什么要去重</h2><p>数组中含有重复属性，需要去除</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><ul>
+<li>循环数组中的每一项，每拿到一项都往数组中添加</li>
+<li>添加数组前验证新数组中是否存在，如果存在则不存</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> newArr = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (newArr.includes(arr[i])) &#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  newArr.push(arr[i])</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// forEach简化</span></span><br><span class="line">arr.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (newArr.includes(item)) <span class="keyword">return</span>;</span><br><span class="line">  newArr.push(item)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(newArr) <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><ul>
+<li>创建一个空对象obj</li>
+<li>循环数组中每一项，把每一项向对象中进行存储</li>
+<li>每一次存储前验证obj中是否存在对象</li>
+<li>基于splice实现删除性能差，当前项被删除，后面每一项的索引都要向前提前，若数据过多，影响性能</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  <span class="keyword">let</span> item = arr[i]</span><br><span class="line">  <span class="keyword">if</span> (obj[item] !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    arr.splice(i, <span class="number">1</span>);</span><br><span class="line">    i--; <span class="comment">// 防止数据塌陷</span></span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  obj[item] = item</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [1, 2, 3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 优化上述代码</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  <span class="keyword">let</span> item = arr[i]</span><br><span class="line">  <span class="keyword">if</span> (obj[item] !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    arr[i] = arr[arr.length - <span class="number">1</span>]</span><br><span class="line">    arr.length--;</span><br><span class="line">    i--; <span class="comment">// 防止数据塌陷</span></span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  obj[item] = item</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h2><ul>
+<li>先排序，将数组拼接成字符串，用正则</li>
+<li>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line">arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line"><span class="keyword">let</span> str = arr.join(<span class="string">'@'</span>) + <span class="string">'@'</span></span><br><span class="line"><span class="keyword">let</span> reg = <span class="regexp">/(\d+@)\1*/g</span></span><br><span class="line">arr = []</span><br><span class="line"></span><br><span class="line">str.replace(reg, (n, m) =&gt; &#123;</span><br><span class="line">  m = <span class="built_in">Number</span>(m.slice(<span class="number">0</span>, m.length - <span class="number">1</span>))</span><br><span class="line">  arr.push(m)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">//  [1, 4, 5, 6, 7]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a>方案四</h3><ul>
+<li>es6中的Set方法</li>
+<li>Map方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line"></span><br><span class="line">arr = [...new <span class="built_in">Set</span>(arr)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [1, 4, 5, 6, 7]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="封装去重方法"><a href="#封装去重方法" class="headerlink" title="封装去重方法"></a>封装去重方法</h2><ul>
+<li>参数：arr 要去重的数组</li>
+<li>返回：去重后的数组</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> item = arr[i]</span><br><span class="line">    <span class="comment">// 如果存在会有返回值</span></span><br><span class="line">    <span class="keyword">if</span> (obj[item] !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">      arr[i] = arr[arr.length - <span class="number">1</span>] </span><br><span class="line">      arr.length--;</span><br><span class="line">      i--;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    obj[item] = item;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(unique([<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])) <span class="comment">// [1, 4, 5, 6, 7]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数组塌陷"><a href="#数组塌陷" class="headerlink" title="数组塌陷"></a>数组塌陷</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  <span class="comment">// 把当前项从数组中移除，原数组改变所以数组长度改变路</span></span><br><span class="line">  arr.splice(i, <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// i=0, i &lt; 3 =&gt; arr =&gt; [20, 30]</span></span><br><span class="line"><span class="comment">// i=1, i &lt; 2 =&gt; arr =&gt; [20] 数组塌陷</span></span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/09/13/js/arrary/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/12/mysql/basicCommands/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

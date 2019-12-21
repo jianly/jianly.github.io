@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="什么是函数函数就是一个方法或者一个功能体，函数就是把实现某个功能的代码放到一起进行分装，以后想要操作实现这个功能，只需要把函数执行即可 =&amp;gt; 封装。减少页面中冗余代码，提高代码重复使用率（低耦合高内聚）。  形参：是在定义函数名和函数体的时候使用的参数,目的是用来接收调用该函数时传入的参数.在调用函数时，实参将赋值给形参。  实参：是在调用时传递给函数的参数. 实参可以是常量、变量、表达式、">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-19T16:08:29.810Z">
+<meta property="og:updated_time" content="2019-12-20T11:48:00.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中的函数">
 <meta name="twitter:description" content="什么是函数函数就是一个方法或者一个功能体，函数就是把实现某个功能的代码放到一起进行分装，以后想要操作实现这个功能，只需要把函数执行即可 =&amp;gt; 封装。减少页面中冗余代码，提高代码重复使用率（低耦合高内聚）。  形参：是在定义函数名和函数体的时候使用的参数,目的是用来接收调用该函数时传入的参数.在调用函数时，实参将赋值给形参。  实参：是在调用时传递给函数的参数. 实参可以是常量、变量、表达式、">
@@ -113,13 +113,17 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是函数"><span class="toc-text">什么是函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建函数"><span class="toc-text">创建函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数"><span class="toc-text">匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数表达式"><span class="toc-text">函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自执行函数"><span class="toc-text">自执行函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的底层运行机制"><span class="toc-text">函数的底层运行机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments"><span class="toc-text">arguments</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是函数"><span class="toc-text">什么是函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建函数"><span class="toc-text">创建函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数"><span class="toc-text">匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数表达式"><span class="toc-text">函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自执行函数"><span class="toc-text">自执行函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的底层运行机制"><span class="toc-text">函数的底层运行机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments"><span class="toc-text">arguments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#任意数求和"><span class="toc-text">任意数求和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arrow-function-箭头函数"><span class="toc-text">arrow function (箭头函数)</span></a></li></ol>
   </div>
 
 
 
 <div class="content content-post CENTER">
-   <article id="post-js/function" class="article article-type-post" itemprop="blogPost">
+   <article 
+  id="post-js/function" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
   <header class="article-header">
     <h1 class="post-title">JS中的函数</h1>
 
@@ -193,9 +197,27 @@
 <p>函数内置的实参集合</p>
 </blockquote>
 <ul>
-<li>任意数求和（执行函数的时候，传递N个值实现求和）</li>
+<li>类数组集合，集合中存储着所有函数执行时，传递的实参信息</li>
+<li>不论是否设置形参，arguments都存在</li>
+<li>不论是否传递实参，arguments也都存在</li>
+<li>arguments.callee，存储的是当前函数本身</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="任意数求和"><a href="#任意数求和" class="headerlink" title="任意数求和"></a>任意数求和</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、传递参数的个数布丁</span></span><br><span class="line"><span class="comment"> * 2、传递的值是否为有效数字不定</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> total = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">     <span class="keyword">let</span> item = <span class="built_in">Number</span>(<span class="built_in">arguments</span>[i])</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (<span class="built_in">isNaN</span>(item)) &#123;</span><br><span class="line">       <span class="keyword">continue</span>;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     total += item</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> total</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> sum(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>)</span><br><span class="line"></span><br><span class="line"> sum(<span class="string">'10'</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"> sum(<span class="number">10</span>, <span class="string">'AA'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="arrow-function-箭头函数"><a href="#arrow-function-箭头函数" class="headerlink" title="arrow function (箭头函数)"></a>arrow function (箭头函数)</h2><blockquote>
+<p>将原函数的“function”关键字和函数名都删掉，并使用“=&gt;”连接参数列表和函数体。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n, m</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n + m</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数简化 </span></span><br><span class="line"><span class="keyword">const</span> sum = <span class="function">(<span class="params">n, m</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> n + m</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再简化，可以给形参设置默认值</span></span><br><span class="line"><span class="keyword">const</span> sum = <span class="function">(<span class="params">n = <span class="number">0</span>, m = <span class="number">0</span></span>) =&gt;</span> n + m;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>箭头函数中没有arguments，但是可以使用剩余运算符获取到传递到集合（它是数组）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 任意数求和</span></span><br><span class="line"><span class="keyword">const</span> sum = <span class="function">(<span class="params">...arg</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg)  <span class="comment">// [1, 2, 3, 4]</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">eval</span>(arg.join(<span class="string">'+'</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>箭头函数中到this某些场景也是方便我们操作到</li>
+</ul>
+
     
   </div>
 
@@ -209,7 +231,7 @@
     <a class="show pull-left" href="/2018/08/28/js/ logical-statement/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2019/02/12/mysql/basicCommands/">
+    <a class="show pull-right" href="/2018/09/05/js/math/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
