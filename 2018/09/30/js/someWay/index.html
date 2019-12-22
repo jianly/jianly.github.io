@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中常用的一些方法 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="时间秒转换为时分秒1234567891011121314151617181920212223timeFormat(time) &amp;#123;  let timeStr = &apos;&apos;;  let stringFormat = (i) =&amp;gt; &amp;#123;      return i &amp;lt; 10 ? `0$&amp;#123;i&amp;#125;` : `$&amp;#123;i&amp;#125;`;  &amp;#125;  let">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中常用的一些方法">
+<meta property="og:url" content="http://janely.cn/2018/09/30/js/someWay/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="时间秒转换为时分秒1234567891011121314151617181920212223timeFormat(time) &amp;#123;  let timeStr = &apos;&apos;;  let stringFormat = (i) =&amp;gt; &amp;#123;      return i &amp;lt; 10 ? `0$&amp;#123;i&amp;#125;` : `$&amp;#123;i&amp;#125;`;  &amp;#125;  let">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-22T06:43:59.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中常用的一些方法">
+<meta name="twitter:description" content="时间秒转换为时分秒1234567891011121314151617181920212223timeFormat(time) &amp;#123;  let timeStr = &apos;&apos;;  let stringFormat = (i) =&amp;gt; &amp;#123;      return i &amp;lt; 10 ? `0$&amp;#123;i&amp;#125;` : `$&amp;#123;i&amp;#125;`;  &amp;#125;  let">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#时间"><span class="toc-text">时间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#秒转换为时分秒"><span class="toc-text">秒转换为时分秒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时分秒倒计时-00-00-00"><span class="toc-text">时分秒倒计时(00:00:00)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间字符串处理"><span class="toc-text">时间字符串处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#queryURLParams"><span class="toc-text">queryURLParams</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取一个url地址问号后面传递的参数"><span class="toc-text">获取一个url地址问号后面传递的参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现随机四位验证码"><span class="toc-text">实现随机四位验证码</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/someWay" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">JS中常用的一些方法</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.30</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><h2 id="秒转换为时分秒"><a href="#秒转换为时分秒" class="headerlink" title="秒转换为时分秒"></a>秒转换为时分秒</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">timeFormat(time) &#123;</span><br><span class="line">  <span class="keyword">let</span> timeStr = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">let</span> stringFormat = <span class="function">(<span class="params">i</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> i &lt; <span class="number">10</span> ? <span class="string">`0<span class="subst">$&#123;i&#125;</span>`</span> : <span class="string">`<span class="subst">$&#123;i&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> minuteTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> secondTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> hourTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(time &lt; <span class="number">60</span>) &#123;</span><br><span class="line">      timeStr = <span class="string">`00:00:<span class="subst">$&#123;stringFormat(time)&#125;</span>`</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(time &gt;= <span class="number">60</span> &amp;&amp; time &lt; <span class="number">3600</span>) &#123;</span><br><span class="line">      minuteTime = <span class="built_in">parseInt</span>(time / <span class="number">60</span>);</span><br><span class="line">      secondTime = <span class="built_in">parseInt</span>(time % <span class="number">60</span>);</span><br><span class="line">      timeStr = <span class="string">`00:<span class="subst">$&#123;stringFormat(minuteTime)&#125;</span>:<span class="subst">$&#123;stringFormat(secondTime)&#125;</span>`</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(time &gt;= <span class="number">3600</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> _t = <span class="built_in">parseInt</span>(time % <span class="number">3600</span>);</span><br><span class="line">      hourTime = <span class="built_in">parseInt</span>(time / <span class="number">3600</span>);</span><br><span class="line">      minuteTime = <span class="built_in">parseInt</span>(_t / <span class="number">60</span>);</span><br><span class="line">      secondTime = <span class="built_in">parseInt</span>(_t % <span class="number">60</span>);</span><br><span class="line">      timeStr = <span class="string">`<span class="subst">$&#123;stringFormat(hourTime)&#125;</span>:<span class="subst">$&#123;stringFormat(minuteTime)&#125;</span>:<span class="subst">$&#123;stringFormat(secondTime)&#125;</span>`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.timing = timeStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="时分秒倒计时-00-00-00"><a href="#时分秒倒计时-00-00-00" class="headerlink" title="时分秒倒计时(00:00:00)"></a>时分秒倒计时(00:00:00)</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">countDown(time) &#123;</span><br><span class="line">  <span class="keyword">let</span> stringFormat = <span class="function">(<span class="params">i</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> i &lt; <span class="number">10</span> ? <span class="string">`0<span class="subst">$&#123;i&#125;</span>`</span> : <span class="string">`<span class="subst">$&#123;i&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> minuteTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> secondTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> hourTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">this</span>.timer = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (time &gt; <span class="number">0</span> &amp;&amp; time &lt; <span class="number">60</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.timing = <span class="string">`00:00:<span class="subst">$&#123;stringFormat(time)&#125;</span>`</span></span><br><span class="line">      --time;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (time &gt;= <span class="number">60</span> &amp;&amp; time &lt; <span class="number">3600</span>) &#123;</span><br><span class="line">      minuteTime = <span class="built_in">Math</span>.floor(time / <span class="number">60</span>);</span><br><span class="line">      secondTime = <span class="built_in">Math</span>.floor(time % <span class="number">60</span>);</span><br><span class="line">      <span class="keyword">this</span>.timing = <span class="string">`00:<span class="subst">$&#123;stringFormat(minuteTime)&#125;</span>:<span class="subst">$&#123;stringFormat(secondTime)&#125;</span>`</span>;</span><br><span class="line">      --time;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(time &gt;= <span class="number">3600</span>) &#123;</span><br><span class="line">      hourTime = <span class="built_in">Math</span>.floor(time / <span class="number">3600</span> )</span><br><span class="line">      minuteTime = <span class="built_in">Math</span>.floor(time / <span class="number">60</span>);</span><br><span class="line">      secondTime = <span class="built_in">Math</span>.floor(time % <span class="number">60</span>);</span><br><span class="line">      <span class="keyword">this</span>.timing = <span class="string">`<span class="subst">$&#123;stringFormat(hourTime)&#125;</span>:<span class="subst">$&#123;stringFormat(minuteTime)&#125;</span>:<span class="subst">$&#123;stringFormat(secondTime)&#125;</span>`</span></span><br><span class="line">      --time;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      clearInterval(<span class="keyword">this</span>.timer);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间字符串处理"><a href="#时间字符串处理" class="headerlink" title="时间字符串处理"></a>时间字符串处理</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="string">'2018-7-24 11:30:24'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 若月日时分秒不足十位，加个0</span></span><br><span class="line"><span class="keyword">const</span> addZero = <span class="function"><span class="params">val</span> =&gt;</span> val.length &lt; <span class="number">2</span> ? <span class="string">`0<span class="subst">$&#123;val&#125;</span>`</span> : val</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转换为2018年07月24日 11时30分24秒</span></span><br><span class="line"><span class="keyword">let</span> arr = date.split(<span class="regexp">/(?: |-|:)/g</span>);  <span class="comment">// ["2018", "7", "24", "11", "30", "24"]</span></span><br><span class="line"></span><br><span class="line">date = <span class="string">`<span class="subst">$&#123;arr[<span class="number">0</span>]&#125;</span>年<span class="subst">$&#123;addZero(arr[<span class="number">1</span>])&#125;</span>月<span class="subst">$&#123;addZero(arr[<span class="number">2</span>])&#125;</span>日 <span class="subst">$&#123;addZero(arr[<span class="number">3</span>])&#125;</span>时<span class="subst">$&#123;addZero(arr[<span class="number">4</span>])&#125;</span>分<span class="subst">$&#123;addZero(arr[<span class="number">5</span>])&#125;</span>秒`</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="queryURLParams"><a href="#queryURLParams" class="headerlink" title="queryURLParams"></a>queryURLParams</h1><h2 id="获取一个url地址问号后面传递的参数"><a href="#获取一个url地址问号后面传递的参数" class="headerlink" title="获取一个url地址问号后面传递的参数"></a>获取一个url地址问号后面传递的参数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">'http://www.janely.cn/js?id=10&amp;name=someway&amp;word=2000#jane'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> askIndex = url.indexOf(<span class="string">'?'</span>)</span><br><span class="line"><span class="keyword">let</span> wellIndex = url.indexOf(<span class="string">'#'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> askTxt = url.substring(askIndex + <span class="number">1</span>, wellIndex).split(<span class="string">'&amp;'</span>)</span><br><span class="line"><span class="keyword">let</span> wellTxt = url.substring(wellIndex + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">askTxt.forEach(<span class="function"><span class="params">item</span> =&gt;</span> result[item.split(<span class="string">'='</span>)[<span class="number">0</span>]] = item.split(<span class="string">'='</span>)[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">result[<span class="string">'hash'</span>] = wellTxt</span><br></pre></td></tr></table></figure>
+
+<p><strong>封装方法</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * queryURLParams：获取url地址中的参数和哈希值</span></span><br><span class="line"><span class="comment"> *  @params</span></span><br><span class="line"><span class="comment"> *    url [string] 要解析的url</span></span><br><span class="line"><span class="comment"> *  @return</span></span><br><span class="line"><span class="comment"> *    [object] 包含参数和哈希值的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queryURLParams</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> askIn = url.indexOf(<span class="string">'?'</span>),</span><br><span class="line">      wellIn = url.indexOf(<span class="string">'#'</span>),</span><br><span class="line">      askTxt = <span class="string">''</span>,</span><br><span class="line">      wellTxt = <span class="string">''</span></span><br><span class="line">      </span><br><span class="line">  <span class="comment">// #不存在</span></span><br><span class="line">  wellIn === <span class="number">-1</span> ? wellIn = url.length : <span class="literal">null</span></span><br><span class="line">  <span class="comment">// ?存在</span></span><br><span class="line">  askIn !== <span class="number">-1</span> ? askTxt = url.substring(askIn + <span class="number">1</span>, wellIn) : <span class="literal">null</span></span><br><span class="line">  wellTxt = url.substring(wellIn + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取每一部分信息</span></span><br><span class="line">  <span class="keyword">let</span> result = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  wellTxt !== <span class="string">''</span> ? result[<span class="string">'hash'</span>] = wellTxt : <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (askTxt !== <span class="string">''</span>) askTxt.split(<span class="string">'&amp;'</span>).forEach(<span class="function"><span class="params">item</span> =&gt;</span> </span><br><span class="line">    result[item.split(<span class="string">'='</span>)[<span class="number">0</span>]] = item.split(<span class="string">'='</span>)[<span class="number">1</span>]</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(queryURLParams(<span class="string">'http://www.janely.cn/js?id=10&amp;name=someway&amp;word=2000#jane'</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则简化</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * queryURLParams：获取url地址中的参数和哈希值</span></span><br><span class="line"><span class="comment"> *  @params</span></span><br><span class="line"><span class="comment"> *    url [string] 要解析的url</span></span><br><span class="line"><span class="comment"> *  @return</span></span><br><span class="line"><span class="comment"> *    [object] 包含参数和哈希值的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queryURLParams</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = &#123;&#125;,</span><br><span class="line">      reg1 = <span class="regexp">/([^?=&amp;#]+)=([^?=&amp;#]+)/g</span>,</span><br><span class="line">      reg2 = <span class="regexp">/#([^?=&amp;#]+)/g</span></span><br><span class="line">      </span><br><span class="line">  url.replace(reg1, (n, x, y) =&gt; result[x] = y)</span><br><span class="line">  url.replace(reg2, (n, x) =&gt; result[<span class="string">'hash'</span>] = x)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(queryURLParams(<span class="string">'http://www.janely.cn/js#jane'</span>)) <span class="comment">// &#123;hash: jane&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="实现随机四位验证码"><a href="#实现随机四位验证码" class="headerlink" title="实现随机四位验证码"></a>实现随机四位验证码</h1><p>目的：防止外挂程序恶意批量注入</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/09/27/js/string/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/10/11/js/date/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

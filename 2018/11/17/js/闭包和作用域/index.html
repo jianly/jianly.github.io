@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>闭包和作用域 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="什么是闭包一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。” 12345678910111213function simple() &amp;#123;  let n = 1  return function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包和作用域">
+<meta property="og:url" content="http://janely.cn/2018/11/17/js/闭包和作用域/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="什么是闭包一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。” 12345678910111213function simple() &amp;#123;  let n = 1  return function">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-22T10:42:44.277Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闭包和作用域">
+<meta name="twitter:description" content="什么是闭包一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。” 12345678910111213function simple() &amp;#123;  let n = 1  return function">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是闭包"><span class="toc-text">什么是闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/闭包和作用域" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">闭包和作用域</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.11.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p><strong>一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。</strong>能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。”</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">simple</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> n = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(++n)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a1 = simple()</span><br><span class="line"><span class="keyword">let</span> a2 = simple()</span><br><span class="line"></span><br><span class="line">a1();  <span class="comment">// 2</span></span><br><span class="line">a1();  <span class="comment">// 3</span></span><br><span class="line">a2();  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/10/17/js/DOM/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/12/mysql/basicCommands/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

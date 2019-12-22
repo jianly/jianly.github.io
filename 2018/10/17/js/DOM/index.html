@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中DOM及其操作 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="什么是DOM DOM: document object model 文档对象模型，提供一些属性和方法供我们操作页面中的元素  获取DOM元素的方法 document.getElementById()  [context].getElementsByTayName() 在指定上下文中，通过标签获取一组元素集合  [context].getElementsByClassName() 在指定上下文中，通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中DOM及其操作">
+<meta property="og:url" content="http://janely.cn/2018/10/17/js/DOM/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="什么是DOM DOM: document object model 文档对象模型，提供一些属性和方法供我们操作页面中的元素  获取DOM元素的方法 document.getElementById()  [context].getElementsByTayName() 在指定上下文中，通过标签获取一组元素集合  [context].getElementsByClassName() 在指定上下文中，通">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-22T09:39:10.110Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中DOM及其操作">
+<meta name="twitter:description" content="什么是DOM DOM: document object model 文档对象模型，提供一些属性和方法供我们操作页面中的元素  获取DOM元素的方法 document.getElementById()  [context].getElementsByTayName() 在指定上下文中，通过标签获取一组元素集合  [context].getElementsByClassName() 在指定上下文中，通">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DOM"><span class="toc-text">什么是DOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取DOM元素的方法"><span class="toc-text">获取DOM元素的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点和描述节点之间关系的属性"><span class="toc-text">节点和描述节点之间关系的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#描述节点之间的关系"><span class="toc-text">描述节点之间的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态增删改元素"><span class="toc-text">动态增删改元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/DOM" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">JS中DOM及其操作</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.10.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="什么是DOM"><a href="#什么是DOM" class="headerlink" title="什么是DOM"></a>什么是DOM</h2><blockquote>
+<p>DOM: document object model 文档对象模型，提供一些属性和方法供我们操作页面中的元素</p>
+</blockquote>
+<h2 id="获取DOM元素的方法"><a href="#获取DOM元素的方法" class="headerlink" title="获取DOM元素的方法"></a>获取DOM元素的方法</h2><ul>
+<li><p>document.getElementById()</p>
+</li>
+<li><p>[context].getElementsByTayName() 在指定上下文中，通过标签获取一组元素集合</p>
+</li>
+<li><p>[context].getElementsByClassName() 在指定上下文中，通过样式类名获取一组元素的集合</p>
+</li>
+<li><p>document.getElementsByName() 在整个文档中，通过标签的name属性值获取一组节点集合</p>
+</li>
+<li><p>document.head / document.body / document.documentElement 获取页面中的head/body/html三个元素</p>
+</li>
+<li><p>[context].querySelector([selector]) 通过选择器获取到指定的元素对象</p>
+</li>
+<li><p>[context].querySelectorAll([selector]) 通过选择器获取到指定的元素集合</p>
+</li>
+</ul>
+<h2 id="节点和描述节点之间关系的属性"><a href="#节点和描述节点之间关系的属性" class="headerlink" title="节点和描述节点之间关系的属性"></a>节点和描述节点之间关系的属性</h2><blockquote>
+<p>节点：node  节点集合：nodeList (getElementsByName / querySelectorAll 获取所有节点的集合)</p>
+</blockquote>
+<ul>
+<li><p>元素节点</p>
+<ul>
+<li>nodeType：1</li>
+<li>nodeName: 大写的标签名</li>
+<li>nodeValue: null</li>
+</ul>
+</li>
+<li><p>文本节点</p>
+<ul>
+<li>nodeType：3</li>
+<li>nodeName: ‘#text’</li>
+<li>nodeValue: 文本内容</li>
+</ul>
+</li>
+<li><p>注释节点</p>
+<ul>
+<li>nodeType：8</li>
+<li>nodeName: ‘#commen’</li>
+<li>nodeValue: 注释内容</li>
+</ul>
+</li>
+<li><p>文档节点</p>
+<ul>
+<li>nodeType：9</li>
+<li>nodeName: ‘#document’</li>
+<li>nodeValue: null</li>
+</ul>
+</li>
+</ul>
+<h2 id="描述节点之间的关系"><a href="#描述节点之间的关系" class="headerlink" title="描述节点之间的关系"></a>描述节点之间的关系</h2><ul>
+<li><p>childNodes: 获取所有的子节点</p>
+</li>
+<li><p>children: 获取所有元素的子节点</p>
+</li>
+<li><p>firstChild: 获取第一个子节点</p>
+</li>
+<li><p>lastChild: 获取最后一个子节点</p>
+</li>
+<li><p>firstElementChild / lastElementChild: 获取第一个和最后一个元素子节点</p>
+</li>
+<li><p>previousSibling：获取上一个哥哥的节点</p>
+</li>
+<li><p>nextSibling：获取下一个弟弟的节点</p>
+</li>
+<li><p>previousElementSibling / nextElementSibling：获取哥哥和弟弟元素节点</p>
+</li>
+<li><p>parentNode: 父亲节点</p>
+</li>
+</ul>
+<h2 id="动态增删改元素"><a href="#动态增删改元素" class="headerlink" title="动态增删改元素"></a>动态增删改元素</h2><ul>
+<li>createElement 创建元素对象</li>
+<li>createTextNode 创建文本对象</li>
+<li>appendChild 把元素添加到容器的末尾</li>
+<li>insertBefore(新增元素，指定元素) 把元素添加到指定容器中指定元素的前面</li>
+<li>cloneNode(true / false) 克隆元素或节点</li>
+<li>removeChild 删除元素</li>
+</ul>
+<h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><ul>
+<li>元素对象.属性名 = 属性值（原理是向元素对象对于的堆内存中添加了一个属性）</li>
+<li>基于setAttribute是把属性信息写到了元素标签的结构上。getAttribute可以把结构上存储的自定义属性值获取到</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/10/11/js/date/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/11/17/js/闭包和作用域/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

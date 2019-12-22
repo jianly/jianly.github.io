@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中日期对象 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="基本操作 获取当前客户端（本机）的时间，这个时间不能作为依据，因为可以随意更改  123let time = new Date() // 该结果不是字符串，属于日期对象typeof time // &apos;object&apos;  属性和方法getFullYear() 获取年1time.getFullYear() // 2018  getMonth() 获取月0-11代表1月到12月 1time.getMont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中日期对象">
+<meta property="og:url" content="http://janely.cn/2018/10/11/js/date/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="基本操作 获取当前客户端（本机）的时间，这个时间不能作为依据，因为可以随意更改  123let time = new Date() // 该结果不是字符串，属于日期对象typeof time // &apos;object&apos;  属性和方法getFullYear() 获取年1time.getFullYear() // 2018  getMonth() 获取月0-11代表1月到12月 1time.getMont">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-22T07:39:47.853Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中日期对象">
+<meta name="twitter:description" content="基本操作 获取当前客户端（本机）的时间，这个时间不能作为依据，因为可以随意更改  123let time = new Date() // 该结果不是字符串，属于日期对象typeof time // &apos;object&apos;  属性和方法getFullYear() 获取年1time.getFullYear() // 2018  getMonth() 获取月0-11代表1月到12月 1time.getMont">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性和方法"><span class="toc-text">属性和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#getFullYear-获取年"><span class="toc-text">getFullYear() 获取年</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getMonth-获取月"><span class="toc-text">getMonth() 获取月</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getDate-获取日"><span class="toc-text">getDate() 获取日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getDay-获取星期"><span class="toc-text">getDay() 获取星期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getHours-获取时"><span class="toc-text">getHours() 获取时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getMinutes-获取分"><span class="toc-text">getMinutes() 获取分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getSeconds-获取秒"><span class="toc-text">getSeconds() 获取秒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getMilliseconds-获取毫秒"><span class="toc-text">getMilliseconds() 获取毫秒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getTime-获取当前日期距离-1970-1-1-00-00-00-这个日期之间的毫秒差"><span class="toc-text">getTime() 获取当前日期距离 1970/1/1 00:00:00 这个日期之间的毫秒差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toLocaleDateString-获取年月日字符串"><span class="toc-text">toLocaleDateString() 获取年月日字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toLocaleString-获取完整的日期字符串"><span class="toc-text">toLocaleString() 获取完整的日期字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成一个时间显示器"><span class="toc-text">完成一个时间显示器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Date-格式化时间字符串"><span class="toc-text">new Date() 格式化时间字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#支持的格式"><span class="toc-text">支持的格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封装公共时间字符串格式化处理"><span class="toc-text">封装公共时间字符串格式化处理</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/date" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">JS中日期对象</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.10.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>获取当前客户端（本机）的时间，这个时间不能作为依据，因为可以随意更改</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>() <span class="comment">// 该结果不是字符串，属于日期对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> time <span class="comment">// 'object'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="属性和方法"><a href="#属性和方法" class="headerlink" title="属性和方法"></a>属性和方法</h2><h3 id="getFullYear-获取年"><a href="#getFullYear-获取年" class="headerlink" title="getFullYear() 获取年"></a>getFullYear() 获取年</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getFullYear() <span class="comment">// 2018</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getMonth-获取月"><a href="#getMonth-获取月" class="headerlink" title="getMonth() 获取月"></a>getMonth() 获取月</h3><p>0-11代表1月到12月</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getMonth() <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getDate-获取日"><a href="#getDate-获取日" class="headerlink" title="getDate() 获取日"></a>getDate() 获取日</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getDate() <span class="comment">// 11</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getDay-获取星期"><a href="#getDay-获取星期" class="headerlink" title="getDay() 获取星期"></a>getDay() 获取星期</h3><p>0-6表示周日到周六</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getDay() <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getHours-获取时"><a href="#getHours-获取时" class="headerlink" title="getHours() 获取时"></a>getHours() 获取时</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getHours() <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getMinutes-获取分"><a href="#getMinutes-获取分" class="headerlink" title="getMinutes() 获取分"></a>getMinutes() 获取分</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getMinutes() <span class="comment">// 18</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getSeconds-获取秒"><a href="#getSeconds-获取秒" class="headerlink" title="getSeconds() 获取秒"></a>getSeconds() 获取秒</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getSeconds() <span class="comment">// 45</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="getMilliseconds-获取毫秒"><a href="#getMilliseconds-获取毫秒" class="headerlink" title="getMilliseconds() 获取毫秒"></a>getMilliseconds() 获取毫秒</h3><h3 id="getTime-获取当前日期距离-1970-1-1-00-00-00-这个日期之间的毫秒差"><a href="#getTime-获取当前日期距离-1970-1-1-00-00-00-这个日期之间的毫秒差" class="headerlink" title="getTime() 获取当前日期距离 1970/1/1 00:00:00 这个日期之间的毫秒差"></a>getTime() 获取当前日期距离 1970/1/1 00:00:00 这个日期之间的毫秒差</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.getMilliseconds() <span class="comment">// 1539224325000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="toLocaleDateString-获取年月日字符串"><a href="#toLocaleDateString-获取年月日字符串" class="headerlink" title="toLocaleDateString() 获取年月日字符串"></a>toLocaleDateString() 获取年月日字符串</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.toLocaleDateString() <span class="comment">// "2018/10/11"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="toLocaleString-获取完整的日期字符串"><a href="#toLocaleString-获取完整的日期字符串" class="headerlink" title="toLocaleString() 获取完整的日期字符串"></a>toLocaleString() 获取完整的日期字符串</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.toLocaleString() <span class="comment">// "2018/10/11 上午10:18:45"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="完成一个时间显示器"><a href="#完成一个时间显示器" class="headerlink" title="完成一个时间显示器"></a>完成一个时间显示器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * queryDate：获取当前的日期，把其转换为想要的格式</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">queryDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">      year = time.getFullYear(),</span><br><span class="line">      month = time.getMonth(),</span><br><span class="line">      day = time.getDate(),</span><br><span class="line">      week = time.getDay(),</span><br><span class="line">      hours = time.getHours(),</span><br><span class="line">      minutes = time.getMinutes(),</span><br><span class="line">      seconds = time.getSeconds(),</span><br><span class="line">      weekArr = [<span class="string">"日"</span>, <span class="string">"一"</span>, <span class="string">"二"</span>, <span class="string">"三"</span>, <span class="string">"四"</span>, <span class="string">"五"</span>, <span class="string">"六"</span>];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> addZero = <span class="function"><span class="params">val</span> =&gt;</span> val.length &lt; <span class="number">2</span> ? <span class="string">`0<span class="subst">$&#123;val&#125;</span>`</span> : val;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;year&#125;</span>年<span class="subst">$&#123;addZero(month)&#125;</span>月<span class="subst">$&#123;addZero(day)&#125;</span>日 星期<span class="subst">$&#123;weekArr[week]&#125;</span> <span class="subst">$&#123;addZero(hours)&#125;</span>时<span class="subst">$&#123;addZero(minutes)&#125;</span>分<span class="subst">$&#123;addZero(seconds)&#125;</span>秒`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(queryDate())</span><br></pre></td></tr></table></figure>
+
+<h2 id="new-Date-格式化时间字符串"><a href="#new-Date-格式化时间字符串" class="headerlink" title="new Date() 格式化时间字符串"></a>new Date() 格式化时间字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018/10/11'</span>) <span class="comment">// Thu Jan 01 1970 08:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018/10/11 10:18:54'</span>) <span class="comment">// Thu Oct 11 2018 10:18:54 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="支持的格式"><a href="#支持的格式" class="headerlink" title="支持的格式"></a>支持的格式</h3><ul>
+<li>yyyy/mm/dd</li>
+<li>yyyy/mm/dd hh:mm:ss </li>
+<li>yyyy-mm-dd (ie下不支持)</li>
+</ul>
+<h2 id="封装公共时间字符串格式化处理"><a href="#封装公共时间字符串格式化处理" class="headerlink" title="封装公共时间字符串格式化处理"></a>封装公共时间字符串格式化处理</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.formatTime = <span class="function"><span class="keyword">function</span> <span class="title">formatTime</span>(<span class="params">template</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">typeof</span> template === <span class="string">'undefined'</span> ? template = <span class="string">'&#123;0&#125;年&#123;1&#125;月&#123;2&#125;日 &#123;3&#125;:&#123;4&#125;:&#123;5&#125;'</span> : <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> matchAry = <span class="keyword">this</span>.match(<span class="regexp">/\d+/g</span>)</span><br><span class="line"></span><br><span class="line">  template = template.replace(<span class="regexp">/\&#123;(\d+)\&#125;/g</span>, (x, y) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> val = matchAry[y] || <span class="string">'00'</span></span><br><span class="line">    val.length &lt; <span class="number">2</span> ? val = <span class="string">`0<span class="subst">$&#123;val&#125;</span>`</span> : <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> val</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> template</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log((<span class="string">'2018-10-11 10:18:54'</span>).formatTime(<span class="string">"&#123;1&#125;-&#123;2&#125; &#123;3&#125;:&#123;4&#125;"</span>)) <span class="comment">// 10-11 10:18</span></span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/09/30/js/someWay/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/10/17/js/DOM/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
