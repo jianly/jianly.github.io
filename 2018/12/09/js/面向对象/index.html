@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>面向对象 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="理解对象属性什么是对象 无序属性的集合，其属性可以包含基本值、对象或者函数。对象是一组没有特定顺序的值，对象的每个属性或方法都有一个名字，而每个名字都映射到一个值。每个对象都是基于一个引用类型创建的。  创建对象 最简单的方式就是创建一个object的实例，然后为它添加属性和方法  12345678910111213141516let person = new Object()person.nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象">
+<meta property="og:url" content="http://janely.cn/2018/12/09/js/面向对象/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="理解对象属性什么是对象 无序属性的集合，其属性可以包含基本值、对象或者函数。对象是一组没有特定顺序的值，对象的每个属性或方法都有一个名字，而每个名字都映射到一个值。每个对象都是基于一个引用类型创建的。  创建对象 最简单的方式就是创建一个object的实例，然后为它添加属性和方法  12345678910111213141516let person = new Object()person.nam">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/prototype.png">
+<meta property="og:updated_time" content="2019-12-23T13:10:45.447Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象">
+<meta name="twitter:description" content="理解对象属性什么是对象 无序属性的集合，其属性可以包含基本值、对象或者函数。对象是一组没有特定顺序的值，对象的每个属性或方法都有一个名字，而每个名字都映射到一个值。每个对象都是基于一个引用类型创建的。  创建对象 最简单的方式就是创建一个object的实例，然后为它添加属性和方法  12345678910111213141516let person = new Object()person.nam">
+<meta name="twitter:image" content="https://blog-githb.oss-cn-beijing.aliyuncs.com/prototype.png">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#理解对象属性"><span class="toc-text">理解对象属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是对象"><span class="toc-text">什么是对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性类型"><span class="toc-text">属性类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据属性"><span class="toc-text">数据属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-defineProperty-修改数据属性"><span class="toc-text">Object.defineProperty()修改数据属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#访问器属性"><span class="toc-text">访问器属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-defineProperty-定义访问器属性"><span class="toc-text">Object.defineProperty()定义访问器属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义多个属性"><span class="toc-text">定义多个属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象-1"><span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、工厂模式"><span class="toc-text">1、工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、构造函数模式"><span class="toc-text">2、构造函数模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是构造函数"><span class="toc-text">什么是构造函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、原型模式"><span class="toc-text">3、原型模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#理解并创建对象"><span class="toc-text">理解并创建对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-js/面向对象" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">面向对象</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.12.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="理解对象属性"><a href="#理解对象属性" class="headerlink" title="理解对象属性"></a>理解对象属性</h1><h2 id="什么是对象"><a href="#什么是对象" class="headerlink" title="什么是对象"></a>什么是对象</h2><blockquote>
+<p><strong>无序属性的集合，其属性可以包含基本值、对象或者函数</strong>。对象是一组没有特定顺序的值，对象的每个属性或方法都有一个名字，而每个名字都映射到一个值。每个对象都是基于一个引用类型创建的。</p>
+</blockquote>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><ul>
+<li>最简单的方式就是创建一个object的实例，然后为它添加属性和方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">person.name = <span class="string">'jane'</span></span><br><span class="line">person.age = <span class="number">25</span></span><br><span class="line"></span><br><span class="line">person.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象字面量语法重构：</span></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'jane'</span>,</span><br><span class="line">  age: <span class="number">25</span></span><br><span class="line">  sayName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h2><h3 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h3><blockquote>
+<p>数据属性包含一个数据值的位置。在这个位置可以读取和写入值。有4个描述其行为的特性：</p>
+</blockquote>
+<ul>
+<li><p><code>[[Configurable]]</code>：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性，默认值是true</p>
+</li>
+<li><p><code>[[Enumerable]]</code>：表示能否通过for-in循环属性，默认值是true</p>
+</li>
+<li><p><code>[[Writable]]</code>：表示能否修改属性的值，默认值是true</p>
+</li>
+<li><p><code>[[Value]]</code>：包含这个属性的数据值。从这个位置读，写入属性值时把新的值保存在这个位置，默认值为undefined</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [[Value]]特性被设定为指定的值，如：</span></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'jane'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-defineProperty-修改数据属性"><a href="#Object-defineProperty-修改数据属性" class="headerlink" title="Object.defineProperty()修改数据属性"></a>Object.defineProperty()修改数据属性</h3><blockquote>
+<p>要修改上面属性默认的特性，必须使用Object.defineProperty()方法。</p>
+</blockquote>
+<p><strong>三个参数：</strong></p>
+<ul>
+<li>属性所在的对象</li>
+<li>属性的名字</li>
+<li>一个描述符对象：其属性必须是：configurable、enumerable、writable、value</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把person的name属性改为只读。</span></span><br><span class="line"><span class="keyword">let</span> person = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  writable: <span class="literal">false</span>, <span class="comment">// name属性为只读</span></span><br><span class="line">  value: <span class="string">'jane'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name) <span class="comment">// 'jane'</span></span><br><span class="line">person.name = <span class="string">'symbol'</span></span><br><span class="line"><span class="built_in">console</span>.log(person.name) <span class="comment">// 'jane'</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>可以多次调用Object.defineProperty()修改同一个属性，但在把configurable特性设置为false后就会有限制</strong></p>
+<h3 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h3><blockquote>
+<p>不包含数据值，包含getter和setter函数（这两个函数都不是必须的）。</p>
+</blockquote>
+<ul>
+<li>getter函数：读取访问器属性，返回有效的值</li>
+<li>setter函数：写入访问器属性，传入新值，负责决定如何处理数据。</li>
+</ul>
+<p><strong>四个特性</strong></p>
+<ul>
+<li><p><code>[[Configurable]]</code>：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性，默认值是true</p>
+</li>
+<li><p><code>[[Enumerable]]</code>：表示能否通过for-in循环属性，默认值是true</p>
+</li>
+<li><p><code>[[Get]]</code>：在读取属性时调用函数，默认值是undefeated</p>
+</li>
+<li><p><code>[[Set]]</code>：在写入属性时调用函数，默认值是undefeated</p>
+</li>
+</ul>
+<h3 id="Object-defineProperty-定义访问器属性"><a href="#Object-defineProperty-定义访问器属性" class="headerlink" title="Object.defineProperty()定义访问器属性"></a>Object.defineProperty()定义访问器属性</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  _year: <span class="number">2018</span>,</span><br><span class="line">  age: <span class="number">23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'year'</span>, &#123;</span><br><span class="line">  <span class="keyword">get</span>: function() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._year</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>: function(newValue) &#123;</span><br><span class="line">    <span class="keyword">if</span> (newValue &gt; <span class="keyword">this</span>._year) &#123;</span><br><span class="line">      <span class="keyword">this</span>.age += newValue - <span class="keyword">this</span>._year</span><br><span class="line">      <span class="keyword">this</span>._year = newValue</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">person.year = <span class="number">2019</span></span><br><span class="line"><span class="built_in">console</span>.log(person.age) <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h3><p>使用Object.defineProperties()方法可以通过描述符一次定义多个属性。参数：</p>
+<ul>
+<li>要添加和修改其属性的对象</li>
+<li>与第一个对象中要添加或修改的属性一一对应</li>
+</ul>
+<p>Object.defineProperties()和Object.defineProperty唯一的区别是：<strong>Object.defineProperties()定义的属性都是同一时间创建的</strong></p>
+<h2 id="创建对象-1"><a href="#创建对象-1" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="1、工厂模式"><a href="#1、工厂模式" class="headerlink" title="1、工厂模式"></a>1、工厂模式</h3><blockquote>
+<p>使用同一个接口创建很多对象，会产生大量的重复代码。为了解决这个问题，开始使用工厂模式的一种变体。抽象了创建具体对象的过程。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 工厂模式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">  o.name = name</span><br><span class="line">  o.age = age </span><br><span class="line">  o.job = job</span><br><span class="line">  o.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">  retrun o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person1 = createPerson(<span class="string">'jane'</span>, <span class="number">25</span>, <span class="string">'teacher'</span>)</span><br><span class="line"><span class="keyword">let</span> person2 = createPerson(<span class="string">'symbol'</span>, <span class="number">30</span>, <span class="string">'doctor'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、构造函数模式"><a href="#2、构造函数模式" class="headerlink" title="2、构造函数模式"></a>2、构造函数模式</h3><blockquote>
+<p>工厂模式虽然解决了创建多个相似对象的问题，但却没有解决对象识别的问题（即怎么知道一个对象的类型），为了解决这个问题，构造函数模式出现。</p>
+</blockquote>
+<h4 id="什么是构造函数"><a href="#什么是构造函数" class="headerlink" title="什么是构造函数"></a>什么是构造函数</h4><blockquote>
+<p>用 new 关键字来调用的函数，称为构造函数。</p>
+</blockquote>
+<ul>
+<li>构造函数可以用来创建特定类型的对象，原生构造函数在运行时会自动出现在执行环境中</li>
+<li>可以创建自定义的构造函数，从而定义自定义对象类型的属性和方法</li>
+<li>可以将实例标识为一种特定的类型</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数模式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.obj = obj</span><br><span class="line">  <span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建实例</span></span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> Person(<span class="string">'jane'</span>, <span class="number">25</span>, <span class="string">'teacher'</span>)</span><br><span class="line"><span class="keyword">let</span> person2 = <span class="keyword">new</span> Person(<span class="string">'symbol'</span>, <span class="number">30</span>, <span class="string">'doctor'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用构造函数经历的过程：</span></span><br><span class="line">- 创建一个新对象</span><br><span class="line">- 将构造函数的作用域赋值给新对象</span><br><span class="line">- 执行构造函数中的代码</span><br><span class="line">- 返回新对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>工厂模式和构造函数模式的区别</strong></p>
+<ul>
+<li>没有显示地创建对象</li>
+<li>没有return语句</li>
+<li>直接将属性和方法赋值给了this对象</li>
+<li>构造函数以一个大写字母开头，非构造函数以小写字母开头</li>
+</ul>
+<p><strong>constructor</strong></p>
+<blockquote>
+<p>用来标识对象类型</p>
+</blockquote>
+<ul>
+<li>person1和person2分别保存着Person的一个不同的实例，这两个对象都有一个constructor属性，该属性指向Person。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(person1.constructor === Person) <span class="comment">// true</span></span><br><span class="line">alert(person2.constructor === Person) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>构造函数的问题</strong></p>
+<ul>
+<li>每个方法都要在每个实例上重新创建一遍。</li>
+<li>这种方式创建函数，会导致不同的作用域链和标识符解析，但创建Function新实例但机制仍然是相同但</li>
+<li>不同实例上同名函数是不相等的</li>
+<li>虽然可以将函数定义在构造函数外部，内部的函数等于全局的函数，但是在全局作用域中定义的函数实际上只能被某个对象调用，这让全局作用域有点名不副实</li>
+<li>如果对象需要定义很多方法，那么就要定义很多个全局函数</li>
+</ul>
+<h3 id="3、原型模式"><a href="#3、原型模式" class="headerlink" title="3、原型模式"></a>3、原型模式</h3><blockquote>
+<p>基于上述构造函数的问题，为了解决这些问题，可以使用原型模式。</p>
+</blockquote>
+<p><strong>原型对象、构造函数、实例三者之间的关系</strong></p>
+<p><img src="https://blog-githb.oss-cn-beijing.aliyuncs.com/prototype.png" alt></p>
+<ul>
+<li>构造函数：普通函数通过new调用时就称为构造函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> = </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'jane'</span></span><br><span class="line">  <span class="keyword">this</span>.age = <span class="number">25</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实例：通过构造函数的new操作创建的对象是实例对象，实例通过内部属性(<em>proto</em>)指向原型对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// person1就是实例</span></span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> Person()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>原型对象：任何一个函数，都拥有一个prototype属性，指向其原型对象，该原型对象也是由该函数new调用创造的所有实例对象的原型对象。原型对象的construct属性指向的是构造函数，prototype等价于<strong>proto</strong>。</li>
+</ul>
+<p><strong>Person.prototype只是一个指针，指向函数的原型对象</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.construct === Person <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="理解并创建对象"><a href="#理解并创建对象" class="headerlink" title="理解并创建对象"></a>理解并创建对象</h1><h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/11/17/js/闭包和作用域/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/12/mysql/basicCommands/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

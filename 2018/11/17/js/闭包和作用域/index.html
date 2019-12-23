@@ -15,17 +15,17 @@
     <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
   
 
-  <meta name="description" content="什么是闭包一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。” 12345678910111213function simple() &amp;#123;  let n = 1  return function">
+  <meta name="description" content="什么是环境执行环境（execution context），有时也称之为“上下文”。执行环境定义了变量可被访问的范围、函数有权访问的其他数据。当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量及函数也随之销毁，因此在变量的作用域外是无法访问它的，因为它不是还没有创建，就是已经被销毁了。 什么是作用域作用域指一个变量的作用范围。它是静态的(相对于上下文对象), 在编写代码时就确定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="闭包和作用域">
 <meta property="og:url" content="http://janely.cn/2018/11/17/js/闭包和作用域/index.html">
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
-<meta property="og:description" content="什么是闭包一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。” 12345678910111213function simple() &amp;#123;  let n = 1  return function">
+<meta property="og:description" content="什么是环境执行环境（execution context），有时也称之为“上下文”。执行环境定义了变量可被访问的范围、函数有权访问的其他数据。当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量及函数也随之销毁，因此在变量的作用域外是无法访问它的，因为它不是还没有创建，就是已经被销毁了。 什么是作用域作用域指一个变量的作用范围。它是静态的(相对于上下文对象), 在编写代码时就确定">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-22T10:42:44.277Z">
+<meta property="og:updated_time" content="2019-12-23T07:32:43.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭包和作用域">
-<meta name="twitter:description" content="什么是闭包一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。” 12345678910111213function simple() &amp;#123;  let n = 1  return function">
+<meta name="twitter:description" content="什么是环境执行环境（execution context），有时也称之为“上下文”。执行环境定义了变量可被访问的范围、函数有权访问的其他数据。当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量及函数也随之销毁，因此在变量的作用域外是无法访问它的，因为它不是还没有创建，就是已经被销毁了。 什么是作用域作用域指一个变量的作用范围。它是静态的(相对于上下文对象), 在编写代码时就确定">
 
   
 
@@ -113,7 +113,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是闭包"><span class="toc-text">什么是闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是环境"><span class="toc-text">什么是环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是作用域"><span class="toc-text">什么是作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是闭包"><span class="toc-text">什么是闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li></ol>
   </div>
 
 
@@ -163,7 +163,14 @@
 
   <div class="article-content">
     
-      <h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p><strong>一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。</strong>能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。”</p>
+      <h2 id="什么是环境"><a href="#什么是环境" class="headerlink" title="什么是环境"></a>什么是环境</h2><p>执行环境（execution context），有时也称之为“上下文”。执行环境定义了变量可被访问的范围、函数有权访问的其他数据。当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量及函数也随之销毁，因此在变量的作用域外是无法访问它的，因为它不是还没有创建，就是已经被销毁了。</p>
+<h2 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h2><p>作用域指一个变量的作用范围。它是静态的(相对于上下文对象), 在编写代码时就确定了。</p>
+<ul>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ul>
+<h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p><strong>一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。</strong>能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。”</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">simple</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> n = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(++n)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a1 = simple()</span><br><span class="line"><span class="keyword">let</span> a2 = simple()</span><br><span class="line"></span><br><span class="line">a1();  <span class="comment">// 2</span></span><br><span class="line">a1();  <span class="comment">// 3</span></span><br><span class="line">a2();  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2>
@@ -180,7 +187,7 @@
     <a class="show pull-left" href="/2018/10/17/js/DOM/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2019/02/12/mysql/basicCommands/">
+    <a class="show pull-right" href="/2018/12/09/js/面向对象/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
