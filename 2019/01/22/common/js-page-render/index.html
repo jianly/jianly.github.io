@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>浏览器原理和页面渲染原理 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,">
+  
+
+  <meta name="description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器原理和页面渲染原理">
+<meta property="og:url" content="http://janely.cn/2019/01/22/common/js-page-render/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-26T05:37:30.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器原理和页面渲染原理">
+<meta name="twitter:description" content="什么是DOCTYPE以及作用 是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的  标准模式和怪异模式 标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。  怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。   作用可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DOCTYPE以及作用"><span class="toc-text">什么是DOCTYPE以及作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标准模式和怪异模式"><span class="toc-text">标准模式和怪异模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入url发生什么"><span class="toc-text">输入url发生什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、构建请求，浏览器开启一个线程来处理请求"><span class="toc-text">1、构建请求，浏览器开启一个线程来处理请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下："><span class="toc-text">2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、建立TCP链接"><span class="toc-text">3、建立TCP链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、发送http请求"><span class="toc-text">4、发送http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、网络响应"><span class="toc-text">5、网络响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、根据响应内容，渲染页面"><span class="toc-text">6、根据响应内容，渲染页面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重排（也叫回流）Reflow、重绘Repaint"><span class="toc-text">重排（也叫回流）Reflow、重绘Repaint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面性能"><span class="toc-text">页面性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js运行机制"><span class="toc-text">js运行机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么是单线程"><span class="toc-text">为什么是单线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是任务队列"><span class="toc-text">什么是任务队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是回调函数"><span class="toc-text">什么是回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Event-loop（事件循环）"><span class="toc-text">什么是Event loop（事件循环）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节流（throttle）"><span class="toc-text">节流（throttle）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防抖（debounce）"><span class="toc-text">防抖（debounce）</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-common/js-page-render" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">浏览器原理和页面渲染原理</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.01.22</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="什么是DOCTYPE以及作用"><a href="#什么是DOCTYPE以及作用" class="headerlink" title="什么是DOCTYPE以及作用"></a>什么是DOCTYPE以及作用</h2><blockquote>
+<p>是一种标记语言的文档类型声明，告诉浏览器当前html是用什么版本写的</p>
+</blockquote>
+<h3 id="标准模式和怪异模式"><a href="#标准模式和怪异模式" class="headerlink" title="标准模式和怪异模式"></a>标准模式和怪异模式</h3><ul>
+<li><p>标准模式：浏览器使用w3c的标准解析渲染页面，在标准模式中，浏览器以其支持的最高标准呈现页面。</p>
+</li>
+<li><p>怪异模式：浏览器使用自己的怪异模式解析渲染页面，在怪异模式中，页面已一种比较宽松的向后兼容的方式显示。</p>
+</li>
+</ul>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>可以告诉浏览器当前使用哪种HTML或者XHTML规范，可以声明三种版本：严格、过度、基于框架</p>
+<h2 id="输入url发生什么"><a href="#输入url发生什么" class="headerlink" title="输入url发生什么"></a>输入url发生什么</h2><h3 id="1、构建请求，浏览器开启一个线程来处理请求"><a href="#1、构建请求，浏览器开启一个线程来处理请求" class="headerlink" title="1、构建请求，浏览器开启一个线程来处理请求"></a>1、构建请求，浏览器开启一个线程来处理请求</h3><h3 id="2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下："><a href="#2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下：" class="headerlink" title="2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下："></a>2、启动一个dns查询获取请求对应但IP地址，dns查询过程如下：</h3><ul>
+<li><p>浏览器缓存：浏览器会缓存DNS记录一段时间</p>
+</li>
+<li><p>系统缓存：如果在浏览器缓存中没有找到需要的记录，浏览器会做一个系统调用，查询系统缓存中的记录</p>
+</li>
+<li><p>路由器缓存：接着，查询请求发向路由器，一般会有自己的DNS缓存</p>
+</li>
+<li><p>ISP DNS缓存：检查ISP缓存DNS的服务器，在这一般都能找到相应的缓存记录</p>
+</li>
+<li><p>递归搜索</p>
+</li>
+</ul>
+<h3 id="3、建立TCP链接"><a href="#3、建立TCP链接" class="headerlink" title="3、建立TCP链接"></a>3、建立TCP链接</h3><ul>
+<li>通过三次握手（发送3个数据包确认已经建立连接）建立客户端和服务器直接的连接。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">三次握手的流程：</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sequence Number: 序列号 SYN: 同步序列编号，是建立连接的信号，ACK：响应，</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、客户端主动打开，发送请求报文段，将SYN标识位置为<span class="number">1</span>，Sequence <span class="built_in">Number</span>置为x，然后进入SYN_SEND状态</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、服务器收到SYN报文段进行确认，将SYN标识位置为<span class="number">1</span>，ACK置为<span class="number">1</span>，Sequence <span class="built_in">Number</span>置为y，Acknowledgment <span class="built_in">Number</span>（确认号）置为x+<span class="number">1</span>，然后进入SYN_RECV状态，这个状态被称为半连接状态</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、客户端再进行一次确认，将ACK置为<span class="number">1</span>（此时不用SYN），Sequence <span class="built_in">Number</span>置为x+<span class="number">1</span>，Acknowledgment <span class="built_in">Number</span>置为y+<span class="number">1</span>发向服务器，最后客户端与服务器都进入ESTABLISHED状态</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>进行数据传输，数据包校验保证数据到达接收方</p>
+</li>
+<li><p>断开连接，四次挥手</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">四次挥手的过程：</span><br><span class="line"></span><br><span class="line"><span class="comment">// FIN：关闭连接，</span></span><br><span class="line"><span class="number">1</span>、先由客户端向服务器端发送一个FIN，请求关闭数据传输。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、当服务器接收到客户端的FIN时，向客户端发送一个ACK，其中ack的值等于FIN+SEQ</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、然后服务器向客户端发送一个FIN，告诉客户端应用程序关闭。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、当客户端收到服务器端的FIN是，回复一个ACK给服务器端。其中ack的值等于FIN+SEQ</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、发送http请求"><a href="#4、发送http请求" class="headerlink" title="4、发送http请求"></a>4、发送http请求</h3><ul>
+<li><p>请求行</p>
+</li>
+<li><p>请求头</p>
+</li>
+<li><p>请求体</p>
+</li>
+</ul>
+<h3 id="5、网络响应"><a href="#5、网络响应" class="headerlink" title="5、网络响应"></a>5、网络响应</h3><ul>
+<li><p>响应行</p>
+</li>
+<li><p>响应头</p>
+</li>
+<li><p>响应体</p>
+</li>
+</ul>
+<h3 id="6、根据响应内容，渲染页面"><a href="#6、根据响应内容，渲染页面" class="headerlink" title="6、根据响应内容，渲染页面"></a>6、根据响应内容，渲染页面</h3><ul>
+<li><p>解析HTML（HTML Parser）</p>
+</li>
+<li><p>构建DOM树（DOM Tree）</p>
+</li>
+<li><p>构建CSSOM树（Style）</p>
+</li>
+<li><p>构建渲染树（Render Tree）</p>
+</li>
+<li><p>页面布局（Layout）</p>
+</li>
+<li><p>绘制渲染树（Painting）</p>
+</li>
+</ul>
+<h2 id="重排（也叫回流）Reflow、重绘Repaint"><a href="#重排（也叫回流）Reflow、重绘Repaint" class="headerlink" title="重排（也叫回流）Reflow、重绘Repaint"></a>重排（也叫回流）Reflow、重绘Repaint</h2><p>重排即重新生成布局，重绘即重新绘制页面。<strong>注意</strong>：重绘不一定需要重排，只要布局没有发烧改变，就不会重排。所以，重排必然导致重绘制，布局发生改变。</p>
+<p><strong>导致网页重新渲染的原因：</strong></p>
+<ul>
+<li><p>修改dom</p>
+</li>
+<li><p>修改样式表</p>
+</li>
+<li><p>用户事件</p>
+</li>
+</ul>
+<h2 id="页面性能"><a href="#页面性能" class="headerlink" title="页面性能"></a>页面性能</h2><p>频繁的重排或重绘，会导致页面性能会下降。提高网页性能，就是要降低重排和重绘的频率和成本，尽量少重新渲染。</p>
+<p><strong>提高性能的方法</strong></p>
+<ul>
+<li><p>用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能</p>
+</li>
+<li><p>减少dom查询，对dom查询做缓存。</p>
+</li>
+<li><p>合理利用浏览器的缓存</p>
+</li>
+<li><p>使用cdn</p>
+</li>
+<li><p>优化发送HTTP请求</p>
+</li>
+</ul>
+<h2 id="js运行机制"><a href="#js运行机制" class="headerlink" title="js运行机制"></a>js运行机制</h2><h3 id="为什么是单线程"><a href="#为什么是单线程" class="headerlink" title="为什么是单线程"></a>为什么是单线程</h3><p>JavaScript作为浏览器脚本语言，主要用途是与用户互动，以及操作DOM，所以只能是单线程，否则会带来复杂的同步问题。</p>
+<h3 id="什么是任务队列"><a href="#什么是任务队列" class="headerlink" title="什么是任务队列"></a>什么是任务队列</h3><p>JavaScript单线程，同一个时间只能做一个任务，任务结束，才能执行下一件任务，若任务耗时很长，那么下一个任务就得一直等待。于是将任务分成两种，一种同步任务、一种异步任务（<a href="janely.cn/fastjson/">详细理解同步、异步点击这里</a>）。</p>
+<p>异步任务不进入主线程，而进入“任务队列”的任务，只有“任务队列”通知主线程，某个异步任务可以执行力，该任务才会进入主线程。</p>
+<h3 id="什么是回调函数"><a href="#什么是回调函数" class="headerlink" title="什么是回调函数"></a>什么是回调函数</h3><p>回调函数，也被称作高阶函数，就是把一个函数作为参数传入“另一个函数”，然后回调函数在“另一个函数”中调用。回调函数本质上是一种模式（对一种问题的确定解决方案），因此使用回调函数我们也称之为回调模式。有两种，一种是函数回调，一种是匿名函数回调。</p>
+<h3 id="什么是Event-loop（事件循环）"><a href="#什么是Event-loop（事件循环）" class="headerlink" title="什么是Event loop（事件循环）"></a>什么是Event loop（事件循环）</h3><p>异步执行的运行机制：</p>
+<ul>
+<li><p>所有同步任务都在主线程执行，形成一个执行栈</p>
+</li>
+<li><p>主线程之外，还存在一个“任务队列”。只要异步任务有了运行结果，就在“任务队列”中放置一个事件</p>
+</li>
+<li><p>一旦执行栈中所有同步任务执行完毕，系统就会读取“任务队列”，看里面有哪些事件，哪些对应的异步任务，于是结束等待状态，进入执行栈开始执行</p>
+</li>
+<li><p>重复上面三步</p>
+</li>
+</ul>
+<p><strong>主线程从“任务队列”中读取事件，这个过程的循环不断的，所以整个的这种运行机制又称为事件循环。只要主线程空了，就会读取任务队列，这就是JavaScript的运行机制</strong></p>
+<h2 id="节流（throttle）"><a href="#节流（throttle）" class="headerlink" title="节流（throttle）"></a>节流（throttle）</h2><p>如果在定时器的时间范围内再次触发，则不予理踩，等当前定时器完成，才能启动下一个定时任务</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, interval</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">if</span> (!flag) <span class="keyword">return</span>;</span><br><span class="line">    flag = <span class="literal">false</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      fn.apply(context,args);</span><br><span class="line">      flag = <span class="literal">true</span>;</span><br><span class="line">    &#125;, interval)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="防抖（debounce）"><a href="#防抖（debounce）" class="headerlink" title="防抖（debounce）"></a>防抖（debounce）</h2><p>每次事件触发则删除原来的定时器，建立新的定时器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      fn.apply(context, args);</span><br><span class="line">    &#125;, delay);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/01/16/common/http缓存/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/09/frame/react/jsx/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

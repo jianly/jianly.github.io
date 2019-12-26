@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中关于Ajax | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,">
+  
+
+  <meta name="description" content="Ajax的工作原理异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。 XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中关于Ajax">
+<meta property="og:url" content="http://janely.cn/2018/10/24/common/ajax/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="Ajax的工作原理异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。 XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-26T05:37:13.914Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中关于Ajax">
+<meta name="twitter:description" content="Ajax的工作原理异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。 XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ajax的工作原理"><span class="toc-text">Ajax的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-创建ajax对象"><span class="toc-text">1. 创建ajax对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-xhr-发送请求"><span class="toc-text">2. xhr 发送请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-xhr获取响应"><span class="toc-text">3. xhr获取响应</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-common/ajax" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">JS中关于Ajax</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.10.24</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Ajax的工作原理"><a href="#Ajax的工作原理" class="headerlink" title="Ajax的工作原理"></a>Ajax的工作原理</h1><p>异步的 javascript and xml, 是通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用JavaScript来操作dom从而更新页面。这其中最关键的一步就是从服务器获得请求数据。</p>
+<p>XmlHttpRequest是Ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是JavaScript可以 及时向服务器提出请求和处理响应，而不阻塞用户，达到无刷新的效果。</p>
+<h2 id="1-创建ajax对象"><a href="#1-创建ajax对象" class="headerlink" title="1. 创建ajax对象"></a>1. 创建ajax对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-xhr-发送请求"><a href="#2-xhr-发送请求" class="headerlink" title="2. xhr 发送请求"></a>2. xhr 发送请求</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'test.html'</span>, <span class="string">'true'</span>)</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-xhr获取响应"><a href="#3-xhr获取响应" class="headerlink" title="3. xhr获取响应"></a>3. xhr获取响应</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.readstate == <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">      请求状态码</span></span><br><span class="line"><span class="comment">      0: 请求还没有建立 (open执行前)</span></span><br><span class="line"><span class="comment">      1: 请求建立但还没发送（执行了open）</span></span><br><span class="line"><span class="comment">      2: 请求正式发送（执行了send）</span></span><br><span class="line"><span class="comment">      3: 请求已受理，有部分数据可以用，但还没有处理完成</span></span><br><span class="line"><span class="comment">      4: 请求完成处理完成</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    alert(xhr.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/10/17/js/DOM/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/11/17/js/闭包和作用域/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
