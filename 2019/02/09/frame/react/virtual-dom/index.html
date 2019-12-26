@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React中关于虚拟DOM | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="React渲染步骤 state 数据  JSX模版  数据 + 模版 生成真实的DOM，显示 123&amp;lt;div id=&apos;abc&apos;&amp;gt;  &amp;lt;span&amp;gt;Hello World&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;  生成虚拟DOM(就是一个JS对象，用它来描述真实DOM) (损耗来性能) 1[&apos;div&apos;, &amp;#123;id: &apos;abc&apos;&amp;#125;, [&apos;span&apos;,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React中关于虚拟DOM">
+<meta property="og:url" content="http://janely.cn/2019/02/09/frame/react/virtual-dom/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="React渲染步骤 state 数据  JSX模版  数据 + 模版 生成真实的DOM，显示 123&amp;lt;div id=&apos;abc&apos;&amp;gt;  &amp;lt;span&amp;gt;Hello World&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;  生成虚拟DOM(就是一个JS对象，用它来描述真实DOM) (损耗来性能) 1[&apos;div&apos;, &amp;#123;id: &apos;abc&apos;&amp;#125;, [&apos;span&apos;,">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-26T13:17:01.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React中关于虚拟DOM">
+<meta name="twitter:description" content="React渲染步骤 state 数据  JSX模版  数据 + 模版 生成真实的DOM，显示 123&amp;lt;div id=&apos;abc&apos;&amp;gt;  &amp;lt;span&amp;gt;Hello World&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;  生成虚拟DOM(就是一个JS对象，用它来描述真实DOM) (损耗来性能) 1[&apos;div&apos;, &amp;#123;id: &apos;abc&apos;&amp;#125;, [&apos;span&apos;,">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#React渲染步骤"><span class="toc-text">React渲染步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM-diff算法"><span class="toc-text">DOM diff算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心思想"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与传统diff算法比较"><span class="toc-text">与传统diff算法比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三大策略"><span class="toc-text">三大策略</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-frame/react/virtual-dom" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">React中关于虚拟DOM</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.02.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="React渲染步骤"><a href="#React渲染步骤" class="headerlink" title="React渲染步骤"></a>React渲染步骤</h1><ol>
+<li><p>state 数据</p>
+</li>
+<li><p>JSX模版</p>
+</li>
+<li><p>数据 + 模版 生成真实的DOM，显示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'abc'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成虚拟DOM(<strong>就是一个JS对象，用它来描述真实DOM</strong>) (损耗来性能)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'div'</span>, &#123;<span class="attr">id</span>: <span class="string">'abc'</span>&#125;, [<span class="string">'span'</span>, &#123;&#125;, <span class="string">'hello world'</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>state 发生变化</p>
+</li>
+<li><p>数据 + 模版 生成新的虚拟DOM (极大的提升了性能)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'div'</span>, &#123;<span class="attr">id</span>: <span class="string">'abc'</span>&#125;, [<span class="string">'span'</span>, &#123;&#125;, <span class="string">'new world'</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较原始DOM和新的DOM的区别，找到区别是span中内容（极大的提升性能）</p>
+</li>
+<li><p>直接操作DOM，改变span中的内容</p>
+</li>
+</ol>
+<h1 id="DOM-diff算法"><a href="#DOM-diff算法" class="headerlink" title="DOM diff算法"></a>DOM diff算法</h1><h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>就是比较两个虚拟DOM的区别，实际上就是比较两个对象的区别。根据两个虚拟对象创建出补丁，描述改变的内容，用这个补丁更新DOM。</p>
+<h2 id="与传统diff算法比较"><a href="#与传统diff算法比较" class="headerlink" title="与传统diff算法比较"></a>与传统diff算法比较</h2><ul>
+<li><p>传统diff算法：通过循环递归对节点进行依次对比，算法复杂度达到O(n^3)，n是树的节点树。举个例子：如果要展示1000个节点，得执行上亿次比较，即便是cpu快能执行30亿条命令，也很难在一秒内计算出差异</p>
+</li>
+<li><p>react的diff算法</p>
+<ul>
+<li>什么是调和：将虚拟dom树转换成真实dom树的最少操作的过程</li>
+<li>react diff算法是调和的具体实现</li>
+<li>用三大策略，将O(n^3)复杂度转化为O(n)复杂度<ul>
+<li>分层比较，一层一层比，不会跨级对比</li>
+<li>如果一层的对象只是换了下位置，可以通过key值直接换位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="三大策略"><a href="#三大策略" class="headerlink" title="三大策略"></a>三大策略</h2><ol>
+<li><strong>策略一（tree diff）</strong></li>
+</ol>
+<blockquote>
+<p> web ui中dom节点跨层级的移动操作特别少，可以忽略不计</p>
+</blockquote>
+<ul>
+<li>React通过updateDepth对虚拟dom树进行层级控制</li>
+<li>对树分层比较，两棵树只对同一层节点进行比较。如果该节点不存在，则该节点及其子节点会被完全删除，不会再进一步比较。</li>
+<li>只需遍历依次，就能完成整棵dom树的比较。</li>
+</ul>
+<p><strong>问题：若dom节点出现跨层级操作，diff会怎么处理？</strong></p>
+<p>diff只简单考虑同层级的节点位置变换，如果是跨层级的话，只有创建节点和删除节点的操作。<font color="red">官方建议不要进行dom节点跨层级操作，可以通过css隐藏、显示节点，而不是真正的移除、添加dom节点</font></p>
+<ol start="2">
+<li><strong>策略二（component diff）</strong></li>
+</ol>
+<ul>
+<li>拥有相同类的两个组件，生成相似的树形结构</li>
+<li>拥有不同类的两个组件，生成不同的树形结构</li>
+</ul>
+<ol start="3">
+<li><strong>策略三（element diff）</strong></li>
+</ol>
+<ul>
+<li>对于同一层及的一组节点，通过唯一的id区分</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/01/22/common/js-page-render/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/12/mysql/basicCommands/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
