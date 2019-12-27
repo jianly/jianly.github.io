@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="React渲染步骤 state 数据  JSX模版  数据 + 模版 生成真实的DOM，显示 123&amp;lt;div id=&apos;abc&apos;&amp;gt;  &amp;lt;span&amp;gt;Hello World&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;  生成虚拟DOM(就是一个JS对象，用它来描述真实DOM) (损耗来性能) 1[&apos;div&apos;, &amp;#123;id: &apos;abc&apos;&amp;#125;, [&apos;span&apos;,">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-26T13:17:01.480Z">
+<meta property="og:updated_time" content="2019-12-27T04:12:22.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React中关于虚拟DOM">
 <meta name="twitter:description" content="React渲染步骤 state 数据  JSX模版  数据 + 模版 生成真实的DOM，显示 123&amp;lt;div id=&apos;abc&apos;&amp;gt;  &amp;lt;span&amp;gt;Hello World&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;  生成虚拟DOM(就是一个JS对象，用它来描述真实DOM) (损耗来性能) 1[&apos;div&apos;, &amp;#123;id: &apos;abc&apos;&amp;#125;, [&apos;span&apos;,">
@@ -217,14 +217,27 @@
 <li><strong>策略二（component diff）</strong></li>
 </ol>
 <ul>
-<li>拥有相同类的两个组件，生成相似的树形结构</li>
-<li>拥有不同类的两个组件，生成不同的树形结构</li>
+<li><p>同一类型的两个组件，按层级继续比较虚拟dom树</p>
+</li>
+<li><p>不同类型的组件，将被改变的组件判断为脏组件，从而替换整个组件的所有节点</p>
+</li>
+<li><p>同一类型的两个组件，组件A变化为组件B时，可能虚拟dom没有任何变化，若变换的过程中，虚拟dom没有改变，可节省大量计算时间，所有可以通过shouldComponentUpdate判断是否需要计算</p>
+</li>
 </ul>
+<p><strong>虽然当两个组件是不同类型但结构相似时，进行diff算法分析会影响性能，但毕竟不同类型但组件存在相似dom树但情况在实际开发过程中很少出现，所有这种极端因素很难在实际开发过程中造成重大影响</strong></p>
 <ol start="3">
 <li><strong>策略三（element diff）</strong></li>
 </ol>
+<blockquote>
+<p>对于同一层及的一组节点，通过唯一的id区分，diff提供了三种节点操作：</p>
+</blockquote>
 <ul>
-<li>对于同一层及的一组节点，通过唯一的id区分</li>
+<li><p>插入（INSERT_MARKUP）：新的组件类型不再旧集合中，即全新但节点，需要对新节点进行插入操作</p>
+</li>
+<li><p>移动（MOVE_EXISTING）：旧集合中有新组件类型，且element是可更新对类型，这时候就需要做移动操作，可以复用以前对dom节点</p>
+</li>
+<li><p>删除（REMOVE_NODE）：旧组件类型，在新集合里也有，但对应的element不同则不能直接复用和更新，需要执行删除操作，或者旧组件不在新集合里的，也需要执行删除操作</p>
+</li>
 </ul>
 
     

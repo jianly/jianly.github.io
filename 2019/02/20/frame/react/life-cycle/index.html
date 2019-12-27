@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React中生命周期 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="什么是生命周期生命周期函数指在某一个时刻会自动调用执行的函数 旧的生命周期有哪些mounting，挂载阶段 constrouctor初始化数据 componentWillMount() 挂载前，只在挂载时执行一次 render() componentDidMount()挂载后，只在挂载时执行一次  updation，更新阶段props发生变化时  componentWillReceiveProps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React中生命周期">
+<meta property="og:url" content="http://janely.cn/2019/02/20/frame/react/life-cycle/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="什么是生命周期生命周期函数指在某一个时刻会自动调用执行的函数 旧的生命周期有哪些mounting，挂载阶段 constrouctor初始化数据 componentWillMount() 挂载前，只在挂载时执行一次 render() componentDidMount()挂载后，只在挂载时执行一次  updation，更新阶段props发生变化时  componentWillReceiveProps">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-27T07:24:25.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React中生命周期">
+<meta name="twitter:description" content="什么是生命周期生命周期函数指在某一个时刻会自动调用执行的函数 旧的生命周期有哪些mounting，挂载阶段 constrouctor初始化数据 componentWillMount() 挂载前，只在挂载时执行一次 render() componentDidMount()挂载后，只在挂载时执行一次  updation，更新阶段props发生变化时  componentWillReceiveProps">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是生命周期"><span class="toc-text">什么是生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#旧的生命周期有哪些"><span class="toc-text">旧的生命周期有哪些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mounting，挂载阶段"><span class="toc-text">mounting，挂载阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#updation，更新阶段"><span class="toc-text">updation，更新阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unmounting，卸载阶段"><span class="toc-text">Unmounting，卸载阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新的生命周期"><span class="toc-text">新的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mounting，挂载阶段"><span class="toc-text">Mounting，挂载阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Updating，更新阶段"><span class="toc-text">Updating，更新阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Umounting，卸载阶段"><span class="toc-text">Umounting，卸载阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-Handing错误处理"><span class="toc-text">Error Handing错误处理</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-frame/react/life-cycle" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">React中生命周期</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.02.20</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="什么是生命周期"><a href="#什么是生命周期" class="headerlink" title="什么是生命周期"></a>什么是生命周期</h2><p>生命周期函数指在某一个时刻会自动调用执行的函数</p>
+<h2 id="旧的生命周期有哪些"><a href="#旧的生命周期有哪些" class="headerlink" title="旧的生命周期有哪些"></a>旧的生命周期有哪些</h2><h3 id="mounting，挂载阶段"><a href="#mounting，挂载阶段" class="headerlink" title="mounting，挂载阶段"></a>mounting，挂载阶段</h3><ul>
+<li><code>constrouctor</code>初始化数据</li>
+<li><code>componentWillMount()</code> 挂载前，只在挂载时执行一次</li>
+<li><code>render()</code></li>
+<li><code>componentDidMount()</code>挂载后，只在挂载时执行一次</li>
+</ul>
+<h3 id="updation，更新阶段"><a href="#updation，更新阶段" class="headerlink" title="updation，更新阶段"></a>updation，更新阶段</h3><p><strong>props发生变化时</strong></p>
+<ul>
+<li><p><code>componentWillReceiveProps()</code>，接收到新的props时触发</p>
+</li>
+<li><p><code>shouldComponentUpdate(nextProps, nextState)</code>，组件被更新之前会被自动的执行</p>
+</li>
+<li><p><code>componentWillUpdata(nextProps, nextState)</code>，组件props或者state改变时触发，true：更新；false：不更新</p>
+</li>
+<li><p><code>render()</code></p>
+</li>
+<li><p><code>componentDidUpdate()</code>，组件更新后触发</p>
+</li>
+</ul>
+<p><strong>state发生变化时</strong></p>
+<ul>
+<li><p><code>shouldComponentUpdate(nextProps, nextState)</code>，组件被更新之前会被自动的执行</p>
+</li>
+<li><p><code>componentWillUpdata(nextProps, nextState)</code>，组件props或者state改变时触发，true：更新；false：不更新</p>
+</li>
+<li><p><code>render()</code></p>
+</li>
+<li><p><code>componentDidUpdate()</code>，组件更新后触发</p>
+</li>
+</ul>
+<h3 id="Unmounting，卸载阶段"><a href="#Unmounting，卸载阶段" class="headerlink" title="Unmounting，卸载阶段"></a>Unmounting，卸载阶段</h3><ul>
+<li><code>componentWillUnmount()</code>，组件卸载时触发</li>
+</ul>
+<h2 id="新的生命周期"><a href="#新的生命周期" class="headerlink" title="新的生命周期"></a>新的生命周期</h2><h3 id="Mounting，挂载阶段"><a href="#Mounting，挂载阶段" class="headerlink" title="Mounting，挂载阶段"></a>Mounting，挂载阶段</h3><blockquote>
+<p>当组件实例被创建并插入dom中时</p>
+</blockquote>
+<ul>
+<li><code>constrouctor</code>，初始化state数据</li>
+<li><code>static getDerivedStateFromProps(props, state)</code></li>
+<li><code>render()</code></li>
+<li><code>componentDidMount()</code>，会在组件挂载后（插入 DOM 树中）立即调用。</li>
+</ul>
+<h3 id="Updating，更新阶段"><a href="#Updating，更新阶段" class="headerlink" title="Updating，更新阶段"></a>Updating，更新阶段</h3><blockquote>
+<p>当组件当props或state发生变化时会触发更新</p>
+</blockquote>
+<ul>
+<li><code>static getDerivedStateFromProps(props, state)</code></li>
+</ul>
+<blockquote>
+<p>getDerivedStateFromProps 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。</p>
+</blockquote>
+<ul>
+<li><code>shouldComponentUpdate(nextProps, nextState)</code></li>
+</ul>
+<blockquote>
+<p>当 props 或 state 发生变化时，shouldComponentUpdate() 会在渲染执行之前被调用。返回值默认为 true。首次渲染或使用 forceUpdate() 时不会调用该方法。</p>
+</blockquote>
+<ul>
+<li><code>render()</code></li>
+<li><code>getSnapshotBeforeUpdate(prevProps, prevState)</code></li>
+</ul>
+<blockquote>
+<p>getSnapshotBeforeUpdate() 在最近一次渲染输出（提交到 DOM 节点）之前调用。它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。此生命周期的任何返回值将作为参数传递给 componentDidUpdate()。</p>
+</blockquote>
+<ul>
+<li><code>componentDidUpdate()</code>，会在更新后会被立即调用。首次渲染不会执行此方法。</li>
+</ul>
+<h3 id="Umounting，卸载阶段"><a href="#Umounting，卸载阶段" class="headerlink" title="Umounting，卸载阶段"></a>Umounting，卸载阶段</h3><blockquote>
+<p>当组件从DOM中移除时</p>
+</blockquote>
+<ul>
+<li><code>componentWillUnmount</code></li>
+</ul>
+<h3 id="Error-Handing错误处理"><a href="#Error-Handing错误处理" class="headerlink" title="Error Handing错误处理"></a>Error Handing错误处理</h3><ul>
+<li><code>static getDerivedStateFromError()</code></li>
+</ul>
+<blockquote>
+<p>会在后代组件抛出错误后被调用。 它将抛出的错误作为参数，并返回一个值以更新 state</p>
+</blockquote>
+<ul>
+<li><code>componentDidCatch(error, info)</code></li>
+</ul>
+<blockquote>
+<p>在后代组件抛出错误后被调用。 它接收两个参数：</p>
+</blockquote>
+<ul>
+<li>error —— 抛出的错误。</li>
+<li>info —— 带有 componentStack key 的对象，其中包含有关组件引发错误的栈信息。</li>
+<li>componentDidCatch() 会在“提交”阶段被调用，因此允许执行副作用。 </li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/02/12/mysql/basicCommands/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/02/25/algorithm/string/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
