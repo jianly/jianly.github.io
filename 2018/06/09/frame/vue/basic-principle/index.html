@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 
-  <html class="light page-archives2018">
+  <html class="light page-post">
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Archives: 2018 | INTROSPECTION MOMENT</title>
+  <title>Vue的基本原理 | INTROSPECTION MOMENT</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -15,16 +15,17 @@
     <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
   
 
-  <meta name="description" content="Thinking--Introspection--Improving **勿忘初心，自由自在**">
-<meta property="og:type" content="website">
-<meta property="og:title" content="INTROSPECTION MOMENT">
-<meta property="og:url" content="http://janely.cn/archives/2018/page/3/index.html">
+  <meta name="description" content="MVVMvue适合开发什么项目，什么场景使用vue与react区别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue的基本原理">
+<meta property="og:url" content="http://janely.cn/2018/06/09/frame/vue/basic-principle/index.html">
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
-<meta property="og:description" content="Thinking--Introspection--Improving **勿忘初心，自由自在**">
+<meta property="og:description" content="MVVMvue适合开发什么项目，什么场景使用vue与react区别">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2020-01-05T14:29:52.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="INTROSPECTION MOMENT">
-<meta name="twitter:description" content="Thinking--Introspection--Improving **勿忘初心，自由自在**">
+<meta name="twitter:title" content="Vue的基本原理">
+<meta name="twitter:description" content="MVVMvue适合开发什么项目，什么场景使用vue与react区别">
 
   
 
@@ -60,17 +61,8 @@
     <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
   
 
-  <div class="content content-archive">
-  <div class="page-header">
-
-  
-    <div class="breadcrumb">
-      <div class="location">博客</div>
-      <i class="icon-location"></i>
-    </div>
-  
-
-  
+  <div class="post-header CENTER">
+   
   <div class="toolbox">
     <a class="toolbox-entry" href="/">
       <span class="toolbox-entry-text">菜单</span>
@@ -116,81 +108,89 @@
   </div>
 
 
-
-  <div class="box-blog-info">
-    <a class="avatar" href="/">
-      <img src="/images/avatar.jpg" alt="" />
-    </a>
-    <div class="info">
-      <h3 class="name">
-        Janely
-      </h3>
-      <div class="slogan">
-        Thinking - Introspection - Improving
-      </div>
-    </div>
-  </div>
-
 </div>
 
 
-  <div class="post-list-box archive-body">
-    <ul class="list-post">  <li class="item-year item item-title item-title-3">
-    <a href="/archives/2018" class="text-year">
-      2018
-      <span style="font-size: 12px;">狗</span>
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MVVM"><span class="toc-text">MVVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue适合开发什么项目，什么场景使用"><span class="toc-text">vue适合开发什么项目，什么场景使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue与react区别"><span class="toc-text">vue与react区别</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-frame/vue/basic-principle" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">Vue的基本原理</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.06.09</span>
+      </span>
+
       
-    </a>
-  </li>
-<li class="item-post item">
-  <span class="post-date">04-13</span>
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
 
-  
-  <a class="post-title" href="/2018/04/13/js/js-rule-variable-function/">我的JS规范四变量、函数和运算符</a>
-
-
-</li>
-<li class="item-post item">
-  <span class="post-date">03-04</span>
-
-  
-  <a class="post-title" href="/2018/03/04/js/js-rule-statements-expressions/">我的JS规范三语句和表达式</a>
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </span>
 
 
-</li>
-<li class="item-post item">
-  <span class="post-date">02-14</span>
 
-  
-  <a class="post-title" href="/2018/02/14/js/js-rule-comment/">我的JS规范二注释</a>
+      
 
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
 
-</li>
-<li class="item-post item">
-  <span class="post-date">01-10</span>
-
-  
-  <a class="post-title" href="/2018/01/10/js/js-rule-formate/">我的JS规范一基本格式化</a>
-
-
-</li>
-</ul>
-  </div>
-
-  <div class="archive-footer">
+  <div class="article-content">
     
-  <div class="pagination">
-    <nav class="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/page/2/"><i class="icon-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><a class="page-number" href="/archives/2018/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+      <h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><h2 id="vue适合开发什么项目，什么场景使用"><a href="#vue适合开发什么项目，什么场景使用" class="headerlink" title="vue适合开发什么项目，什么场景使用"></a>vue适合开发什么项目，什么场景使用</h2><h2 id="vue与react区别"><a href="#vue与react区别" class="headerlink" title="vue与react区别"></a>vue与react区别</h2>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/04/13/js/js-rule-variable-function/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/06/17/js/datatype-distinction/">
+        <i class="icon icon-angle-right"></i>
+    </a>
   </div>
 
 
-  </div>
+
+
 </div>
 
 
-
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
 
 
 
@@ -245,6 +245,24 @@
 </div>
 
 
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
 
   
 

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ES6、ES7、ES8新特性及使用方法的整理 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="ES6let 声明变量，用法类似于var，但是没有var的变量提升现象，只在命令所在的代码块内有效，形成了封闭作用域，凡在变量之前使用这些变量就会报错。  123456789101112131415161718192021222324252627// 变量提升console.log(a) // referenceErrorconsole.log(b) // undefined&amp;#123;  let">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6、ES7、ES8新特性及使用方法的整理">
+<meta property="og:url" content="http://janely.cn/2019/10/09/common/es6-es7-es8/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="ES6let 声明变量，用法类似于var，但是没有var的变量提升现象，只在命令所在的代码块内有效，形成了封闭作用域，凡在变量之前使用这些变量就会报错。  123456789101112131415161718192021222324252627// 变量提升console.log(a) // referenceErrorconsole.log(b) // undefined&amp;#123;  let">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2020-01-05T14:29:45.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6、ES7、ES8新特性及使用方法的整理">
+<meta name="twitter:description" content="ES6let 声明变量，用法类似于var，但是没有var的变量提升现象，只在命令所在的代码块内有效，形成了封闭作用域，凡在变量之前使用这些变量就会报错。  123456789101112131415161718192021222324252627// 变量提升console.log(a) // referenceErrorconsole.log(b) // undefined&amp;#123;  let">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6"><span class="toc-text">ES6</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#let"><span class="toc-text">let</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明变量的六种方法"><span class="toc-text">声明变量的六种方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶层对象和globalThis"><span class="toc-text">顶层对象和globalThis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解构赋值"><span class="toc-text">解构赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串的扩展"><span class="toc-text">字符串的扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数值的扩展"><span class="toc-text">数值的扩展</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-common/es6-es7-es8" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">ES6、ES7、ES8新特性及使用方法的整理</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.10.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h1><h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><ul>
+<li>声明变量，用法类似于var，但是没有var的变量提升现象，只在命令所在的代码块内有效，形成了封闭作用域，凡在变量之前使用这些变量就会报错。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变量提升</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// referenceError</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 块级作用域</span></span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// a is not defined</span></span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能在函数内部重复声明</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> n</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun1()  <span class="comment">// referenceError</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">let</span> n</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun2()  <span class="comment">// success</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>暂时性死区</li>
+</ul>
+<blockquote>
+<p>在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”。ES6 规定暂时性死区和let、const语句不出现变量提升，主要是为了减少运行时错误，防止在变量声明前就使用这个变量，从而导致意料之外的行为。这样的错误在 ES5 是很常见的，现在有了这种规定，避免此类错误就很容易了。</p>
+</blockquote>
+<ul>
+<li>块级作用域</li>
+</ul>
+<blockquote>
+<p>es5中只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景。</p>
+</blockquote>
+<ol>
+<li>内层变量可能会覆盖外层变量</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a)</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="string">'hi'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun1() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>用来计数的循环变量泄漏为全局变量</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">'hi'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a[i])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(i) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><ul>
+<li>声明一个只读的常量，一旦声明，常量的值就不能改变。</li>
+<li>一旦声明变量，就必须初始化，不能留到以后赋值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MAX = <span class="number">9</span></span><br><span class="line"></span><br><span class="line">MAX = <span class="number">3</span> <span class="comment">// Assignment to constant variable.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> min; <span class="comment">// Missing initializer in const declaration</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>作用域与<code>let</code>相同，只在声明所在的块级作用域内有效</li>
+<li>声明的常量也没有变量提升现象，同样存在暂时性死区，只能在声明的位置后面使用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(MAX); <span class="comment">// ReferenceError</span></span><br><span class="line">  <span class="keyword">const</span> MAX = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>声明的常量，不可重复</li>
+</ul>
+<h2 id="声明变量的六种方法"><a href="#声明变量的六种方法" class="headerlink" title="声明变量的六种方法"></a>声明变量的六种方法</h2><ol>
+<li>var</li>
+<li>function</li>
+<li>let</li>
+<li>const</li>
+<li>import</li>
+<li>class</li>
+</ol>
+<h2 id="顶层对象和globalThis"><a href="#顶层对象和globalThis" class="headerlink" title="顶层对象和globalThis"></a>顶层对象和globalThis</h2><ol>
+<li>顶层对象</li>
+</ol>
+<blockquote>
+<p>顶层对象，在浏览器环境中指的是<code>window</code>对象，在NODE中指的是<code>global</code>对象。es5中顶层对象的属性与全局变量是等价的。</p>
+</blockquote>
+<p><strong>顶层对象的属性和全局变量挂钩带来的问题：</strong></p>
+<ul>
+<li>没有办法在编译时就报出变量未声明的错误，只有运行时才能知道</li>
+<li>很容易误操作创建了全局变量</li>
+<li>顶层对象的属性是到处可以读写的，不利于模块化编程</li>
+<li><code>window</code>对象有实体含义，指的是浏览器的窗口对象，顶层对象是一个有实体含义的对象，也是不合适的</li>
+</ul>
+<p><strong>es6的规定：</strong></p>
+<ul>
+<li>为了保持兼容性，<code>var</code>和<code>function</code>声明的全局变量，依旧是顶层对象的属性</li>
+<li>let、const、class声明的全局变量，不属于顶层对象的属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>  <span class="comment">// =&gt; a是顶层对象的属性</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.a <span class="comment">// 1</span></span><br><span class="line">global.a <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">this</span>.a   <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span> <span class="comment">// =&gt; b不是顶层对象的属性</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.b <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>globalThis</li>
+</ol>
+<blockquote>
+<p>js中存在一个顶层对象，它提供全局环境，所有代码都是在这个环境中运行。但是，顶层对象在各种实现里面是不统一的</p>
+</blockquote>
+<ul>
+<li>浏览器中，顶层对象是window，但是node和web worker里没有window</li>
+<li>浏览器和web worker里，self也指向顶层对象，但node中没有self</li>
+<li>node中，顶层对象是global，其他环境都不支持</li>
+</ul>
+<p><strong>一般使用this变量，但有局限性</strong></p>
+<ul>
+<li>全局环境中，this会返回顶层对象，但是在node模块和es6模块中，this返回的是当前模块</li>
+<li>函数里的this，如果函数不是作为对象的方法运行，而是单纯作为函数运行，this会指向顶层对象，严格模式下，会返回undefined</li>
+<li>new Function(‘return this’)()，总是会返回全局对象。但是，如果浏览器用了 CSP（Content Security Policy，内容安全策略），那么eval、new Function这些方法都可能无法使用。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getGolbal = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> self !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> self &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> <span class="built_in">window</span> &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> global !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> global &#125;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'unable to locate global object'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><blockquote>
+<p>从数组和对象中提取值，对变量进行赋值，这被称为解构</p>
+</blockquote>
+<ul>
+<li>数组</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">let</span> [foo = <span class="literal">true</span>] = []</span><br><span class="line">foo <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> [x, y = <span class="string">'b'</span>] = [<span class="string">'a'</span>] <span class="comment">// x =&gt; 'a' , y =&gt; 'b'</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对象</li>
+</ul>
+<blockquote>
+<p>对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。</p>
+</blockquote>
+<p><strong>内部机制：先找到同名属性，然后再赋给对应但变量</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; a, b &#125; = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;</span><br><span class="line">a <span class="comment">// 1</span></span><br><span class="line">b <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; c &#125; = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;</span><br><span class="line">c <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。</span></span><br><span class="line"><span class="keyword">let</span> &#123; sin, cos, log &#125; = <span class="built_in">Math</span></span><br><span class="line"><span class="keyword">let</span> &#123; log &#125; = <span class="built_in">console</span></span><br><span class="line">log(<span class="string">'jane'</span>) <span class="comment">// jane</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 内部机制</span></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">a</span>: c &#125; = &#123; <span class="attr">a</span>: <span class="number">2</span>, <span class="attr">b</span>: <span class="number">3</span> &#125;</span><br><span class="line">c <span class="comment">// 2</span></span><br><span class="line">a <span class="comment">// a is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">let</span> &#123;x = <span class="number">3</span>&#125; = &#123;&#125;;</span><br><span class="line">x <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字符串但解构赋值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a, b, c, d] = <span class="string">'jane'</span></span><br><span class="line">a  <span class="comment">// j</span></span><br><span class="line">b  <span class="comment">// a</span></span><br><span class="line">c  <span class="comment">// n</span></span><br><span class="line">d  <span class="comment">// e</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123;<span class="attr">length</span>: len&#125; = <span class="string">'jane'</span></span><br><span class="line"></span><br><span class="line">len <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数值和布尔值但解构赋值</li>
+</ul>
+<blockquote>
+<p>如果等号右边是数值和布尔值，则会先转为对象</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;<span class="attr">toString</span>: n&#125; = <span class="number">123</span></span><br><span class="line">n === <span class="built_in">Number</span>.prototype.toString <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数参数但解构赋值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y]</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add([<span class="number">1</span>, <span class="number">2</span>]) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>用途</strong></p>
+<ol>
+<li>交换变量但值</li>
+<li>从函数返回多个值</li>
+<li>函数参数但定义</li>
+<li>提取json数据</li>
+<li>函数参数但默认值</li>
+<li>遍历map结构</li>
+<li>输入模块但指定方法</li>
+</ol>
+<h2 id="字符串的扩展"><a href="#字符串的扩展" class="headerlink" title="字符串的扩展"></a>字符串的扩展</h2><ul>
+<li>字符串的遍历器接口</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> <span class="string">'jane'</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 'j'</span></span><br><span class="line"><span class="comment">// 'a'</span></span><br><span class="line"><span class="comment">// 'n'</span></span><br><span class="line"><span class="comment">// 'e'</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模板字符串</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通字符串</span></span><br><span class="line"><span class="string">`jane '\n' is a developer`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 多行字符串</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"><span class="string">&lt;ul&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;a&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;b&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 嵌入变量</span></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">'jane'</span></span><br><span class="line"><span class="string">`hello <span class="subst">$&#123;name&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数值的扩展"><a href="#数值的扩展" class="headerlink" title="数值的扩展"></a>数值的扩展</h2>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/05/12/common/web-security/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

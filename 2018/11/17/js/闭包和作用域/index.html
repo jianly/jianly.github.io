@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="什么是环境执行环境（execution context），有时也称之为“上下文”。执行环境定义了变量可被访问的范围、函数有权访问的其他数据。当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量及函数也随之销毁，因此在变量的作用域外是无法访问它的，因为它不是还没有创建，就是已经被销毁了。 什么是作用域作用域指一个变量的作用范围。它是静态的(相对于上下文对象), 在编写代码时就确定">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-26T05:38:21.382Z">
+<meta property="og:updated_time" content="2020-01-05T11:49:51.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中闭包和作用域">
 <meta name="twitter:description" content="什么是环境执行环境（execution context），有时也称之为“上下文”。执行环境定义了变量可被访问的范围、函数有权访问的其他数据。当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量及函数也随之销毁，因此在变量的作用域外是无法访问它的，因为它不是还没有创建，就是已经被销毁了。 什么是作用域作用域指一个变量的作用范围。它是静态的(相对于上下文对象), 在编写代码时就确定">
@@ -113,7 +113,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是环境"><span class="toc-text">什么是环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是作用域"><span class="toc-text">什么是作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是闭包"><span class="toc-text">什么是闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是环境"><span class="toc-text">什么是环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是作用域"><span class="toc-text">什么是作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是闭包"><span class="toc-text">什么是闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li></ol>
   </div>
 
 
@@ -173,7 +173,23 @@
 <h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p><strong>一个函数用到了它作用域外面的变量，那么这个变量和这个函数之间的环境就叫闭包。</strong>能够读取其他函数内部变量的函数，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。”</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">simple</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> n = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(++n)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a1 = simple()</span><br><span class="line"><span class="keyword">let</span> a2 = simple()</span><br><span class="line"></span><br><span class="line">a1();  <span class="comment">// 2</span></span><br><span class="line">a1();  <span class="comment">// 3</span></span><br><span class="line">a2();  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><ul>
+<li>this的指向在函数定义的时候是确定不了的，只有函数执行时才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="number">1</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.n) <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">// window</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a() <span class="comment">// this =&gt; window</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>函数中有this，但是没有被上一级的对象所调用，那么this指向的就是window</p>
+</li>
+<li><p>函数中有this，这个函数被上一级对象所调用，那么this指向的就是上一级对象</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  name: <span class="string">'jane'</span>,</span><br><span class="line">  sayName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name) <span class="comment">// jane</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">people.sayName() <span class="comment">// this =&gt; people</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数中有this，这个函数包含多个对象，尽管这个函数被最外层的对象所调用，但this指向但还是上一级但对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  name: <span class="string">'jane'</span>,</span><br><span class="line">  way: &#123;</span><br><span class="line">    sayName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name) <span class="comment">// undefined</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">// window</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = people.way.sayName</span><br><span class="line"></span><br><span class="line">a() <span class="comment">// this =&gt; window</span></span><br></pre></td></tr></table></figure>
     
   </div>
 
