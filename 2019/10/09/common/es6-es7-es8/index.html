@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="INTROSPECTION MOMENT">
 <meta property="og:description" content="ES6let 声明变量，用法类似于var，但是没有var的变量提升现象，只在命令所在的代码块内有效，形成了封闭作用域，凡在变量之前使用这些变量就会报错。  123456789101112131415161718192021222324252627// 变量提升console.log(a) // referenceErrorconsole.log(b) // undefined&amp;#123;  let">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2020-01-05T14:29:45.870Z">
+<meta property="og:updated_time" content="2020-01-05T14:52:08.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6、ES7、ES8新特性及使用方法的整理">
 <meta name="twitter:description" content="ES6let 声明变量，用法类似于var，但是没有var的变量提升现象，只在命令所在的代码块内有效，形成了封闭作用域，凡在变量之前使用这些变量就会报错。  123456789101112131415161718192021222324252627// 变量提升console.log(a) // referenceErrorconsole.log(b) // undefined&amp;#123;  let">
@@ -307,7 +307,65 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通字符串</span></span><br><span class="line"><span class="string">`jane '\n' is a developer`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 多行字符串</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"><span class="string">&lt;ul&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;a&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;b&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 嵌入变量</span></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">'jane'</span></span><br><span class="line"><span class="string">`hello <span class="subst">$&#123;name&#125;</span>`</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="数值的扩展"><a href="#数值的扩展" class="headerlink" title="数值的扩展"></a>数值的扩展</h2>
+<h2 id="数值的扩展"><a href="#数值的扩展" class="headerlink" title="数值的扩展"></a>数值的扩展</h2><ul>
+<li>二进制和八进制</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0o767</span> === <span class="number">503</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Number.isFinite()</li>
+</ul>
+<blockquote>
+<p>用来检查一个数值是否为有限的（finite）</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isFinite(<span class="number">15</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="number">0.8</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="literal">NaN</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="literal">Infinity</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(-<span class="literal">Infinity</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Number.isNaN()</li>
+</ul>
+<blockquote>
+<p>用来检查一个值是否为NaN</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isNaN(<span class="literal">NaN</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(<span class="number">15</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(<span class="string">'15'</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(<span class="literal">true</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(<span class="number">9</span>/<span class="literal">NaN</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上述两种方法与传统的全局方法isFinite()和isNaN()的区别在于，传统方法先调用Number()将非数值的值转为数值，再进行判断，而这两个新方法只对数值有效，Number.isFinite()对于非数值一律返回false, Number.isNaN()只有对于NaN才返回true，非NaN一律返回false。</p>
+<ul>
+<li>Number.parseInt()、 Number.parseFloat() </li>
+</ul>
+<blockquote>
+<p>将全局parseInt()和parseFloat()移植到Number对象上，目的是逐步减少全局性方法，使得语言逐步模块化</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5的写法</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'12.34'</span>) <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'123.45#'</span>) <span class="comment">// 123.45</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6的写法</span></span><br><span class="line"><span class="built_in">Number</span>.parseInt(<span class="string">'12.34'</span>) <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">Number</span>.parseFloat(<span class="string">'123.45#'</span>) <span class="comment">// 123.45</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Number.isInteger()</li>
+</ul>
+<blockquote>
+<p>用来判断一个数值是否为整数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">25</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">25.0</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">25.1</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Math对象的扩展</li>
+</ul>
+<ol>
+<li>trunc()，用于去除一个数的小数部分，返回整数部分</li>
+</ol>
+<p>a、对于非数值，内部使用Number方法将其先转为数值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.trunc(<span class="string">'123'</span>) <span class="comment">// 124</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="literal">false</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="literal">true</span>)  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="literal">null</span>)  <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>b、对于空值和无法截取整数的值，返回NaN</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.trunc(<span class="literal">NaN</span>)    <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="string">'JANE'</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.trunc()       <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="literal">undefined</span>)  <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p>c、对于没有部署这个方法的环境，可以用下面的代码模拟</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.trunc = <span class="built_in">Math</span>.trunc || <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x &lt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(x) : <span class="built_in">Math</span>.floor(x);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>sign()：用来判断一个数到底是正数、负数、还是零。对于非数值，会先将其转换为数值</li>
+<li>cbrt()：计算一个数的立方根</li>
+</ol>
+<p>## </p>
+
     
   </div>
 
@@ -321,7 +379,7 @@
     <a class="show pull-left" href="/2019/05/12/common/web-security/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="hide pull-right" href="/">
+    <a class="show pull-right" href="/2019/12/02/node/如何学习NodeJs/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>

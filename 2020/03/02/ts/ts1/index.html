@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>学习Typescript笔记一 | INTROSPECTION MOMENT</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,前端开发,nodejs,JavaScript">
+  
+
+  <meta name="description" content="安装ts1npm install typescript -g  第一个ts程序 新建一个hello.ts  12345function sayHello(person: string) &amp;#123;  return &apos;Hello,&apos; + person;&amp;#125;let user = &apos;Tom&apos;;console.log(sayHello(user));   运行hello.ts  1tsc hel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Typescript笔记一">
+<meta property="og:url" content="http://janely.cn/2020/03/02/ts/ts1/index.html">
+<meta property="og:site_name" content="INTROSPECTION MOMENT">
+<meta property="og:description" content="安装ts1npm install typescript -g  第一个ts程序 新建一个hello.ts  12345function sayHello(person: string) &amp;#123;  return &apos;Hello,&apos; + person;&amp;#125;let user = &apos;Tom&apos;;console.log(sayHello(user));   运行hello.ts  1tsc hel">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2020-03-05T09:28:31.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习Typescript笔记一">
+<meta name="twitter:description" content="安装ts1npm install typescript -g  第一个ts程序 新建一个hello.ts  12345function sayHello(person: string) &amp;#123;  return &apos;Hello,&apos; + person;&amp;#125;let user = &apos;Tom&apos;;console.log(sayHello(user));   运行hello.ts  1tsc hel">
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">菜单</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">菜单</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装ts"><span class="toc-text">安装ts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一个ts程序"><span class="toc-text">第一个ts程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原始数据类型"><span class="toc-text">原始数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任意值"><span class="toc-text">任意值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未声明类型的变量"><span class="toc-text">未声明类型的变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型推论"><span class="toc-text">类型推论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联合类型"><span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的类型–接口（Interfaces）"><span class="toc-text">对象的类型–接口（Interfaces）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可选属性"><span class="toc-text">可选属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任意属性"><span class="toc-text">任意属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只读属性"><span class="toc-text">只读属性</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article 
+  id="post-ts/ts1" 
+  class="article article-type-post" 
+  itemprop="blogPost"
+  style="margin-bottom: 10vh;">
+  <header class="article-header">
+    <h1 class="post-title">学习Typescript笔记一</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2020.03.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Janely</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Typescript/">Typescript</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="安装ts"><a href="#安装ts" class="headerlink" title="安装ts"></a>安装ts</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install typescript -g</span><br></pre></td></tr></table></figure>
+
+<h2 id="第一个ts程序"><a href="#第一个ts程序" class="headerlink" title="第一个ts程序"></a>第一个ts程序</h2><ul>
+<li>新建一个hello.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello,'</span> + person;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> user = <span class="string">'Tom'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行hello.ts</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc hello.ts <span class="comment">// 会生成一个hello.js文件，若参数类型不对会报错</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原始数据类型"><a href="#原始数据类型" class="headerlink" title="原始数据类型"></a>原始数据类型</h2><p>包括：布尔值、数值、null、undefined、字符串、symbol</p>
+<ol>
+<li>布尔值</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isDone: <span class="built_in">boolean</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：使用构造函数<code>Boolean</code>创造的对象不是布尔值，<code>new Boolean返回的是一个对象</code></strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> createByNewBoolean: <span class="built_in">boolean</span> = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>数值</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> decLiteral: <span class="built_in">number</span> = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> hexLiteral: <span class="built_in">number</span> = <span class="number">0xf00d</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>字符串</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myName: <span class="built_in">string</span> = <span class="string">'Tom'</span>;</span><br><span class="line"><span class="keyword">let</span> myAge: <span class="built_in">number</span> = <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sentence: <span class="built_in">string</span> = <span class="string">`hello, my name is <span class="subst">$&#123;myName&#125;</span>.</span></span><br><span class="line"><span class="string">I'll be <span class="subst">$&#123;myAge + 1&#125;</span> years old next month.`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>4.空值</p>
+<ul>
+<li>可以用<code>void</code>表示没有任何返回值的函数：</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">alertName</span>(<span class="params"></span>): <span class="title">void</span></span>&#123;</span><br><span class="line">  alert(<span class="string">'My name is Tom'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>声明一个<code>void</code>类型的变量没有什么用，只能将它赋值为<code>undefined</code>和<code>null</code>:</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> unusable: <span class="built_in">void</span> = <span class="literal">undefined</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Null和Undefined</li>
+</ol>
+<ul>
+<li>可以使用<code>null</code>和<code>undefined</code>来定义这两个原始数据类型：</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> u: <span class="literal">undefined</span> = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> n: <span class="literal">null</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>与<code>void</code>的区别是，<code>undefined</code>和<code>null</code>是所有类型的子类型。也就是说<code>undefined</code>类型的变量，可以赋值给<code>number</code>类型的变量：</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> u: <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span> = u;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>void</code>类型的变量不能赋值给<code>number</code>类型的变量：</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> u: <span class="built_in">void</span>;</span><br><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span> = u;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任意值"><a href="#任意值" class="headerlink" title="任意值"></a>任意值</h2><blockquote>
+<p>Any用来表示允许赋值为任意类型，在任意值上访问任何属性都是允许的，也允许调用任何方法</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFavoriteNumber: <span class="built_in">any</span> = <span class="string">'seven'</span>;</span><br><span class="line">myFavoriteNumber = <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问任何属性</span></span><br><span class="line"><span class="keyword">let</span> anyThing: <span class="built_in">any</span> = <span class="string">'hello'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(anyThing.myName)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问任何方法</span></span><br><span class="line">anyThing.setName(<span class="string">'Tom'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明一个变量为任意值之后，对它的任何操作，返回的内容的类型都是任意值。</strong></p>
+<h2 id="未声明类型的变量"><a href="#未声明类型的变量" class="headerlink" title="未声明类型的变量"></a>未声明类型的变量</h2><blockquote>
+<p>变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型：</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> something;</span><br><span class="line">something = <span class="string">'seven'</span>;</span><br><span class="line">something = <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">let</span> something: <span class="built_in">any</span>;</span><br><span class="line">something = <span class="string">'seven'</span>;</span><br><span class="line">something = <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型推论"><a href="#类型推论" class="headerlink" title="类型推论"></a>类型推论</h2><blockquote>
+<p>在没有明确的指定类型的时候推测出一个类型，这就是类型推论。</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFavoriteNumber = <span class="string">'seven'</span>;</span><br><span class="line">myFavoriteNumber = <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果定义的时候没有赋值，不管之后有没有赋值，都会被推断城<code>any</code>类型而完全不被类型检查：</strong></p>
+<h2 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h2><blockquote>
+<p>Union Types表示取值可以为多种类型的一种</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFavoriteNumber: <span class="built_in">string</span> | <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">myFavoriteNumber = <span class="string">'seven'</span>;</span><br><span class="line">myFavoriteNumber = <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里的共有的属性或方法：</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLength</span>(<span class="params">something: <span class="built_in">number</span> | <span class="built_in">string</span></span>) : <span class="title">number</span>  </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> something.length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类型“string | number”上不存在属性“length”。类型“number”上不存在属性“length。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="对象的类型–接口（Interfaces）"><a href="#对象的类型–接口（Interfaces）" class="headerlink" title="对象的类型–接口（Interfaces）"></a>对象的类型–接口（Interfaces）</h2><blockquote>
+<p>什么是接口？在面向对象语言中，它是对行为的抽象，而具体如何行动需要由类（class）去实现（implement）。</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">  age: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom: Person = &#123;</span><br><span class="line">  name: <span class="string">'Tom'</span>,</span><br><span class="line">  age: <span class="number">25</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>定义的变量比接口少了一些属性，多一些属性是不允许的，变量的形状必须和接口的形状保持一致。</strong></p>
+<h2 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h2><blockquote>
+<p>该属性可以不存在，但是仍然不允许添加未定义的属性</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">  age?: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom: Person = &#123;</span><br><span class="line">  name: <span class="string">'Tom'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任意属性"><a href="#任意属性" class="headerlink" title="任意属性"></a>任意属性</h2><blockquote>
+<p>希望接口允许有任意的属性：</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">  age?: <span class="built_in">number</span>,</span><br><span class="line">  [propName: <span class="built_in">string</span>]: <span class="built_in">any</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom: Person = &#123;</span><br><span class="line">  name: <span class="string">'Tom'</span>,</span><br><span class="line">  age: <span class="number">25</span>,</span><br><span class="line">  gender: <span class="string">'male'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集：</strong></li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">  age?: <span class="built_in">number</span>,</span><br><span class="line">  [propName: <span class="built_in">string</span>]: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom: Person = &#123;</span><br><span class="line">  name: <span class="string">'Tom'</span>,</span><br><span class="line">  age: <span class="number">25</span>,</span><br><span class="line">  gender: <span class="string">'male'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类型“number”的属性“age”不能赋给字符串索引类型“string”。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能将类型“&#123; name: string; age: number; gender: string; &#125;”分配给类型“Person”。 属性“age”与索引签名不兼容。不能将类型“number”分配给类型“string”。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a>只读属性</h2><blockquote>
+<p>只能在创建时被赋值，<code>readonly</code>定义只读属性</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  readonly id: <span class="built_in">number</span>,</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">  age?: <span class="built_in">number</span>,</span><br><span class="line">  [propName: <span class="built_in">string</span>]: <span class="built_in">any</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom: Person = &#123;</span><br><span class="line">  id: <span class="number">9527</span>,</span><br><span class="line">  name: <span class="string">'Tom'</span>,</span><br><span class="line">  age: <span class="number">25</span>,</span><br><span class="line">  gender: <span class="string">'male'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tom.id = <span class="number">8888</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cannot assign to 'id' because it is a read-only property.ts(2540)</span></span><br></pre></td></tr></table></figure>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/12/02/node/如何学习NodeJs/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2020/03/03/ts/ts2/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
